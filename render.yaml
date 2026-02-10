@@ -14,7 +14,7 @@ services:
     healthCheckPath: /api/health
 
   # Frontend Static Site
-  - type:  static
+  - type: web
     name: promm-edu-frontend
     runtime: static
     buildCommand: cd frontend && npm install && npm run build
