@@ -13,16 +13,12 @@ services:
         value: 3000
     healthCheckPath: /api/health
 
-  # Frontend Static Site
+  # Frontend Static Site - CORRECTED
   - type: web
     name: promm-edu-frontend
-    runtime: static
+    env: static
     buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: frontend/dist
-    routes:
-      - type: rewrite
-        source: /*
-        destination: /index.html
     envVars:
       - key: VITE_API_URL
         fromService:
