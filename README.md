@@ -16,7 +16,7 @@
 |------|------|
 | **목표** | 기업/개인 대상 AI 프롬프트 엔지니어링 교육 |
 | **핵심 가치** | AI 비용 30% 절감 + 생산성 45% 향상 |
-| **현재 단계** | MVP 완성, Render 배포 완료 |
+| **현재 단계** | MVP 진행중, Render 배포 완료 |
 | **기술 기반** | GraphRAG, DSPy, Corrective RAG, Tree of Thoughts |
 
 ---
@@ -183,7 +183,7 @@ main              # 안정 배포 버전
 ## 📞 문의
 
 - **GitHub**: [HXEXN/promm-edu](https://github.com/HXEXN/promm-edu)
-- **Email**: contact@promm-edu.com
+- **Email**: promm.hyeonmin@gmail.com
 
 ## 📄 라이선스
 
