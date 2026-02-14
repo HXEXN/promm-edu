@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import API_URL from '../config/api';
 import './AdvancedOptimizer.css';
 
 function AdvancedOptimizer() {
@@ -14,7 +15,7 @@ function AdvancedOptimizer() {
 
         setLoading(true);
         try {
-            const response = await fetch('http://localhost:3000/api/advanced/analyze', {
+            const response = await fetch(`${API_URL}/api/advanced/analyze`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ text: inputText, domain, compressionLevel })
@@ -36,7 +37,7 @@ function AdvancedOptimizer() {
 
         setLoading(true);
         try {
-            const response = await fetch('http://localhost:3000/api/advanced/optimize', {
+            const response = await fetch(`${API_URL}/api/advanced/optimize`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ text: inputText, priority: 'balanced' })

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import API_URL from '../config/api';
 import { useLesson } from '../contexts/LessonContext';
 import { getLevelInfo } from '../services/gamification';
 import './LessonSidebar.css';
@@ -10,7 +11,7 @@ function LessonSidebar() {
 
     useEffect(() => {
         // Fetch lessons from API
-        fetch('http://localhost:3000/api/lessons')
+        fetch(`${API_URL}/api/lessons`)
             .then(res => res.json())
             .then(data => {
                 if (data.success) {

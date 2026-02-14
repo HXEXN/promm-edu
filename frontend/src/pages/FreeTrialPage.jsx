@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import API_URL from '../config/api';
 import { useNavigate } from 'react-router-dom';
 import './FreeTrialPage.css';
 
@@ -22,7 +23,7 @@ function FreeTrialPage() {
         setLoading(true);
 
         try {
-            const response = await fetch('http://localhost:3000/api/trial/register', {
+            const response = await fetch(`${API_URL}/api/trial/register`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email: userEmail })
@@ -52,7 +53,7 @@ function FreeTrialPage() {
         try {
             // 크레딧 차감 (선택적)
             try {
-                await fetch('http://localhost:3000/api/trial/use-credit', {
+                await fetch(`${API_URL}/api/trial/use-credit`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -71,7 +72,7 @@ function FreeTrialPage() {
                 ? 'Write a Python function to sort a list'
                 : 'GraphRAG가 무엇인가요?';
 
-            const response = await fetch('http://localhost:3000/api/advanced/2026', {
+            const response = await fetch(`${API_URL}/api/advanced/2026`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

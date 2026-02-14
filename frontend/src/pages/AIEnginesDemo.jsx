@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import API_URL from '../config/api';
 import './AIEnginesDemo.css';
 
 function AIEnginesDemo() {
@@ -29,7 +30,7 @@ function AIEnginesDemo() {
         setResult(null);
 
         try {
-            const response = await fetch('http://localhost:3000/api/advanced', {
+            const response = await fetch(`${API_URL}/api/advanced`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -53,7 +54,7 @@ function AIEnginesDemo() {
         setResult(null);
 
         try {
-            const response = await fetch('http://localhost:3000/api/advanced', {
+            const response = await fetch(`${API_URL}/api/advanced`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -81,7 +82,7 @@ function AIEnginesDemo() {
         setResult(null);
 
         try {
-            const response = await fetch('http://localhost:3000/api/advanced', {
+            const response = await fetch(`${API_URL}/api/advanced`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -103,7 +104,7 @@ function AIEnginesDemo() {
         setResult(null);
 
         try {
-            const response = await fetch('http://localhost:3000/api/advanced', {
+            const response = await fetch(`${API_URL}/api/advanced`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -130,7 +131,7 @@ function AIEnginesDemo() {
         setResult(null);
 
         try {
-            const response = await fetch('http://localhost:3000/api/advanced', {
+            const response = await fetch(`${API_URL}/api/advanced`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

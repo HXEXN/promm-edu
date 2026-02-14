@@ -2,6 +2,7 @@ import express from 'express';
 import db from '../models/database.js';
 import { analyzePrompt, executePrompt } from '../services/promptService.js';
 import { generateEnterpriseReport } from '../services/enterpriseService.js';
+import { analyzePromptWithAI } from '../services/aiService.js';
 import * as advanced2026 from '../services/advanced2026.js';
 
 // In-memory storage for trial users (replace with DB in production)
@@ -26,6 +27,21 @@ router.post('/prompt/analyze', (req, res) => {
         const analysis = analyzePrompt(role, context, action);
         res.json({ success: true, data: analysis });
     } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
+
+// AI-powered prompt quality analysis
+router.post('/prompt/ai-analyze', async (req, res) => {
+    try {
+        const { prompt } = req.body;
+        if (!prompt || prompt.trim().length === 0) {
+            return res.status(400).json({ success: false, error: '프롬프트를 입력해주세요' });
+        }
+        const result = await analyzePromptWithAI(prompt);
+        res.json(result);
+    } catch (error) {
+        console.error('❌ AI Analyze error:', error);
         res.status(500).json({ success: false, error: error.message });
     }
 });

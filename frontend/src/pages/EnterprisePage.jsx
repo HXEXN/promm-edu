@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import API_URL from '../config/api';
 import EnterpriseForm from '../components/EnterpriseForm';
 import InvoiceModal from '../components/InvoiceModal';
 import './EnterprisePage.css';
@@ -11,7 +12,7 @@ function EnterprisePage() {
     const handleAnalyze = async (requirements) => {
         setLoading(true);
         try {
-            const response = await fetch('http://localhost:3000/api/enterprise/analyze', {
+            const response = await fetch(`${API_URL}/api/enterprise/analyze`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(requirements)

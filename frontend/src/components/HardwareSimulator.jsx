@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import API_URL from '../config/api';
 import './HardwareSimulator.css';
 import './SimulatorEffects.css';
 
@@ -12,7 +13,8 @@ function HardwareSimulator() {
     const [ws, setWs] = useState(null);
 
     useEffect(() => {
-        const websocket = new WebSocket('ws://localhost:3000/ws');
+        const wsUrl = API_URL.replace('http://', 'ws://').replace('https://', 'wss://');
+        const websocket = new WebSocket(`${wsUrl}/ws`);
 
         websocket.onopen = () => {
             console.log('Hardware simulator WebSocket connected');
