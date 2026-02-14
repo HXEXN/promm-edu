@@ -1,23 +1,50 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import detailedCurriculum from '../data/curriculumContent';
+import MarkdownRenderer from '../components/MarkdownRenderer';
 import PromptEditor from '../components/PromptEditor';
 import Quiz from '../components/Quiz';
 import './CorporateEducationPage.css';
+
+const STORAGE_KEY = 'promm-edu-lms-progress';
 
 function CorporateEducationPage() {
     const location = useLocation();
     const navigate = useNavigate();
     const [activeModule, setActiveModule] = useState(0);
     const [activeLesson, setActiveLesson] = useState(0);
-    const [viewMode, setViewMode] = useState('content'); // 'content', 'quiz', 'practice'
-    const [completedLessons, setCompletedLessons] = useState(new Set());
+    const [viewMode, setViewMode] = useState('content');
+    const [completedLessons, setCompletedLessons] = useState(() => {
+        try {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            return saved ? new Set(JSON.parse(saved)) : new Set();
+        } catch { return new Set(); }
+    });
     const [quizScores, setQuizScores] = useState({});
     const [showCertificate, setShowCertificate] = useState(false);
+    const [sidebarOpen, setSidebarOpen] = useState(false);
 
     const curriculum = detailedCurriculum;
     const currentModule = curriculum[activeModule];
     const currentLesson = currentModule.lessons[activeLesson];
+
+    // Save progress to localStorage
+    useEffect(() => {
+        try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify([...completedLessons]));
+        } catch { /* ignore */ }
+    }, [completedLessons]);
+
+    // ESC key to close modal
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (e.key === 'Escape' && showCertificate) {
+                setShowCertificate(false);
+            }
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [showCertificate]);
 
     // Calculate overall progress
     const totalLessons = curriculum.reduce((acc, m) => acc + m.lessons.length, 0);
@@ -30,7 +57,6 @@ function CorporateEducationPage() {
             newCompleted.add(lessonId);
             setCompletedLessons(newCompleted);
 
-            // Check for course completion
             if (newCompleted.size === totalLessons) {
                 setTimeout(() => setShowCertificate(true), 1000);
             }
@@ -56,7 +82,6 @@ function CorporateEducationPage() {
 
         if (result.passed !== false) {
             handleLessonComplete();
-            // Auto advance to next lesson
             setTimeout(() => {
                 if (activeLesson < currentModule.lessons.length - 1) {
                     setActiveLesson(activeLesson + 1);
@@ -74,29 +99,85 @@ function CorporateEducationPage() {
         setActiveModule(moduleIndex);
         setActiveLesson(0);
         setViewMode('content');
+        setSidebarOpen(false);
     };
 
     const handleLessonClick = (lessonIndex) => {
         setActiveLesson(lessonIndex);
         setViewMode('content');
+        setSidebarOpen(false);
+    };
+
+    // Navigate to next/previous lesson
+    const goToNextLesson = useCallback(() => {
+        if (activeLesson < currentModule.lessons.length - 1) {
+            setActiveLesson(activeLesson + 1);
+        } else if (activeModule < curriculum.length - 1) {
+            setActiveModule(activeModule + 1);
+            setActiveLesson(0);
+        }
+        setViewMode('content');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, [activeLesson, activeModule, currentModule, curriculum]);
+
+    const goToPrevLesson = useCallback(() => {
+        if (activeLesson > 0) {
+            setActiveLesson(activeLesson - 1);
+        } else if (activeModule > 0) {
+            const prevModule = curriculum[activeModule - 1];
+            setActiveModule(activeModule - 1);
+            setActiveLesson(prevModule.lessons.length - 1);
+        }
+        setViewMode('content');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, [activeLesson, activeModule, curriculum]);
+
+    const isFirstLesson = activeModule === 0 && activeLesson === 0;
+    const isLastLesson = activeModule === curriculum.length - 1 &&
+        activeLesson === currentModule.lessons.length - 1;
+
+    // Get flat lesson index for display
+    const getFlatLessonIndex = () => {
+        let idx = 0;
+        for (let m = 0; m < activeModule; m++) {
+            idx += curriculum[m].lessons.length;
+        }
+        return idx + activeLesson + 1;
     };
 
     return (
         <div className="corp-edu-page">
             <header className="edu-header">
                 <div className="header-content">
-                    <h1>🎓 기업 맞춤형 AI 교육 센터</h1>
-                    <p>Enterprise AI Training Program</p>
+                    <button
+                        className="mobile-menu-btn"
+                        onClick={() => setSidebarOpen(!sidebarOpen)}
+                        aria-label="메뉴 열기"
+                    >
+                        ☰
+                    </button>
+                    <div className="header-text">
+                        <h1>🎓 기업 맞춤형 AI 교육 센터</h1>
+                        <p>Enterprise AI Training Program</p>
+                    </div>
                 </div>
-                <button className="btn-outline" onClick={() => navigate('/')}>로그아웃</button>
+                <div className="header-meta">
+                    <span className="lesson-counter">{getFlatLessonIndex()} / {totalLessons}</span>
+                    <button className="btn-outline" onClick={() => navigate('/')}>로그아웃</button>
+                </div>
             </header>
 
             <div className="edu-container">
-                <aside className="edu-sidebar">
+                {/* Mobile overlay */}
+                {sidebarOpen && (
+                    <div className="sidebar-overlay" onClick={() => setSidebarOpen(false)} />
+                )}
+
+                <aside className={`edu-sidebar ${sidebarOpen ? 'open' : ''}`}>
                     <div className="progress-card">
                         <h3>학습 진도율</h3>
                         <div className="progress-circle" style={{
-                            background: `conic-gradient(#4facfe ${progress}%, #e2e8f0 0)`
+                            background: `conic-gradient(#4facfe ${progress * 3.6}deg, #e2e8f0 0)`
                         }}>
                             <div className="inner-circle">
                                 <span className="percent">{progress}%</span>
@@ -167,6 +248,9 @@ function CorporateEducationPage() {
                             <span>Module {activeModule + 1}</span>
                             <span className="separator">›</span>
                             <span>Lesson {activeLesson + 1}</span>
+                            {completedLessons.has(currentLesson.id) && (
+                                <span className="breadcrumb-badge done">✓ 완료</span>
+                            )}
                         </div>
                         <h2>{currentLesson.title}</h2>
 
@@ -183,6 +267,11 @@ function CorporateEducationPage() {
                                     onClick={() => setViewMode('quiz')}
                                 >
                                     ✏️ 퀴즈
+                                    {quizScores[currentLesson.id] && (
+                                        <span className="tab-badge">
+                                            {quizScores[currentLesson.id].score}/{quizScores[currentLesson.id].total}
+                                        </span>
+                                    )}
                                 </button>
                             )}
                             {currentLesson.practice && (
@@ -199,11 +288,7 @@ function CorporateEducationPage() {
                     <div className="lesson-body">
                         {viewMode === 'content' && (
                             <div className="theory-content">
-                                <div className="markdown-content">
-                                    <pre style={{ whiteSpace: 'pre-wrap', fontFamily: 'inherit' }}>
-                                        {currentLesson.content.theory}
-                                    </pre>
-                                </div>
+                                <MarkdownRenderer content={currentLesson.content.theory} />
 
                                 {currentLesson.content.example && (
                                     <div className="example-box">
@@ -222,6 +307,26 @@ function CorporateEducationPage() {
                                                 <pre>{currentLesson.content.example.expectedOutput}</pre>
                                             </div>
                                         )}
+                                    </div>
+                                )}
+
+                                {/* References Section */}
+                                {currentLesson.references && currentLesson.references.length > 0 && (
+                                    <div className="references-section">
+                                        <h4>📚 참조 논문 및 자료</h4>
+                                        <div className="references-list">
+                                            {currentLesson.references.map((ref, idx) => (
+                                                <div key={idx} className="reference-card">
+                                                    <div className="ref-title">{ref.title}</div>
+                                                    <div className="ref-meta">
+                                                        {ref.authors} ({ref.year}) — {ref.venue}
+                                                    </div>
+                                                    <div className="ref-finding">
+                                                        💡 {ref.keyFinding}
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
                                     </div>
                                 )}
 
@@ -280,6 +385,26 @@ function CorporateEducationPage() {
                             </div>
                         )}
                     </div>
+
+                    {/* Lesson Navigation */}
+                    <div className="lesson-nav-bar">
+                        <button
+                            className="lesson-nav-btn prev"
+                            onClick={goToPrevLesson}
+                            disabled={isFirstLesson}
+                        >
+                            <span className="nav-arrow">←</span>
+                            <span className="nav-label">이전 레슨</span>
+                        </button>
+                        <button
+                            className="lesson-nav-btn next"
+                            onClick={goToNextLesson}
+                            disabled={isLastLesson}
+                        >
+                            <span className="nav-label">다음 레슨</span>
+                            <span className="nav-arrow">→</span>
+                        </button>
+                    </div>
                 </main>
             </div>
 
@@ -287,6 +412,13 @@ function CorporateEducationPage() {
             {showCertificate && (
                 <div className="modal-overlay" onClick={() => setShowCertificate(false)}>
                     <div className="certificate-paper" onClick={e => e.stopPropagation()}>
+                        <button
+                            className="modal-close-btn"
+                            onClick={() => setShowCertificate(false)}
+                            aria-label="닫기"
+                        >
+                            ✕
+                        </button>
                         <div className="cert-border">
                             <h1>CERTIFICATE OF COMPLETION</h1>
                             <p className="cert-text">이 수료증은 귀하가 아래 교육 과정을 성실히 이수하였음을 증명합니다.</p>
