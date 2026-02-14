@@ -6,7 +6,7 @@ function EnterpriseForm({ onAnalyze }) {
         monthlyApiCalls: 100000,
         averageInputTokens: 50,
         averageOutputTokens: 100,
-        currentModel: 'gpt-4o',
+        currentModel: 'gpt-5',
         useCase: 'general',
         priorityFactor: 'cost',
         teamSize: 10,
@@ -97,11 +97,12 @@ function EnterpriseForm({ onAnalyze }) {
                                 onChange={handleChange}
                                 required
                             >
-                                <option value="gpt-4o">GPT-4o</option>
-                                <option value="gpt-4o-mini">GPT-4o Mini</option>
-                                <option value="claude-3.5-sonnet">Claude 3.5 Sonnet</option>
-                                <option value="gemini-2.5-flash">Gemini 2.5 Flash</option>
-                                <option value="gemini-2.5-pro">Gemini 2.5 Pro</option>
+                                <option value="gpt-5.2">GPT-5.2 (Garlic)</option>
+                                <option value="gpt-5">GPT-5</option>
+                                <option value="claude-opus-4.6">Claude Opus 4.6</option>
+                                <option value="claude-sonnet-5">Claude Sonnet 5</option>
+                                <option value="gemini-3-pro">Gemini 3 Pro</option>
+                                <option value="gemini-3-flash">Gemini 3 Flash</option>
                             </select>
                         </div>
                     </div>

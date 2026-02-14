@@ -11,12 +11,17 @@ export function analyzeEnterpriseRequirements(requirements) {
         priorityFactor // 'cost', 'performance', 'balance', 'context'
     } = requirements;
 
-    // Calculate current costs
-    const currentCost = calculateModelCost(
+    // Calculate current costs (with fallback for unknown models)
+    const fallbackModel = 'gpt-5';
+    let currentCost = calculateModelCost(
         averageInputTokens,
         averageOutputTokens,
-        currentModel || 'gpt-4o'
+        currentModel || fallbackModel
     );
+    // If model not found in pricing, fallback to default
+    if (!currentCost) {
+        currentCost = calculateModelCost(averageInputTokens, averageOutputTokens, fallbackModel);
+    }
 
     const monthlyTotalCost = currentCost.totalCost * monthlyApiCalls;
     const annualTotalCost = monthlyTotalCost * 12;
@@ -48,13 +53,13 @@ export function analyzeEnterpriseRequirements(requirements) {
             recommendedModel = modelsWithSavings[0]; // Cheapest
             break;
         case 'performance':
-            recommendedModel = modelsWithSavings.find(m => m.modelId === 'gpt-4o');
+            recommendedModel = modelsWithSavings.find(m => m.modelId === 'gpt-5.2') || modelsWithSavings[0];
             break;
         case 'balance':
-            recommendedModel = modelsWithSavings.find(m => m.modelId === 'claude-3.5-sonnet');
+            recommendedModel = modelsWithSavings.find(m => m.modelId === 'claude-sonnet-5') || modelsWithSavings[0];
             break;
         case 'context':
-            recommendedModel = modelsWithSavings.find(m => m.modelId === 'gemini-2.5-pro');
+            recommendedModel = modelsWithSavings.find(m => m.modelId === 'gemini-3-pro') || modelsWithSavings[0];
             break;
         default:
             recommendedModel = modelsWithSavings[0];
