@@ -15,6 +15,7 @@ import PromptGenerator from './pages/PromptGenerator';
 import AdvancedOptimizer from './pages/AdvancedOptimizer';
 import TokenOptimizerLab from './pages/TokenOptimizerLab';
 import AIEnginesDemo from './pages/AIEnginesDemo';
+import TechLab2026 from './pages/TechLab2026';
 import FreeTrialPage from './pages/FreeTrialPage';
 import ROICalculator from './pages/ROICalculator';
 import CaseStudiesPage from './pages/CaseStudiesPage';
@@ -41,6 +42,7 @@ function App() {
         <Route path="/advanced" element={<AdvancedOptimizer />} />
         <Route path="/token-lab" element={<TokenOptimizerLab />} />
         <Route path="/ai-engines" element={<AIEnginesDemo />} />
+        <Route path="/tech-lab" element={<TechLab2026 />} />
 
         {/* 비즈니스 */}
         <Route path="/enterprise/process" element={<EnterpriseProcess />} />
