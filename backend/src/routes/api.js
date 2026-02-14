@@ -4,6 +4,7 @@ import { analyzePrompt, executePrompt } from '../services/promptService.js';
 import { generateEnterpriseReport } from '../services/enterpriseService.js';
 import { analyzePromptWithAI } from '../services/aiService.js';
 import { generateAICurriculum } from '../services/curriculumAIService.js';
+import { generateLessonAudio, getAudioStatus } from '../services/audioLessonService.js';
 import * as advanced2026 from '../services/advanced2026.js';
 
 // In-memory storage for trial users (replace with DB in production)
@@ -92,6 +93,26 @@ router.post('/enterprise/generate-curriculum', async (req, res) => {
         console.error('❌ Curriculum generation error:', error);
         res.status(500).json({ success: false, error: error.message });
     }
+});
+
+// Audio Lesson Generation
+router.post('/audio/generate', async (req, res) => {
+    try {
+        const { lessonId, lessonTitle, theoryText } = req.body;
+        if (!lessonId || !theoryText) {
+            return res.status(400).json({ success: false, error: 'lessonId and theoryText are required' });
+        }
+        const result = await generateLessonAudio(lessonId, lessonTitle || '', theoryText);
+        res.json(result);
+    } catch (error) {
+        console.error('❌ Audio generation error:', error);
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
+
+router.get('/audio/status', (req, res) => {
+    const status = getAudioStatus();
+    res.json({ success: true, audioFiles: status });
 });
 
 // Advanced 2026 Features

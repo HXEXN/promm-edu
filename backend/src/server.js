@@ -60,6 +60,13 @@ app.use(cors({
 
 app.use(express.json());
 
+// Serve static files (audio, etc.)
+import { fileURLToPath } from 'url';
+import pathModule from 'path';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = pathModule.dirname(__filename);
+app.use('/audio', express.static(pathModule.resolve(__dirname, '../public/audio')));
+
 // Routes
 app.use('/api', healthRouter);
 app.use('/api', apiRouter);

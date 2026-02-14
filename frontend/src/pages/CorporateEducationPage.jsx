@@ -4,6 +4,7 @@ import detailedCurriculum from '../data/curriculumContent';
 import MarkdownRenderer from '../components/MarkdownRenderer';
 import PromptEditor from '../components/PromptEditor';
 import Quiz from '../components/Quiz';
+import AudioPlayer from '../components/AudioPlayer';
 import './CorporateEducationPage.css';
 
 const STORAGE_KEY = 'promm-edu-lms-progress';
@@ -332,6 +333,11 @@ function CorporateEducationPage() {
                     <div className="lesson-body">
                         {viewMode === 'content' && (
                             <div className="theory-content">
+                                <AudioPlayer
+                                    lessonId={currentLesson.id}
+                                    lessonTitle={currentLesson.title}
+                                    theoryText={currentLesson.content.theory}
+                                />
                                 <MarkdownRenderer content={currentLesson.content.theory} />
 
                                 {currentLesson.content.example && (
