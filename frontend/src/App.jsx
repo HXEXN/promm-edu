@@ -13,6 +13,7 @@ import StudentAssessment from './pages/StudentAssessment';
 import StudentRecommendation from './pages/StudentRecommendation';
 import PromptGenerator from './pages/PromptGenerator';
 import AdvancedOptimizer from './pages/AdvancedOptimizer';
+import TokenOptimizerLab from './pages/TokenOptimizerLab';
 import AIEnginesDemo from './pages/AIEnginesDemo';
 import FreeTrialPage from './pages/FreeTrialPage';
 import ROICalculator from './pages/ROICalculator';
@@ -38,6 +39,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/prompt-generator" element={<PromptGenerator />} />
         <Route path="/advanced" element={<AdvancedOptimizer />} />
+        <Route path="/token-lab" element={<TokenOptimizerLab />} />
         <Route path="/ai-engines" element={<AIEnginesDemo />} />
 
         {/* 비즈니스 */}

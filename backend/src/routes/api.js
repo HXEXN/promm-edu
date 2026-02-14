@@ -6,6 +6,8 @@ import { analyzePromptWithAI } from '../services/aiService.js';
 import { generateAICurriculum } from '../services/curriculumAIService.js';
 import { generateLessonAudio, getAudioStatus } from '../services/audioLessonService.js';
 import * as advanced2026 from '../services/advanced2026.js';
+import { estimateTokenCount, compareAllModels, calculateAnnualSavings, MODEL_PRICING } from '../services/costAnalysisService.js';
+import { MultiDimensionalQualityScorer } from '../services/qualityScorer.js';
 
 // In-memory storage for trial users (replace with DB in production)
 const trialUsers = {};
@@ -68,6 +70,135 @@ router.post('/prompt/execute', async (req, res) => {
 
         res.json({ success: true, data: result });
     } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
+
+// Token Optimization API — STC + MDQS + RCQO integrated
+router.post('/prompt/optimize', (req, res) => {
+    try {
+        const { prompt, domain = 'general', requestsPerMonth = 1000 } = req.body;
+
+        if (!prompt || prompt.trim().length === 0) {
+            return res.status(400).json({ success: false, error: '프롬프트를 입력해주세요' });
+        }
+
+        // 1. Original analysis
+        const originalTokens = estimateTokenCount(prompt);
+        const scorer = new MultiDimensionalQualityScorer(domain);
+        const originalQuality = scorer.evaluate(prompt);
+        const originalCost = compareAllModels(originalTokens, 50);
+
+        // 2. STC-style optimization — rule-based token compression
+        let optimized = prompt;
+        const techniques = [];
+
+        // Technique 1: Remove filler expressions
+        const fillerPatterns = [
+            { pattern: /제발\s*/g, replacement: '', name: '불필요한 감정 표현 제거' },
+            { pattern: /부탁드립니다\.?\s*/g, replacement: '', name: '불필요한 요청어 제거' },
+            { pattern: /감사합니다\.?\s*/g, replacement: '', name: '불필요한 감사 표현 제거' },
+            { pattern: /please\s*/gi, replacement: '', name: '"please" 제거' },
+            { pattern: /could you (please\s*)?/gi, replacement: '', name: '"could you" 간소화' },
+            { pattern: /I would like you to\s*/gi, replacement: '', name: '"I would like you to" 간소화' },
+            { pattern: /would you (kindly\s*)?(please\s*)?/gi, replacement: '', name: '"would you" 간소화' },
+            { pattern: /I want you to\s*/gi, replacement: '', name: '"I want you to" 간소화' },
+        ];
+        for (const { pattern, replacement, name } of fillerPatterns) {
+            const before = optimized;
+            optimized = optimized.replace(pattern, replacement);
+            if (before !== optimized) techniques.push({ name, category: 'filler_removal', impact: 'low' });
+        }
+
+        // Technique 2: Deduplicate repeated instructions
+        const lines = optimized.split('\n');
+        const seen = new Set();
+        const deduplicated = [];
+        for (const line of lines) {
+            const normalized = line.trim().toLowerCase();
+            if (normalized && !seen.has(normalized)) {
+                seen.add(normalized);
+                deduplicated.push(line);
+            } else if (!normalized) {
+                deduplicated.push(line);
+            } else {
+                techniques.push({ name: `중복 지시 제거: "${line.trim().substring(0, 30)}..."`, category: 'deduplication', impact: 'medium' });
+            }
+        }
+        optimized = deduplicated.join('\n');
+
+        // Technique 3: Trim excessive whitespace
+        const beforeWhitespace = optimized;
+        optimized = optimized.replace(/\n{3,}/g, '\n\n').replace(/\s{2,}/g, ' ').trim();
+        if (beforeWhitespace !== optimized) {
+            techniques.push({ name: '과도한 공백/줄바꿈 정리', category: 'whitespace', impact: 'low' });
+        }
+
+        // Technique 4: Shorten verbose constructs
+        const verbosePatterns = [
+            { pattern: /in order to/gi, replacement: 'to', name: '"in order to" → "to"' },
+            { pattern: /due to the fact that/gi, replacement: 'because', name: '"due to the fact that" → "because"' },
+            { pattern: /at this point in time/gi, replacement: 'now', name: '"at this point in time" → "now"' },
+            { pattern: /in the event that/gi, replacement: 'if', name: '"in the event that" → "if"' },
+            { pattern: /with regard to/gi, replacement: 'about', name: '"with regard to" → "about"' },
+            { pattern: /~에 대해서/g, replacement: '~에 대해', name: '~에 대해서 → ~에 대해' },
+        ];
+        for (const { pattern, replacement, name } of verbosePatterns) {
+            const before = optimized;
+            optimized = optimized.replace(pattern, replacement);
+            if (before !== optimized) techniques.push({ name, category: 'verbose_reduction', impact: 'medium' });
+        }
+
+        // 3. Optimized analysis
+        const optimizedTokens = estimateTokenCount(optimized);
+        const optimizedQuality = scorer.evaluate(optimized);
+        const optimizedCost = compareAllModels(optimizedTokens, 50);
+
+        // 4. Compression metrics
+        const tokensSaved = originalTokens - optimizedTokens;
+        const compressionRatio = originalTokens > 0 ? ((tokensSaved / originalTokens) * 100) : 0;
+        const qualityDelta = optimizedQuality.overall.score - originalQuality.overall.score;
+
+        // 5. Model-by-model savings
+        const modelSavings = {};
+        const requestsPerYear = requestsPerMonth * 12;
+        for (const modelId of Object.keys(MODEL_PRICING)) {
+            const savings = calculateAnnualSavings(originalTokens, optimizedTokens, requestsPerYear, modelId);
+            modelSavings[modelId] = {
+                modelName: MODEL_PRICING[modelId].name,
+                provider: MODEL_PRICING[modelId].provider,
+                ...savings
+            };
+        }
+
+        res.json({
+            success: true,
+            data: {
+                original: {
+                    text: prompt,
+                    tokens: originalTokens,
+                    quality: originalQuality,
+                    cost: originalCost
+                },
+                optimized: {
+                    text: optimized,
+                    tokens: optimizedTokens,
+                    quality: optimizedQuality,
+                    cost: optimizedCost
+                },
+                compression: {
+                    tokensSaved,
+                    compressionRatio: Math.round(compressionRatio * 10) / 10,
+                    qualityDelta,
+                    qualityPreserved: qualityDelta >= -5,
+                    techniques
+                },
+                modelSavings,
+                requestsPerMonth
+            }
+        });
+    } catch (error) {
+        console.error('❌ Token optimization error:', error);
         res.status(500).json({ success: false, error: error.message });
     }
 });

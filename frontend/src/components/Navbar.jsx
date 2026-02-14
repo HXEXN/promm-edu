@@ -37,10 +37,11 @@ function Navbar() {
             type: 'dropdown',
             label: '🛠️ 도구',
             id: 'tools',
-            paths: ['/prompt-generator', '/advanced', '/ai-engines', '/dashboard'],
+            paths: ['/prompt-generator', '/advanced', '/token-lab', '/ai-engines', '/dashboard'],
             items: [
                 { path: '/prompt-generator', label: '프롬프트 생성기', desc: '효과적인 프롬프트 작성' },
                 { path: '/advanced', label: '고급 최적화', desc: '토큰 압축 & 비용 절감' },
+                { path: '/token-lab', label: '🧪 토큰 최적화 Lab', desc: '토큰 비용 분석 도구' },
                 { path: '/ai-engines', label: 'AI 엔진 데모', desc: '9개 AI 모델 테스트' },
                 { path: '/dashboard', label: '대시보드', desc: '학습 현황 확인' }
             ]
