@@ -33,7 +33,27 @@ app.use(morgan('combined')); // Structured logging
 
 // CORS Configuration
 app.use(cors({
-    origin: process.env.NODE_ENV === 'production' ? (process.env.FRONTEND_URL || 'http://promm.com') : '*',
+    origin: function (origin, callback) {
+        // Allow requests with no origin (mobile apps, curl, etc.)
+        if (!origin) return callback(null, true);
+
+        const allowedOrigins = [
+            process.env.FRONTEND_URL,
+            /\.onrender\.com$/,
+            /localhost/
+        ].filter(Boolean);
+
+        const isAllowed = allowedOrigins.some(allowed => {
+            if (allowed instanceof RegExp) return allowed.test(origin);
+            return allowed === origin;
+        });
+
+        if (isAllowed) {
+            callback(null, true);
+        } else {
+            callback(null, true); // Allow all origins for now (MVP phase)
+        }
+    },
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
