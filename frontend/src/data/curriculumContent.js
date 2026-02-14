@@ -1,4 +1,5 @@
 // Detailed curriculum content for production LMS
+import { extendedCurriculum } from './extendedCurriculum.js';
 
 export const detailedCurriculum = [
     {
@@ -1101,5 +1102,8 @@ class HallucinationDetector {
     }
 ];
 
-export default detailedCurriculum;
+// Merge base curriculum (modules 1-4) with extended curriculum (modules 5-9)
+const fullCurriculum = [...detailedCurriculum, ...extendedCurriculum];
 
+export { fullCurriculum };
+export default fullCurriculum;
