@@ -23,10 +23,48 @@ function CorporateEducationPage() {
     const [quizScores, setQuizScores] = useState({});
     const [showCertificate, setShowCertificate] = useState(false);
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [isAICurriculum, setIsAICurriculum] = useState(false);
 
-    const curriculum = detailedCurriculum;
+    // Load curriculum: AI-generated from localStorage or static fallback
+    const [curriculum, setCurriculum] = useState(() => {
+        try {
+            const aiData = localStorage.getItem('promm-edu-ai-curriculum');
+            if (aiData) {
+                const parsed = JSON.parse(aiData);
+                if (parsed.curriculum && parsed.curriculum.length > 0) {
+                    return parsed.curriculum;
+                }
+            }
+        } catch { /* ignore */ }
+        return detailedCurriculum;
+    });
+
+    useEffect(() => {
+        try {
+            const aiData = localStorage.getItem('promm-edu-ai-curriculum');
+            if (aiData) {
+                const parsed = JSON.parse(aiData);
+                if (parsed.curriculum && parsed.curriculum.length > 0) {
+                    setIsAICurriculum(true);
+                }
+            }
+        } catch { /* ignore */ }
+    }, []);
+
+    const handleResetCurriculum = () => {
+        if (window.confirm('AI 맞춤 커리큘럼을 초기화하고 기본 커리큘럼으로 돌아갑니까?')) {
+            localStorage.removeItem('promm-edu-ai-curriculum');
+            localStorage.removeItem(STORAGE_KEY);
+            setCurriculum(detailedCurriculum);
+            setIsAICurriculum(false);
+            setActiveModule(0);
+            setActiveLesson(0);
+            setCompletedLessons(new Set());
+        }
+    };
+
     const currentModule = curriculum[activeModule];
-    const currentLesson = currentModule.lessons[activeLesson];
+    const currentLesson = currentModule?.lessons?.[activeLesson];
 
     // Save progress to localStorage
     useEffect(() => {
@@ -159,6 +197,12 @@ function CorporateEducationPage() {
                     <div className="header-text">
                         <h1>🎓 기업 맞춤형 AI 교육 센터</h1>
                         <p>Enterprise AI Training Program</p>
+                        {isAICurriculum && (
+                            <div className="ai-badge-row">
+                                <span className="ai-badge">🤖 AI 맞춤 커리큘럼</span>
+                                <button className="btn-reset-curriculum" onClick={handleResetCurriculum}>↺ 초기화</button>
+                            </div>
+                        )}
                     </div>
                 </div>
                 <div className="header-meta">

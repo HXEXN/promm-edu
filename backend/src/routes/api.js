@@ -3,6 +3,7 @@ import db from '../models/database.js';
 import { analyzePrompt, executePrompt } from '../services/promptService.js';
 import { generateEnterpriseReport } from '../services/enterpriseService.js';
 import { analyzePromptWithAI } from '../services/aiService.js';
+import { generateAICurriculum } from '../services/curriculumAIService.js';
 import * as advanced2026 from '../services/advanced2026.js';
 
 // In-memory storage for trial users (replace with DB in production)
@@ -77,6 +78,18 @@ router.post('/enterprise/analyze', (req, res) => {
         const report = generateEnterpriseReport(requirements);
         res.json({ success: true, data: report });
     } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
+
+// AI-powered curriculum generation
+router.post('/enterprise/generate-curriculum', async (req, res) => {
+    try {
+        const requirements = req.body;
+        const result = await generateAICurriculum(requirements);
+        res.json(result);
+    } catch (error) {
+        console.error('❌ Curriculum generation error:', error);
         res.status(500).json({ success: false, error: error.message });
     }
 });

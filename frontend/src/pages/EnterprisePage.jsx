@@ -1,16 +1,22 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import API_URL from '../config/api';
 import EnterpriseForm from '../components/EnterpriseForm';
 import InvoiceModal from '../components/InvoiceModal';
 import './EnterprisePage.css';
 
 function EnterprisePage() {
+    const navigate = useNavigate();
     const [report, setReport] = useState(null);
     const [loading, setLoading] = useState(false);
     const [showInvoice, setShowInvoice] = useState(false);
+    const [generatingCurriculum, setGeneratingCurriculum] = useState(false);
+    const [genStep, setGenStep] = useState(0);
+    const [formRequirements, setFormRequirements] = useState(null);
 
     const handleAnalyze = async (requirements) => {
         setLoading(true);
+        setFormRequirements(requirements);
         try {
             const response = await fetch(`${API_URL}/api/enterprise/analyze`, {
                 method: 'POST',
@@ -33,17 +39,51 @@ function EnterprisePage() {
         setShowInvoice(true);
     };
 
-    const handleConfirmInvoice = () => {
+    const handleConfirmInvoice = async () => {
         setShowInvoice(false);
-        setLoading(true);
-        // Simulate API call
-        setTimeout(() => {
-            setLoading(false);
-            setReport(prev => ({ ...prev, appliedTraining: true }));
-            alert('✅ 교육 프로그램 신청이 완료되었습니다.\n교육 센터로 이동합니다.');
-            // Navigate to education page
-            window.location.href = '/enterprise/education';
-        }, 1500);
+        setGeneratingCurriculum(true);
+        setGenStep(1);
+
+        try {
+            // Step 1: Analyzing
+            await new Promise(r => setTimeout(r, 800));
+            setGenStep(2);
+
+            // Step 2: Generate curriculum via AI
+            const response = await fetch(`${API_URL}/api/enterprise/generate-curriculum`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formRequirements || {})
+            });
+            const data = await response.json();
+
+            setGenStep(3);
+            await new Promise(r => setTimeout(r, 600));
+
+            if (data.success && data.curriculum) {
+                // Save AI curriculum to localStorage
+                localStorage.setItem('promm-edu-ai-curriculum', JSON.stringify({
+                    curriculum: data.curriculum,
+                    mode: data.mode,
+                    generatedAt: new Date().toISOString(),
+                    requirements: formRequirements
+                }));
+                // Clear old progress
+                localStorage.removeItem('promm-edu-lms-progress');
+
+                setReport(prev => ({ ...prev, appliedTraining: true }));
+                navigate('/enterprise/education');
+            } else {
+                throw new Error('커리큘럼 생성에 실패했습니다');
+            }
+        } catch (error) {
+            console.error('Curriculum generation error:', error);
+            alert('커리큘럼 생성 중 오류가 발생했습니다. 기본 커리큘럼으로 이동합니다.');
+            navigate('/enterprise/education');
+        } finally {
+            setGeneratingCurriculum(false);
+            setGenStep(0);
+        }
     };
 
     const formatCurrency = (amount) => {
@@ -254,8 +294,36 @@ function EnterprisePage() {
                     📥 PDF 다운로드
                 </button>
             </div>
+
+            {/* Curriculum Generation Progress Overlay */}
+            {generatingCurriculum && (
+                <div className="gen-overlay">
+                    <div className="gen-modal">
+                        <div className="gen-icon">🤖</div>
+                        <h2>AI 맞춤 커리큘럼 생성 중</h2>
+                        <div className="gen-steps">
+                            <div className={`gen-step ${genStep >= 1 ? 'active' : ''} ${genStep > 1 ? 'done' : ''}`}>
+                                <span className="step-num">{genStep > 1 ? '✓' : '1'}</span>
+                                <span>기업 진단 데이터 분석</span>
+                            </div>
+                            <div className={`gen-step ${genStep >= 2 ? 'active' : ''} ${genStep > 2 ? 'done' : ''}`}>
+                                <span className="step-num">{genStep > 2 ? '✓' : '2'}</span>
+                                <span>AI 커리큘럼 생성</span>
+                            </div>
+                            <div className={`gen-step ${genStep >= 3 ? 'active' : ''}`}>
+                                <span className="step-num">3</span>
+                                <span>교육 환경 준비</span>
+                            </div>
+                        </div>
+                        <div className="gen-bar">
+                            <div className="gen-bar-fill" style={{ width: `${(genStep / 3) * 100}%` }} />
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
 
 export default EnterprisePage;
+
