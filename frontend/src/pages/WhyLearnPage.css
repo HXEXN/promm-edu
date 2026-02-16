@@ -1,6 +1,237 @@
+/* Why Learn Page Modern Dark Theme 2026 */
+
 .why-learn-page {
     min-height: 100vh;
     background: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+.page-header {
+    background: transparent;
+    padding: 120px var(--space-md) 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.page-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(16, 185, 129, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.back-link {
+    display: inline-block;
+    color: #60A5FA;
+    text-decoration: none;
+    font-weight: 600;
+    margin-bottom: var(--space-md);
+    transition: all 0.3s;
+    position: relative;
+    z-index: 1;
+}
+
+.back-link:hover {
+    transform: translateX(-4px);
+    color: #93C5FD;
+}
+
+.page-header h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: var(--space-sm);
+    background: linear-gradient(135deg, #FFFFFF 0%, #94a3b8 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    z-index: 1;
+}
+
+.header-subtitle {
+    font-size: 1.2rem;
+    color: #94a3b8;
+    position: relative;
+    z-index: 1;
+}
+
+/* Tabs */
+.impact-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--space-xl) var(--space-md);
+    position: relative;
+    z-index: 2;
+}
+
+.tabs {
+    display: flex;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+    justify-content: center;
+    flex-wrap: wrap;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(12px);
+    padding: 8px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tab {
+    padding: 12px 24px;
+    border: none;
+    background: transparent;
+    border-radius: 14px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    color: #94a3b8;
+}
+
+.tab:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.tab.active {
+    background: rgba(16, 185, 129, 0.15);
+    color: #34D399;
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.1);
+}
+
+/* Content Panel */
+.content-panel {
+    /* Glass style handled by common classes now, specific overrides here */
+    padding: var(--space-2xl);
+    min-height: 600px;
+}
+
+.content-panel h2 {
+    font-size: 2rem;
+    margin-bottom: var(--space-xl);
+    text-align: center;
+    background: linear-gradient(135deg, #fff 0%, #cbd5e1 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Glass Inner & Hover Utilities */
+.glass-panel-inner {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 24px;
+}
+
+.glass-panel-hover {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 24px;
+    transition: all 0.3s;
+}
+
+.glass-panel-hover:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Specific component overrides for dark mode */
+.quote-card.featured {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.8) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.course-code {
+    background: rgba(16, 185, 129, 0.2);
+    color: #34D399;
+    padding: 4px 12px;
+    border-radius: 8px;
+}
+
+.course-highlight {
+    background: rgba(96, 165, 250, 0.1);
+    color: #60A5FA;
+    border: 1px solid rgba(96, 165, 250, 0.2);
+}
+
+.study-implication {
+    background: rgba(245, 158, 11, 0.1);
+    color: #FBBF24;
+    padding: 12px;
+    border-radius: 12px;
+    margin-top: 16px;
+}
+
+/* Comparison Box */
+.before {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.after {
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.example-prompt {
+    background: rgba(0, 0, 0, 0.3);
+    color: #cbd5e1;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.savings-highlight {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.2));
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.roi-box {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(37, 99, 235, 0.2));
+    border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.adoption-stat {
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(109, 40, 217, 0.2));
+    border: 1px solid rgba(124, 58, 237, 0.3);
+}
+
+/* CTA */
+.cta-section {
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    background: linear-gradient(180deg, transparent 0%, rgba(15, 23, 42, 0.8) 100%);
+}
+
+.btn-glow-primary.large {
+    font-size: 1.2rem;
+    padding: 18px 48px;
+}
+
+/* Typography Colors */
+h3,
+h4,
+strong {
+    color: #e2e8f0;
+}
+
+p,
+li {
+    color: #94a3b8;
+}
+
+.why-reasons .reason p {
+    color: #94a3b8;
 }
 
 .page-header {

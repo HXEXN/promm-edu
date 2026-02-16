@@ -235,12 +235,13 @@ export class SemanticTokenCompressor {
         const originalTokens = this.countTokens(text);
         const originalFingerprint = this.generateSemanticFingerprint(text);
 
+        const techniques = [];
         let { processed, protected: protectedAreas } = this.markProtectedAreas(text);
-        processed = this.removeRedundancy(processed);
-        processed = this.optimizeStructure(processed);
-        processed = this.compressSentences(processed);
+        processed = this.removeRedundancy(processed, techniques);
+        processed = this.optimizeStructure(processed, techniques);
+        processed = this.compressSentences(processed, techniques);
         processed = this.restoreProtectedAreas(processed, protectedAreas);
-        processed = this.finalCleanup(processed);
+        processed = this.finalCleanup(processed, techniques);
 
         const compressedTokens = this.countTokens(processed);
         const compressedFingerprint = this.generateSemanticFingerprint(processed);
@@ -263,7 +264,8 @@ export class SemanticTokenCompressor {
                 tokensSaved: originalTokens - compressedTokens,
                 qualityScore: qualityScore,
                 qualityPreserved: qualityScore >= config.qualityThreshold * 100,
-                level: level
+                level: level,
+                techniques: techniques
             }
         };
     }
@@ -290,20 +292,29 @@ export class SemanticTokenCompressor {
         return { processed, protected: protectedAreas };
     }
 
-    removeRedundancy(text) {
+    removeRedundancy(text, techniques) {
         let result = text;
 
-        Object.values(RedundantPatterns).forEach(patterns => {
+        Object.entries(RedundantPatterns).forEach(([category, patterns]) => {
             patterns.forEach(pattern => {
+                const before = result;
                 result = result.replace(pattern, ' ');
+                if (before !== result && techniques) {
+                    techniques.push({
+                        name: `${category} removal`,
+                        category: 'filler_removal',
+                        impact: 'low'
+                    });
+                }
             });
         });
 
         return result;
     }
 
-    optimizeStructure(text) {
+    optimizeStructure(text, techniques) {
         let result = text;
+        const before = result;
 
         result = result.replace(/\bin order to\b/gi, 'to');
         result = result.replace(/\bfor the purpose of\b/gi, 'to');
@@ -314,21 +325,32 @@ export class SemanticTokenCompressor {
         result = result.replace(/\bat the present time\b/gi, 'now');
         result = result.replace(/\bprior to\b/gi, 'before');
 
+        if (before !== result && techniques) {
+            techniques.push({ name: 'Simplify verbose phrases', category: 'verbose_reduction', impact: 'medium' });
+        }
+
         return result;
     }
 
-    compressSentences(text) {
+    compressSentences(text, techniques) {
         const sentences = text.split(/(?<=[.!?])\s+/);
+        let changed = false;
 
         const compressed = sentences.map(sentence => {
             if (sentence.split(' ').length <= 5) return sentence;
 
+            const before = sentence;
             let result = sentence
                 .replace(/^(and|but|so|however|therefore|moreover|furthermore)\s+/gi, '')
                 .replace(/,\s*(and|but|so)\s+/gi, ', ');
 
+            if (before !== result) changed = true;
             return result;
         });
+
+        if (changed && techniques) {
+            techniques.push({ name: 'Sentence structure simplification', category: 'structure', impact: 'medium' });
+        }
 
         return compressed.join(' ');
     }
@@ -343,12 +365,17 @@ export class SemanticTokenCompressor {
         return result;
     }
 
-    finalCleanup(text) {
-        return text
+    finalCleanup(text, techniques) {
+        const result = text
             .replace(/\s+/g, ' ')
             .replace(/\s+([.,!?;:])/g, '$1')
             .replace(/\n\s*\n/g, '\n\n')
             .trim();
+
+        if (text.length > result.length && techniques) {
+            techniques.push({ name: 'Whitespace cleanup', category: 'whitespace', impact: 'low' });
+        }
+        return result;
     }
 
     validateQuality(original, compressed) {

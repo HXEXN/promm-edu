@@ -332,6 +332,12 @@
     color: #fbbf24;
 }
 
+.stat-number.speed {
+    color: #fca5a5;
+    /* Light Red/Pink for speed */
+    text-shadow: 0 0 10px rgba(252, 165, 165, 0.3);
+}
+
 .stat-label {
     display: block;
     font-size: 0.78rem;
@@ -796,11 +802,167 @@
     margin: 0 0 32px;
 }
 
-.features-grid {
+
+/* Deep Dive Section */
+.lab-features.deep-dive {
+    text-align: left;
+    max-width: 100%;
+}
+
+.lab-features.deep-dive h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    background: linear-gradient(135deg, #f1f5f9 0%, #cbd5e1 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.deep-dive-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
     gap: 24px;
 }
+
+.deep-dive-card {
+    background: rgba(30, 41, 59, 0.4);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(148, 163, 184, 0.1);
+    border-radius: 20px;
+    padding: 28px;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.deep-dive-card:hover {
+    transform: translateY(-5px);
+    background: rgba(30, 41, 59, 0.6);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.deep-dive-card.stc {
+    border-top: 3px solid #38bdf8;
+}
+
+.deep-dive-card.mdqs {
+    border-top: 3px solid #818cf8;
+}
+
+.deep-dive-card.rcqo {
+    border-top: 3px solid #c084fc;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.card-icon {
+    font-size: 2.2rem;
+    background: rgba(15, 23, 42, 0.4);
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.card-title h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #f1f5f9;
+}
+
+.card-subtitle {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    display: block;
+    margin-top: 4px;
+}
+
+.card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.tech-desc {
+    color: #cbd5e1;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 24px;
+}
+
+/* STC / RCQO Details */
+.tech-details {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: auto;
+}
+
+.detail-item {
+    display: flex;
+    gap: 12px;
+    background: rgba(15, 23, 42, 0.3);
+    padding: 12px;
+    border-radius: 12px;
+}
+
+.detail-icon {
+    font-size: 1.2rem;
+    margin-top: 2px;
+}
+
+.detail-text strong {
+    display: block;
+    color: #e2e8f0;
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+}
+
+.detail-text p {
+    margin: 0;
+    color: #94a3b8;
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+
+/* MDQS Dimension List */
+.dimension-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 10px;
+}
+
+.dimension-list li {
+    font-size: 0.9rem;
+    color: #cbd5e1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.dim-tag {
+    background: rgba(129, 140, 248, 0.15);
+    color: #818cf8;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    width: 85px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+
 
 .feature-card {
     background: rgba(30, 41, 59, 0.6);

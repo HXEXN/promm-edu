@@ -18,7 +18,7 @@ router.post('/quality', handleQualityScore);
 // POST /api/advanced/analyze - Combined analysis
 router.post('/analyze', async (req, res) => {
     try {
-        const { text, domain = 'general', compressionLevel = 'MODERATE' } = req.body;
+        const { text, domain = 'general', compressionLevel = 'MODERATE', taskType = 'text' } = req.body;
 
         if (!text || text.trim().length === 0) {
             return res.status(400).json({ error: 'Text is required', code: 'EMPTY_TEXT' });
@@ -32,7 +32,35 @@ router.post('/analyze', async (req, res) => {
 
         const compressedQuality = qualityScorer.evaluate(compression.compressed.text);
 
-        const costAnalysis = calculateCostSavings(compression.original.tokens, compression.compressed.tokens);
+        const costAnalysis = calculateCostSavings(
+            compression.original.tokens,
+            compression.compressed.tokens,
+            taskType,
+            originalQuality.overall.score,
+            compressedQuality.overall.score
+        );
+
+        // Generate Model Savings for Table
+        const modelAnalysisOriginal = analyzeModelOptions(text, originalQuality.overall.score, 'balanced', taskType);
+        // We assume optimized text has better quality/fewer retries, so we calculate its cost too
+        const modelAnalysisOptimized = analyzeModelOptions(compression.compressed.text, compressedQuality.overall.score, 'balanced', taskType);
+
+        const modelSavings = {};
+        modelAnalysisOriginal.forEach((originalModel, index) => {
+            const optimizedModel = modelAnalysisOptimized.find(m => m.id === originalModel.id) || modelAnalysisOptimized[index];
+            const originalCost = parseFloat(originalModel.estimatedCost.total);
+            const optimizedCost = parseFloat(optimizedModel.estimatedCost.total); // This will be lower for Image/Video due to fewer retries
+            const annualSavings = (originalCost - optimizedCost) * 1000 * 12; // 1k/mo assumption base
+
+            modelSavings[originalModel.id] = {
+                modelName: originalModel.name,
+                provider: 'AI Provider',
+                originalCostPerRequest: originalCost,
+                optimizedCostPerRequest: optimizedCost,
+                savingsPercentage: originalCost > 0 ? ((originalCost - optimizedCost) / originalCost) * 100 : 0,
+                annualSavings: annualSavings
+            };
+        });
 
         res.json({
             success: true,
@@ -41,6 +69,7 @@ router.post('/analyze', async (req, res) => {
                 optimized: { text: compression.compressed.text, tokens: compression.compressed.tokens, quality: compressedQuality },
                 compression: compression.metrics,
                 costSavings: costAnalysis,
+                modelSavings: modelSavings, // Added for Frontend Table
                 recommendations: generateCombinedRecommendations(originalQuality, compression.metrics)
             },
             metadata: { algorithms: ['PROMM-STC-v1.0', 'PROMM-MDQS-v1.0'], timestamp: new Date().toISOString() }
@@ -55,7 +84,7 @@ router.post('/analyze', async (req, res) => {
 // POST /api/advanced/optimize - Real-time Cost-Quality Optimization
 router.post('/optimize', async (req, res) => {
     try {
-        const { text, budget = 100, minQuality = 80, priority = 'balanced' } = req.body;
+        const { text, budget = 100, minQuality = 80, priority = 'balanced', taskType = 'text' } = req.body;
 
         if (!text || text.trim().length === 0) {
             return res.status(400).json({ error: 'Text is required', code: 'EMPTY_TEXT' });
@@ -64,8 +93,8 @@ router.post('/optimize', async (req, res) => {
         const qualityScorer = new MultiDimensionalQualityScorer('general');
         const quality = qualityScorer.evaluate(text);
 
-        const modelAnalysis = analyzeModelOptions(text, quality.overall.score, priority);
-        const optimalStrategy = determineOptimalStrategy(modelAnalysis, budget, minQuality, priority);
+        const modelAnalysis = analyzeModelOptions(text, quality.overall.score, priority, taskType);
+        const optimalStrategy = determineOptimalStrategy(modelAnalysis, budget, minQuality, priority, Infinity, taskType);
 
         res.json({
             success: true,
@@ -146,116 +175,169 @@ router.post('/structured-output', async (req, res) => {
 // POST /api/advanced/evolve - Self-Evolving Prompt
 router.post('/evolve', async (req, res) => {
     try {
-        const { text, feedback } = req.body;
+        const { text, feedback, options } = req.body;
         const system = new Advanced2026.SelfEvolvingPromptSystem();
         const result = system.evolvePrompt(text, feedback || {
             clarityScore: 60,
             specificityScore: 60,
             tokenEfficiency: 60,
             outputQuality: 60
-        });
+        }, options || {}); // Pass constraints and mode
         res.json({ success: true, data: result, technology: 'Self-Evolving Prompts 2026' });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 });
 
-// GET /api/advanced/config - Updated config with 2026 technologies
-router.get('/config', (req, res) => {
-    res.json({
-        compressionLevels: Object.keys(CompressionLevels),
-        domains: Object.keys(DomainWeights),
-        models: [
-            // OpenAI - 2026 Feb Latest
-            { id: 'gpt-5.2', name: 'GPT-5.2 (Garlic)', inputCost: 2.5, outputCost: 10.0, context: '512K', isNew: true },
-            { id: 'gpt-5', name: 'GPT-5', inputCost: 2.0, outputCost: 8.0, context: '256K' },
-            { id: 'o3', name: 'o3 Reasoning', inputCost: 12.0, outputCost: 48.0, context: '256K', isNew: true },
-            { id: 'o1', name: 'o1 Reasoning', inputCost: 15, outputCost: 60, context: '200K' },
-            // Anthropic - Claude Opus 4.6 (Released Feb 5, 2026)
-            { id: 'claude-opus-4.6', name: 'Claude Opus 4.6', inputCost: 15, outputCost: 75, context: '1M', isNew: true },
-            { id: 'claude-opus-4.5', name: 'Claude Opus 4.5', inputCost: 12, outputCost: 60, context: '1M' },
-            { id: 'claude-sonnet-5', name: 'Claude Sonnet 5', inputCost: 3, outputCost: 15, context: '500K', isNew: true },
-            // Google - Gemini 3 (Released Nov 2025)
-            { id: 'gemini-3-pro', name: 'Gemini 3 Pro', inputCost: 1.75, outputCost: 7.0, context: '2M', isNew: true },
-            { id: 'gemini-3-flash', name: 'Gemini 3 Flash', inputCost: 0.1, outputCost: 0.4, context: '1M', isNew: true }
-        ],
-        technologies2026: [
-            { id: 'context-engineering', name: 'Context Engineering', description: 'JIT context loading and attention budget optimization' },
-            { id: 'prompt-caching', name: 'Prompt Caching', description: 'Up to 50% cost reduction and 85% latency improvement' },
-            { id: 'agentic-reasoning', name: 'Agentic Reasoning', description: 'ReAct+ with self-critique and multi-agent coordination' },
-            { id: 'structured-output', name: 'Structured Output', description: 'JSON Schema enforcement for reliable outputs' },
-            { id: 'self-evolving', name: 'Self-Evolving Prompts', description: 'Meta-prompting and automatic prompt improvement' }
-        ],
-        version: '3.0.0-2026-feb',
-        lastUpdated: '2026-02-06'
-    });
-});
 
+function calculateCostSavings(originalTokens, compressedTokens, taskType = 'text', originalQuality = 0, optimizedQuality = 0) {
 
-// Helper Functions
-function calculateCostSavings(originalTokens, compressedTokens) {
-    const models = {
-        'gpt-4o': { input: 2.5, output: 10 },
-        'gpt-4o-mini': { input: 0.15, output: 0.6 },
-        'claude-3.5-sonnet': { input: 3, output: 15 }
-    };
+    // 1. Image/Video Logic: Retry Reduction
+    if (taskType === 'image' || taskType === 'video') {
+        // Quality improvement leads to fewer retries
+        // e.g., Quality 60 -> 4 retries. Quality 90 -> 1 retry.
+        const origRetries = Math.max(1, Math.ceil((100 - originalQuality) / 15));
+        const optRetries = Math.max(1, Math.ceil((100 - optimizedQuality) / 15));
+        const retriesSaved = Math.max(0, origRetries - optRetries);
 
-    const savings = {};
+        // Base cost (approx DALL-E 3 or Video sec)
+        const unitCost = taskType === 'image' ? 0.040 : 1.00; // $0.04 image, $1.00 video session
+        const moneySavedPerUnit = (retriesSaved * unitCost).toFixed(4);
+        const percentage = origRetries > 0 ? ((retriesSaved / origRetries) * 100).toFixed(1) : 0;
 
-    Object.entries(models).forEach(([model, costs]) => {
-        const originalCost = (originalTokens * costs.input) / 1000000;
-        const compressedCost = (compressedTokens * costs.input) / 1000000;
-        const savedPerCall = originalCost - compressedCost;
+        const annualSavings = (parseFloat(moneySavedPerUnit) * 1000 * 12).toFixed(2); // 1k req/mo
 
-        savings[model] = {
-            originalCostPerCall: originalCost.toFixed(6),
-            compressedCostPerCall: compressedCost.toFixed(6),
-            savedPerCall: savedPerCall.toFixed(6),
-            savedPercentage: ((savedPerCall / originalCost) * 100).toFixed(1),
-            monthly1000Calls: (savedPerCall * 1000).toFixed(2),
-            monthly10000Calls: (savedPerCall * 10000).toFixed(2)
+        return {
+            tokensSaved: 0, // Not relevant
+            percentage: percentage,
+            moneySaved: moneySavedPerUnit,
+            projectedAnnualSavings: annualSavings,
+            roiScore: Math.min(100, Math.round(percentage * 1.5)),
+            estimatedLatencyReduction: percentage // Fewer retries = faster total time
         };
-    });
+    }
 
-    return savings;
+    // 2. Text/Code Logic: Token Reduction
+    // Pricing (per 1M tokens) - Average Blended (Input/Output mix assumption)
+    const AVG_PRICE_PER_1M = 15.00; // $15 per 1M tokens (approx GPT-4o blended)
+
+    const saved = originalTokens - compressedTokens;
+    const percentage = ((saved / originalTokens) * 100).toFixed(1);
+
+    // Estimate output savings (Multiplier: 3x)
+    // Assumption: Better prompts lead to 20-30% shorter, more direct answers
+    const estimatedOutputSavings = Math.round(saved * 3.5);
+    const totalEcoSystemSavings = saved + estimatedOutputSavings;
+
+    return {
+        tokensSaved: saved,
+        percentage: percentage,
+        moneySaved: ((saved / 1000000) * AVG_PRICE_PER_1M).toFixed(4),
+        projectedAnnualSavings: ((totalEcoSystemSavings * 1000 * 12) / 1000000 * AVG_PRICE_PER_1M).toFixed(2),
+        roiScore: Math.min(100, Math.round(percentage * 2.5)),
+        estimatedLatencyReduction: percentage // Assumes roughly linear correlation
+    };
 }
 
-function analyzeModelOptions(text, qualityScore, priority) {
-    const wordCount = text.split(/\s+/).length;
-    const estimatedTokens = Math.ceil(wordCount * 1.3);
+function analyzeModelOptions(text, qualityScore, priority, type = 'text') {
+    // 1. Image Generation Analysis
+    if (type === 'image') {
+        const models = [
+            { id: 'dall-e-3', name: 'DALL-E 3 (HD)', costPerUnit: 0.080, quality: 95, speed: 85 },
+            { id: 'dall-e-3-std', name: 'DALL-E 3 (Standard)', costPerUnit: 0.040, quality: 90, speed: 92 },
+            { id: 'midjourney-v6', name: 'Midjourney v6', costPerUnit: 0.050, quality: 98, speed: 80 }, // Est. amortized
+            { id: 'stable-diffusion-xl', name: 'SDXL (API)', costPerUnit: 0.004, quality: 85, speed: 98 }
+        ];
+
+        return models.map(model => {
+            // Retry Rate Logic: Lower quality prompt = More retries
+            // Quality 100 = 1 try. Quality 50 = 4 tries.
+            const estimatedRetries = Math.max(1, Math.ceil((100 - qualityScore) / 15));
+            const totalCost = (model.costPerUnit * estimatedRetries).toFixed(4);
+            const monthly1000 = (parseFloat(totalCost) * 1000).toFixed(2);
+
+            return {
+                id: model.id,
+                name: model.name,
+                estimatedCost: { total: totalCost, monthly1000: `$${monthly1000}` },
+                expectedQuality: model.quality,
+                efficiencyScore: (model.quality / parseFloat(totalCost) / 100).toFixed(1),
+                speed: model.speed,
+                meta: { retries: estimatedRetries }
+            };
+        });
+    }
+
+    // 2. Video Generation Analysis
+    if (type === 'video') {
+        const models = [
+            { id: 'sora-1.0', name: 'Sora (1.0)', costPerSec: 0.50, quality: 99, speed: 60 },
+            { id: 'runway-gen-3', name: 'Runway Gen-3', costPerSec: 0.25, quality: 95, speed: 70 },
+            { id: 'pika-labs', name: 'Pika 1.0', costPerSec: 0.15, quality: 90, speed: 80 }
+        ];
+
+        return models.map(model => {
+            // Video length assumption: 4 seconds
+            const VIDEO_LEN = 4;
+            // Retry logic similar to image but more expensive
+            const estimatedRetries = Math.max(1, Math.ceil((100 - qualityScore) / 12));
+            const totalCost = (model.costPerSec * VIDEO_LEN * estimatedRetries).toFixed(2);
+            const monthly100 = (parseFloat(totalCost) * 100).toFixed(2); // Video is lower volume
+
+            return {
+                id: model.id,
+                name: model.name,
+                estimatedCost: { total: totalCost, monthly1000: `$${monthly100}` }, // Label hack for frontend compatibility
+                expectedQuality: model.quality,
+                efficiencyScore: (model.quality / parseFloat(totalCost)).toFixed(1),
+                speed: model.speed,
+                meta: { retries: estimatedRetries }
+            };
+        });
+    }
+
+    // 3. Text & Code Analysis
+    const inputTokens = Math.ceil(text.length / 4);
+
+    // Output multiplier: Code is verbose (5x), Text is standard (2x)
+    const outputMultiplier = type === 'code' ? 5 : 2;
+    const estimatedOutputTokens = inputTokens * outputMultiplier;
 
     const models = [
-        { id: 'gpt-4o-mini', name: 'GPT-4o Mini', costPer1M: { input: 0.15, output: 0.6 }, qualityMultiplier: 0.92, speedMultiplier: 1.5, bestFor: ['simple', 'high-volume'] },
-        { id: 'gpt-4o', name: 'GPT-4o', costPer1M: { input: 2.5, output: 10 }, qualityMultiplier: 1.0, speedMultiplier: 1.0, bestFor: ['complex', 'nuanced'] },
-        { id: 'claude-3.5-sonnet', name: 'Claude 3.5 Sonnet', costPer1M: { input: 3, output: 15 }, qualityMultiplier: 0.98, speedMultiplier: 0.9, bestFor: ['creative', 'code'] }
+        { id: 'gpt-4o', name: 'GPT-4o', input: 5.00, output: 15.00, quality: 98, speed: 90 },
+        { id: 'gpt-4o-mini', name: 'GPT-4o Mini', input: 0.15, output: 0.60, quality: 82, speed: 98 },
+        { id: 'claude-3.5-sonnet', name: 'Claude 3.5 Sonnet', input: 3.00, output: 15.00, quality: 99, speed: 85 },
+        { id: 'claude-3-haiku', name: 'Claude 3 Haiku', input: 0.25, output: 1.25, quality: 78, speed: 99 },
+        { id: 'gemini-1.5-pro', name: 'Gemini 1.5 Pro', input: 3.50, output: 10.50, quality: 96, speed: 88 }
     ];
 
     return models.map(model => {
-        const inputCost = (estimatedTokens * model.costPer1M.input) / 1000000;
-        const outputCost = (estimatedTokens * 2 * model.costPer1M.output) / 1000000;
-        const totalCost = inputCost + outputCost;
-        const expectedQuality = Math.min(100, qualityScore * model.qualityMultiplier);
-        const efficiencyScore = (expectedQuality / (totalCost * 10000)) || 0;
+        const cost = ((inputTokens / 1000000 * model.input) + (estimatedOutputTokens / 1000000 * model.output)).toFixed(6);
+        const monthly1000 = (parseFloat(cost) * 1000).toFixed(2);
+        const adjustedQuality = Math.min(model.quality, model.quality * (qualityScore / 100));
+        const efficiency = (adjustedQuality / Math.max(0.01, parseFloat(monthly1000))).toFixed(1);
 
         return {
-            ...model,
-            estimatedCost: { input: inputCost.toFixed(6), output: outputCost.toFixed(6), total: totalCost.toFixed(6), monthly1000: (totalCost * 1000).toFixed(2) },
-            expectedQuality: expectedQuality.toFixed(1),
-            efficiencyScore: efficiencyScore.toFixed(2),
-            recommended: false
+            id: model.id,
+            name: model.name,
+            estimatedCost: { total: cost, monthly1000: `$${monthly1000}` },
+            expectedQuality: adjustedQuality.toFixed(1),
+            efficiencyScore: efficiency,
+            speed: model.speed
         };
     });
 }
 
-function determineOptimalStrategy(modelAnalysis, budget, minQuality, priority) {
+
+function determineOptimalStrategy(modelAnalysis, budget, minQuality, priority, maxTokens = Infinity, taskType = 'text') {
     let recommended;
 
     switch (priority) {
-        case 'cost':
+        case 'cost': // Efficient Mode
             recommended = modelAnalysis.filter(m => parseFloat(m.expectedQuality) >= minQuality)
                 .sort((a, b) => parseFloat(a.estimatedCost.total) - parseFloat(b.estimatedCost.total))[0];
             break;
-        case 'quality':
+        case 'quality': // Quality Mode
             recommended = modelAnalysis.sort((a, b) => parseFloat(b.expectedQuality) - parseFloat(a.expectedQuality))[0];
             break;
         case 'balanced':
@@ -273,11 +355,41 @@ function determineOptimalStrategy(modelAnalysis, budget, minQuality, priority) {
         'claude-3.5-sonnet': '창의적 글쓰기와 코드 생성에 탁월합니다.'
     };
 
+    // Determine optimization settings based on priority
+    let optimizationSettings;
+    if (priority === 'cost') {
+        optimizationSettings = {
+            recommended: true,
+            level: 'AGGRESSIVE',
+            mode: 'efficiency',
+            maxTokens: maxTokens !== Infinity ? maxTokens : 500, // Default tight limit
+            reason: '비용 최적화를 위해 공격적 압축 및 구조 단순화 적용'
+        };
+    } else if (priority === 'quality') {
+        optimizationSettings = {
+            recommended: true,
+            level: 'LIGHT',
+            mode: 'quality',
+            maxTokens: maxTokens,
+            reason: '품질 극대화를 위해 구조적 강화 및 의미 보존 중심'
+        };
+    } else {
+        optimizationSettings = {
+            recommended: true,
+            level: 'MODERATE',
+            mode: 'balanced',
+            maxTokens: maxTokens !== Infinity ? maxTokens : 1000,
+            reason: '균형 잡힌 성능을 위해 적절한 압축과 구조 개선 병행'
+        };
+    }
+
     return {
         model: recommended.id,
         modelName: recommended.name,
         reason: reasons[recommended.id] || '균형 잡힌 성능을 제공합니다.',
-        compression: recommended.id !== 'gpt-4o-mini' ? { recommended: true, level: 'MODERATE', reason: '고비용 모델이므로 토큰 압축으로 비용 절감 가능' } : { recommended: false, reason: '이미 저비용 모델 사용' },
+        compression: recommended.id !== 'gpt-4o-mini' ?
+            optimizationSettings :
+            { ...optimizationSettings, reason: '이미 저비용 모델이지만 추가 최적화 가능' },
         estimatedMonthlyCost: recommended.estimatedCost.monthly1000,
         expectedQuality: recommended.expectedQuality
     };

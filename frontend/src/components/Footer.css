@@ -1,8 +1,10 @@
 .site-footer {
-    background: linear-gradient(180deg, #0f1219 0%, #0a0c14 100%);
-    color: white;
+    background: #020617;
+    /* Very dark slate */
+    color: var(--text-tertiary);
     margin-top: auto;
     position: relative;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .site-footer::before {

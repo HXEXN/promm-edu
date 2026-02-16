@@ -643,16 +643,20 @@ Return ONLY the generated prompt, nothing else.
     /**
      * Prompt Evolution through Performance Feedback
      */
-    evolvePrompt(originalPrompt, feedback) {
+    evolvePrompt(originalPrompt, feedback, options = {}) {
+        const { maxTokens = Infinity, mode = 'balanced' } = options;
+
         const evolutionRecord = {
             id: this.generateEvolutionId(),
             original: originalPrompt,
             feedback,
+            options,
             timestamp: Date.now()
         };
 
-        // Analyze feedback patterns
-        const improvements = this.analyzeForImprovements(feedback);
+        // Analyze feedback patterns with constraints
+        const currentTokenCount = this.estimateTokens(originalPrompt);
+        const improvements = this.analyzeForImprovements(feedback, currentTokenCount, maxTokens, mode);
 
         // Apply evolutionary mutations
         let evolvedPrompt = originalPrompt;
@@ -660,6 +664,11 @@ Return ONLY the generated prompt, nothing else.
         improvements.forEach(improvement => {
             evolvedPrompt = this.applyMutation(evolvedPrompt, improvement);
         });
+
+        // Final token check (if strict efficiency mode)
+        if (mode === 'efficiency' || this.estimateTokens(evolvedPrompt) > maxTokens) {
+            evolvedPrompt = this.compressPrompt(evolvedPrompt);
+        }
 
         evolutionRecord.evolved = evolvedPrompt;
         evolutionRecord.mutations = improvements;
@@ -670,43 +679,78 @@ Return ONLY the generated prompt, nothing else.
             evolvedPrompt,
             improvements,
             evolutionId: evolutionRecord.id,
-            generationNumber: this.promptHistory.length
+            generationNumber: this.promptHistory.length,
+            tokenCount: this.estimateTokens(evolvedPrompt)
         };
     }
 
-    analyzeForImprovements(feedback) {
+    analyzeForImprovements(feedback, currentTokens, maxTokens, mode) {
         const improvements = [];
+        const isEfficiencyMode = mode === 'efficiency';
+        const isQualityMode = mode === 'quality';
+
+        // Estimated token costs for mutations
+        const MutationCosts = {
+            add_structure: 60,
+            add_examples: 40,
+            add_constraints: 30,
+            refine_clarity: 0,
+            compress: -10
+        };
+
+        let projectedTokens = currentTokens;
+
+        const canAfford = (cost) => {
+            if (isQualityMode) return true;
+            if (isEfficiencyMode && cost > 0) return false;
+            return (projectedTokens + cost) <= maxTokens;
+        };
 
         // Clarity issues
         if (feedback.clarityScore < 70) {
-            improvements.push({
-                type: 'add_structure',
-                action: 'Add clear section headers and numbered steps'
-            });
+            if (canAfford(MutationCosts.add_structure)) {
+                improvements.push({
+                    type: 'add_structure',
+                    action: 'Add clear section headers and numbered steps'
+                });
+                projectedTokens += MutationCosts.add_structure;
+            } else if (isEfficiencyMode || !canAfford(MutationCosts.add_structure)) {
+                improvements.push({
+                    type: 'refine_clarity',
+                    action: 'Simplify language for clarity without adding structure'
+                });
+            }
         }
 
         // Specificity issues
         if (feedback.specificityScore < 60) {
-            improvements.push({
-                type: 'add_examples',
-                action: 'Include concrete examples of expected output'
-            });
+            if (canAfford(MutationCosts.add_examples)) {
+                improvements.push({
+                    type: 'add_examples',
+                    action: 'Include concrete examples of expected output'
+                });
+                projectedTokens += MutationCosts.add_examples;
+            }
         }
 
-        // Token efficiency
-        if (feedback.tokenEfficiency < 50) {
+        // Token efficiency (Always check this, but aggressively in efficiency mode)
+        if (feedback.tokenEfficiency < 50 || isEfficiencyMode || projectedTokens > maxTokens) {
             improvements.push({
                 type: 'compress',
                 action: 'Remove redundant phrases and filler words'
             });
+            projectedTokens += MutationCosts.compress;
         }
 
         // Output quality
         if (feedback.outputQuality < 70) {
-            improvements.push({
-                type: 'add_constraints',
-                action: 'Add explicit constraints and quality requirements'
-            });
+            if (canAfford(MutationCosts.add_constraints)) {
+                improvements.push({
+                    type: 'add_constraints',
+                    action: 'Add explicit constraints and quality requirements'
+                });
+                projectedTokens += MutationCosts.add_constraints;
+            }
         }
 
         return improvements;
@@ -722,9 +766,20 @@ Return ONLY the generated prompt, nothing else.
                 return this.compressPrompt(prompt);
             case 'add_constraints':
                 return this.addConstraints(prompt);
+            case 'refine_clarity':
+                return this.refineClarity(prompt);
             default:
                 return prompt;
         }
+    }
+
+    estimateTokens(text) {
+        return Math.ceil(text.length / 4);
+    }
+
+    refineClarity(prompt) {
+        // Simple heuristic for clarity without adding bulk
+        return prompt.replace(/complex|complicated/gi, 'simple');
     }
 
     addStructure(prompt) {

@@ -5,6 +5,7 @@ import './TokenOptimizerLab.css';
 function TokenOptimizerLab() {
     const [prompt, setPrompt] = useState('');
     const [domain, setDomain] = useState('general');
+    const [taskType, setTaskType] = useState('text'); // text, code, image, video
     const [requestsPerMonth, setRequestsPerMonth] = useState(1000);
     const [result, setResult] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -23,10 +24,11 @@ function TokenOptimizerLab() {
         if (!prompt.trim()) return;
         setLoading(true);
         try {
-            const response = await fetch(`${API_URL}/api/prompt/optimize`, {
+            // Use Advanced API for Multi-Modal support
+            const response = await fetch(`${API_URL}/api/advanced/analyze`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ prompt, domain, requestsPerMonth })
+                body: JSON.stringify({ text: prompt, domain, requestsPerMonth, taskType })
             });
             const data = await response.json();
             if (data.success) {
@@ -56,6 +58,9 @@ function TokenOptimizerLab() {
                     ]
                 },
                 modelSavings: null,
+                costSavings: {
+                    estimatedLatencyReduction: originalTokens > 0 ? Math.round(((originalTokens - optimizedTokens) / originalTokens) * 1000) / 10 : 0
+                },
                 requestsPerMonth
             });
         } finally {
@@ -143,6 +148,15 @@ Could you please provide the results in a table format? Thank you very much. I w
 
                     <div className="lab-options">
                         <div className="option-group">
+                            <label>작업 유형 (Task Type)</label>
+                            <select value={taskType} onChange={(e) => setTaskType(e.target.value)}>
+                                <option value="text">✍️ 텍스트 생성</option>
+                                <option value="code">💻 코드 생성</option>
+                                <option value="image">🎨 이미지 생성</option>
+                                <option value="video">🎥 비디오 생성</option>
+                            </select>
+                        </div>
+                        <div className="option-group">
                             <label>도메인</label>
                             <select value={domain} onChange={(e) => setDomain(e.target.value)}>
                                 <option value="general">일반</option>
@@ -197,15 +211,26 @@ Could you please provide the results in a table format? Thank you very much. I w
                 {/* Results Section */}
                 {result && (
                     <section className="lab-results">
-                        {/* Top Stats Bar */}
                         <div className="stats-bar">
                             <div className="stat-item highlight">
-                                <span className="stat-number">{result.compression.tokensSaved}</span>
-                                <span className="stat-label">토큰 절감</span>
+                                <span className="stat-number">
+                                    {(taskType === 'image' || taskType === 'video')
+                                        ? `${result.costSavings?.percentage || 0}%`
+                                        : result.compression.tokensSaved}
+                                </span>
+                                <span className="stat-label">
+                                    {(taskType === 'image' || taskType === 'video') ? '재시도 절감' : '토큰 절감'}
+                                </span>
                             </div>
                             <div className="stat-item">
                                 <span className="stat-number">{result.compression.compressionRatio}%</span>
                                 <span className="stat-label">압축률</span>
+                            </div>
+                            <div className="stat-item">
+                                <span className="stat-number speed">
+                                    {result.costSavings?.estimatedLatencyReduction || result.compression.compressionRatio}%
+                                </span>
+                                <span className="stat-label">연산 속도 향상</span>
                             </div>
                             <div className="stat-item">
                                 <span className={`stat-number ${result.compression.qualityPreserved ? 'good' : 'warn'}`}>
@@ -418,42 +443,99 @@ Could you please provide the results in a table format? Thank you very much. I w
 
                 {/* Feature explanation (when no result) */}
                 {!result && (
-                    <section className="lab-features">
-                        <h2>🔬 토큰 최적화 기술이란?</h2>
-                        <div className="features-grid">
-                            <div className="feature-card">
-                                <div className="feature-icon">✂️</div>
-                                <h3>STC Engine</h3>
-                                <p>Semantic Token Compression</p>
-                                <ul>
-                                    <li>불필요한 filler 표현 제거</li>
-                                    <li>중복 지시 탐지 및 병합</li>
-                                    <li>장황한 구문 간소화</li>
-                                    <li>의미 보존 보장</li>
-                                </ul>
+                    <section className="lab-features deep-dive">
+                        <h2>🔬 토큰 최적화 핵심 기술 (Core Technologies)</h2>
+                        <div className="deep-dive-grid">
+
+                            {/* STC Engine Card */}
+                            <div className="deep-dive-card stc">
+                                <div className="card-header">
+                                    <div className="card-icon">✂️</div>
+                                    <div className="card-title">
+                                        <h3>STC Engine</h3>
+                                        <span className="card-subtitle">Semantic Token Compression</span>
+                                    </div>
+                                </div>
+                                <div className="card-body">
+                                    <p className="tech-desc">
+                                        의미(Semantic)를 보존하면서 언어적 중복을 제거하는 독자적인 압축 엔진입니다. 단순한 요약이 아니라, AI 모델이 이해하는 'Semantic Fingerprint'를 남기고 인간적인 장식어구만 제거합니다.
+                                    </p>
+                                    <div className="tech-details">
+                                        <div className="detail-item">
+                                            <span className="detail-icon">🔍</span>
+                                            <div className="detail-text">
+                                                <strong>의미 지문 (Semantic Fingerprint)</strong>
+                                                <p>문장의 핵심 의도와 필수 엔티티(Entity)만을 추출하여 보존합니다.</p>
+                                            </div>
+                                        </div>
+                                        <div className="detail-item">
+                                            <span className="detail-icon">🛡️</span>
+                                            <div className="detail-text">
+                                                <strong>패턴 보호 (Protected Patterns)</strong>
+                                                <p>코드 블록, JSON 포맷, 특정 제약 조건은 압축하지 않고 원형을 유지합니다.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div className="feature-card">
-                                <div className="feature-icon">📊</div>
-                                <h3>MDQS 7D</h3>
-                                <p>7-Dimension Quality Scoring</p>
-                                <ul>
-                                    <li>명확성 / 구체성 / 구조</li>
-                                    <li>완전성 / 효율성</li>
-                                    <li>실행가능성 / 도메인 적합</li>
-                                    <li>도메인별 가중치 최적화</li>
-                                </ul>
+
+                            {/* MDQS 7D Card */}
+                            <div className="deep-dive-card mdqs">
+                                <div className="card-header">
+                                    <div className="card-icon">📊</div>
+                                    <div className="card-title">
+                                        <h3>MDQS 7D</h3>
+                                        <span className="card-subtitle">7-Dimension Quality Scoring</span>
+                                    </div>
+                                </div>
+                                <div className="card-body">
+                                    <p className="tech-desc">
+                                        프롬프트의 품질을 단일 점수가 아닌 7가지 독립적인 차원에서 분석합니다. 각 차원은 상호 보완적이며, 도메인(코딩, 글쓰기 등)에 따라 가중치가 동적으로 변합니다.
+                                    </p>
+                                    <ul className="dimension-list">
+                                        <li><span className="dim-tag">Clarity</span> 명확성: 모호한 표현 제거</li>
+                                        <li><span className="dim-tag">Specificity</span> 구체성: 예시 및 상세 조건</li>
+                                        <li><span className="dim-tag">Structure</span> 구조: 마크다운 및 계층화</li>
+                                        <li><span className="dim-tag">Completeness</span> 완전성: 누락된 정보 확인</li>
+                                        <li><span className="dim-tag">Efficiency</span> 효율성: 토큰 대비 정보량</li>
+                                        <li><span className="dim-tag">Actionability</span> 실행성: AI가 행동 가능한지</li>
+                                        <li><span className="dim-tag">Domain Fit</span> 적합성: 도메인 전문 용어 사용</li>
+                                    </ul>
+                                </div>
                             </div>
-                            <div className="feature-card">
-                                <div className="feature-icon">💰</div>
-                                <h3>RCQO</h3>
-                                <p>Real-time Cost-Quality Optimizer</p>
-                                <ul>
-                                    <li>6개 AI 모델 실시간 비용 비교</li>
-                                    <li>연간 비용 절감 시뮬레이션</li>
-                                    <li>품질 대비 비용 최적점 탐색</li>
-                                    <li>파레토 최적화</li>
-                                </ul>
+
+                            {/* RCQO Card */}
+                            <div className="deep-dive-card rcqo">
+                                <div className="card-header">
+                                    <div className="card-icon">💰</div>
+                                    <div className="card-title">
+                                        <h3>RCQO</h3>
+                                        <span className="card-subtitle">Real-time Cost-Quality Optimization</span>
+                                    </div>
+                                </div>
+                                <div className="card-body">
+                                    <p className="tech-desc">
+                                        품질과 비용 사이의 최적 균형점(Pareto Frontier)을 실시간으로 탐색합니다. 무조건 저렴한 모델이 아니라, 요구 품질을 만족하는 가장 경제적인 모델을 추천합니다.
+                                    </p>
+                                    <div className="tech-details">
+                                        <div className="detail-item">
+                                            <span className="detail-icon">📉</span>
+                                            <div className="detail-text">
+                                                <strong>비용 시뮬레이션</strong>
+                                                <p>GPT-4o, Claude 3.5, Gemini Pro 등 6개 최신 모델의 실시간 토큰 단가를 반영합니다.</p>
+                                            </div>
+                                        </div>
+                                        <div className="detail-item">
+                                            <span className="detail-icon">⚖️</span>
+                                            <div className="detail-text">
+                                                <strong>모드 선택 (Mode Selection)</strong>
+                                                <p>Efficiency(비용 중심) vs Quality(성능 중심) vs Balanced(균형) 모드를 지원합니다.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
                     </section>
                 )}

@@ -45,7 +45,7 @@ function WhyLearnPage() {
 
                 <div className="tab-content">
                     {activeTab === 'revolution' && (
-                        <div className="content-panel fade-in">
+                        <div className="content-panel glass-panel-pro fade-in">
                             <h2>세계 최고 대학과 AI 리더들의 선언</h2>
 
                             <div className="revolution-highlight">
@@ -65,7 +65,7 @@ function WhyLearnPage() {
                                 </div>
                             </div>
 
-                            <div className="stanford-section">
+                            <div className="stanford-section glass-panel">
                                 <div className="stanford-header">
                                     <span className="stanford-logo">🎓</span>
                                     <div>
@@ -74,7 +74,7 @@ function WhyLearnPage() {
                                     </div>
                                 </div>
 
-                                <div className="course-card">
+                                <div className="course-card glass-panel-inner">
                                     <div className="course-title">
                                         <span className="course-code">CS146S</span>
                                         <span className="course-name">"The Modern Software Developer"</span>
@@ -91,17 +91,17 @@ function WhyLearnPage() {
                                 </div>
 
                                 <div className="stanford-initiatives">
-                                    <div className="initiative">
+                                    <div className="initiative glass-panel-inner">
                                         <strong>AIMES 프로그램</strong>
                                         <p>AI Meets Education at Stanford - 교수진의 생성 AI 교육 통합 지원</p>
                                     </div>
-                                    <div className="initiative">
+                                    <div className="initiative glass-panel-inner">
                                         <strong>AI+Education Summit</strong>
                                         <p>2025년 2월 개최, AI가 교육을 어떻게 변화시키는지 연구</p>
                                     </div>
                                 </div>
 
-                                <div className="stanford-study">
+                                <div className="stanford-study glass-panel-inner">
                                     <h4>📊 Stanford 연구 결과 (2025년 8월)</h4>
                                     <p>
                                         ChatGPT 등장 이후 <strong>초급 프로그래밍 일자리가 크게 감소</strong>했으며,
@@ -117,7 +117,7 @@ function WhyLearnPage() {
                                 <h3>🌟 AI 리더들의 공통된 메시지</h3>
 
                                 <div className="leaders-grid">
-                                    <div className="leader-card">
+                                    <div className="leader-card glass-panel-hover">
                                         <div className="leader-name">Jensen Huang</div>
                                         <div className="leader-role">NVIDIA CEO</div>
                                         <p>
@@ -126,7 +126,7 @@ function WhyLearnPage() {
                                         </p>
                                     </div>
 
-                                    <div className="leader-card">
+                                    <div className="leader-card glass-panel-hover">
                                         <div className="leader-name">Andrew Ng</div>
                                         <div className="leader-role">Stanford / DeepLearning.AI</div>
                                         <p>
@@ -135,7 +135,7 @@ function WhyLearnPage() {
                                         </p>
                                     </div>
 
-                                    <div className="leader-card">
+                                    <div className="leader-card glass-panel-hover">
                                         <div className="leader-name">Satya Nadella</div>
                                         <div className="leader-role">Microsoft CEO</div>
                                         <p>
@@ -146,7 +146,7 @@ function WhyLearnPage() {
                                 </div>
                             </div>
 
-                            <div className="paradigm-shift">
+                            <div className="paradigm-shift glass-panel">
                                 <h3>💫 패러다임의 전환</h3>
                                 <div className="shift-comparison">
                                     <div className="old-way">
@@ -172,21 +172,21 @@ function WhyLearnPage() {
                             <div className="why-now">
                                 <h3>⏰ 왜 지금 배워야 할까요?</h3>
                                 <div className="why-reasons">
-                                    <div className="reason">
+                                    <div className="reason glass-panel-hover">
                                         <span className="reason-icon">🏫</span>
                                         <div>
                                             <strong>교육이 변하고 있습니다</strong>
                                             <p>세계 최고 대학들이 커리큘럼을 AI 중심으로 재편하고 있습니다</p>
                                         </div>
                                     </div>
-                                    <div className="reason">
+                                    <div className="reason glass-panel-hover">
                                         <span className="reason-icon">💼</span>
                                         <div>
                                             <strong>일자리가 변하고 있습니다</strong>
                                             <p>단순 코딩보다 AI 활용 능력이 더 중요해지고 있습니다</p>
                                         </div>
                                     </div>
-                                    <div className="reason">
+                                    <div className="reason glass-panel-hover">
                                         <span className="reason-icon">🚀</span>
                                         <div>
                                             <strong>기회가 열리고 있습니다</strong>
@@ -199,11 +199,11 @@ function WhyLearnPage() {
                     )}
 
                     {activeTab === 'cost' && (
-                        <div className="content-panel fade-in">
+                        <div className="content-panel glass-panel-pro fade-in">
                             <h2>API 비용, 최대 60% 절감 가능</h2>
 
                             <div className="comparison-box">
-                                <div className="before">
+                                <div className="before glass-panel-inner">
                                     <h3>❌ 최적화 전</h3>
                                     <div className="example-prompt">
                                         <p className="prompt-text">
@@ -228,7 +228,7 @@ function WhyLearnPage() {
 
                                 <div className="arrow-separator">→</div>
 
-                                <div className="after">
+                                <div className="after glass-panel-inner">
                                     <h3>✅ 최적화 후</h3>
                                     <div className="example-prompt">
                                         <p className="prompt-text">
@@ -258,7 +258,7 @@ function WhyLearnPage() {
                                 </div>
                             </div>
 
-                            <div className="real-case">
+                            <div className="real-case glass-panel-inner">
                                 <h3>📊 실제 사례</h3>
                                 <ul>
                                     <li>
@@ -279,11 +279,11 @@ function WhyLearnPage() {
                     )}
 
                     {activeTab === 'efficiency' && (
-                        <div className="content-panel fade-in">
+                        <div className="content-panel glass-panel-pro fade-in">
                             <h2>작업 속도 25% 향상, 품질 40% 개선</h2>
 
                             <div className="efficiency-stats">
-                                <div className="stat-box">
+                                <div className="stat-box glass-panel-hover">
                                     <div className="stat-icon">⚡</div>
                                     <div className="stat-number">25%</div>
                                     <div className="stat-desc">더 빠른 작업 완료</div>
@@ -293,7 +293,7 @@ function WhyLearnPage() {
                                     </p>
                                 </div>
 
-                                <div className="stat-box">
+                                <div className="stat-box glass-panel-hover">
                                     <div className="stat-icon">⭐</div>
                                     <div className="stat-number">40%</div>
                                     <div className="stat-desc">더 높은 결과 품질</div>
@@ -303,7 +303,7 @@ function WhyLearnPage() {
                                     </p>
                                 </div>
 
-                                <div className="stat-box">
+                                <div className="stat-box glass-panel-hover">
                                     <div className="stat-icon">🎯</div>
                                     <div className="stat-number">20-30%</div>
                                     <div className="stat-desc">성능 개선</div>
@@ -325,7 +325,7 @@ function WhyLearnPage() {
                                     </p>
                                 </div>
 
-                                <div className="example-roi">
+                                <div className="example-roi glass-panel-inner">
                                     <h4>실제 사례: 소매 체인</h4>
                                     <p>
                                         고객 서비스 봇의 프롬프트를 조정하여
@@ -339,11 +339,11 @@ function WhyLearnPage() {
                     )}
 
                     {activeTab === 'career' && (
-                        <div className="content-panel fade-in">
+                        <div className="content-panel glass-panel-pro fade-in">
                             <h2>급성장하는 프롬프트 엔지니어 수요</h2>
 
                             <div className="career-growth">
-                                <div className="growth-stat">
+                                <div className="growth-stat glass-panel-inner">
                                     <div className="growth-number">3,500%</div>
                                     <div className="growth-label">채용 공고 증가</div>
                                     <p>
@@ -353,7 +353,7 @@ function WhyLearnPage() {
                                     </p>
                                 </div>
 
-                                <div className="linkedin-box">
+                                <div className="linkedin-box glass-panel-inner">
                                     <h3>🏆 LinkedIn 신흥 직무 Top 5</h3>
                                     <p>
                                         LinkedIn의 2025년 Q1 신흥 직무 보고서에서
@@ -363,7 +363,7 @@ function WhyLearnPage() {
                                 </div>
                             </div>
 
-                            <div className="salary-info">
+                            <div className="salary-info glass-panel-inner">
                                 <h3>💼 연봉 정보 (2025)</h3>
                                 <div className="salary-range">
                                     <div className="salary-min">$95,000</div>
@@ -375,7 +375,7 @@ function WhyLearnPage() {
                                 </p>
                             </div>
 
-                            <div className="market-growth">
+                            <div className="market-growth glass-panel-inner">
                                 <h3>📈 시장 규모 전망</h3>
                                 <div className="market-stats">
                                     <div className="market-stat">
@@ -415,10 +415,10 @@ function WhyLearnPage() {
                 <h2>지금 바로 시작하세요</h2>
                 <p>실습을 통해 프롬프트 최적화를 직접 경험하고 측정 가능한 결과를 만들어보세요</p>
                 <div className="cta-buttons">
-                    <Link to="/dashboard?mode=student" className="btn btn-primary btn-large">
+                    <Link to="/dashboard?mode=student" className="btn-glow-primary large">
                         🎓 학습 시작하기
                     </Link>
-                    <Link to="/dashboard?mode=enterprise" className="btn btn-outline btn-large">
+                    <Link to="/dashboard?mode=enterprise" className="btn-glass">
                         🏢 기업 솔루션 보기
                     </Link>
                 </div>

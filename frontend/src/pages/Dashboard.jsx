@@ -22,7 +22,7 @@ function Dashboard() {
 
     return (
         <div className="dashboard-page">
-            <div className="dashboard-header">
+            <div className="dashboard-header glass-panel-pro">
                 <div className="header-content">
                     <div className="logo-section">
                         <div className="header-text">
@@ -32,16 +32,16 @@ function Dashboard() {
                             </span>
                         </div>
                         <div className="header-actions">
-                            <button className="btn-action" onClick={() => navigate('/ai-engines')}>
+                            <button className="btn-action glass-button" onClick={() => navigate('/ai-engines')}>
                                 🤖 AI 엔진
                             </button>
-                            <button className="btn-action" onClick={() => navigate('/advanced')}>
+                            <button className="btn-action glass-button" onClick={() => navigate('/advanced')}>
                                 ⚡ 고급 최적화
                             </button>
                             <button className="btn-mode-switch" onClick={toggleMode}>
                                 {mode === 'enterprise' ? '👨‍🎓 학생 모드' : '💼 기업 모드'}
                             </button>
-                            <button className="btn-info-toggle" onClick={() => setShowEngineInfo(!showEngineInfo)}>
+                            <button className="btn-info-toggle glass-button" onClick={() => setShowEngineInfo(!showEngineInfo)}>
                                 {showEngineInfo ? '✕' : '📖 엔진 설명'}
                             </button>
                         </div>
