@@ -419,8 +419,67 @@
 
 /* Responsive */
 @media (max-width: 1024px) {
+    .navbar-container {
+        padding: 0 var(--space-md);
+        gap: var(--space-sm);
+    }
+
+    .logo-text {
+        font-size: 1.2rem;
+    }
+
+    .nav-link {
+        padding: 8px 10px;
+        font-size: 0.9rem;
+    }
+
     .navbar-actions {
         display: none;
+    }
+
+    .mobile-menu-toggle {
+        display: flex;
+        /* Show toggle earlier if space is tight */
+    }
+
+    .navbar-menu {
+        /* If showing toggle, hide menu or use drawer style (which triggers at 768px currently) */
+        /* For 768-1024, if we hide actions, we might fit menu. If not, switch to drawer. */
+        /* Let's keep menu visible but smaller if possible, or just switch to drawer at 1024px */
+    }
+}
+
+/* Switch to Mobile Drawer at 1024px instead of 768px to avoid overlap */
+@media (max-width: 1024px) {
+    .navbar-menu {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: rgba(15, 23, 42, 0.95);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        align-items: stretch;
+        padding: var(--space-lg);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        transform: translateY(-100%);
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.3s;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .navbar-menu.open {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    .nav-link {
+        justify-content: flex-start;
+        padding: 12px 16px;
+        font-size: 1.1rem;
+        color: #e2e8f0;
     }
 }
 
@@ -460,7 +519,8 @@
         top: 70px;
         left: 0;
         width: 100%;
-        background: white;
+        background: rgba(15, 23, 42, 0.95);
+        backdrop-filter: blur(20px);
         flex-direction: column;
         align-items: stretch;
         padding: var(--space-lg);
@@ -469,6 +529,7 @@
         opacity: 0;
         pointer-events: none;
         transition: all 0.3s;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .navbar-menu.open {

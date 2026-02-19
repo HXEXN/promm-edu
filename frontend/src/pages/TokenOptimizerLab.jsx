@@ -215,7 +215,7 @@ Could you please provide the results in a table format? Thank you very much. I w
                             <div className="stat-item highlight">
                                 <span className="stat-number">
                                     {(taskType === 'image' || taskType === 'video')
-                                        ? `${result.costSavings?.percentage || 0}%`
+                                        ? `${(result.costSavings?.percentage || 0).toFixed(1)}%`
                                         : result.compression.tokensSaved}
                                 </span>
                                 <span className="stat-label">
