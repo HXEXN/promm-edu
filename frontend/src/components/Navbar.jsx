@@ -51,8 +51,9 @@ function Navbar() {
             type: 'dropdown',
             label: '💼 비즈니스',
             id: 'business',
-            paths: ['/enterprise', '/roi-calculator'],
+            paths: ['/enterprise', '/roi-calculator', '/pricing'],
             items: [
+                { path: '/pricing', label: '💰 요금제', desc: '비즈니스 모델 & 가격' },
                 { path: '/enterprise/process', label: '도입 프로세스', desc: '기업 도입 4단계' },
                 { path: '/enterprise/education', label: '기업 교육', desc: '맞춤형 교육 프로그램' },
                 { path: '/roi-calculator', label: 'ROI 계산기', desc: '비용 절감 시뮬레이션' }

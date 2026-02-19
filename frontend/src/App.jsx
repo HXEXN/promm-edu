@@ -22,6 +22,7 @@ import CaseStudiesPage from './pages/CaseStudiesPage';
 import CompetitorComparison from './pages/CompetitorComparison';
 import SitemapPage from './pages/SitemapPage';
 import EUAIActPage from './pages/EUAIActPage';
+import BusinessModelPage from './pages/BusinessModelPage';
 import './index.css';
 
 function App() {
@@ -51,6 +52,7 @@ function App() {
         <Route path="/enterprise/report" element={<EnterprisePage />} />
         <Route path="/enterprise/dashboard" element={<EnterpriseDashboard />} />
         <Route path="/roi-calculator" element={<ROICalculator />} />
+        <Route path="/pricing" element={<BusinessModelPage />} />
 
         {/* 정보 */}
         <Route path="/case-studies" element={<CaseStudiesPage />} />
