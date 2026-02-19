@@ -62,11 +62,12 @@ function Navbar() {
             type: 'dropdown',
             label: '📊 정보',
             id: 'info',
-            paths: ['/case-studies', '/compare', '/technology', '/sitemap'],
+            paths: ['/case-studies', '/compare', '/technology', '/eu-ai-act', '/sitemap'],
             items: [
                 { path: '/case-studies', label: '고객 사례', desc: '성공 스토리' },
                 { path: '/compare', label: '경쟁사 비교', desc: 'PROMM vs 경쟁사' },
                 { path: '/technology', label: '기술 정보', desc: '2026 최신 AI 스택' },
+                { path: '/eu-ai-act', label: '🇪🇺 EU AI Act', desc: '규제 대응 시스템' },
                 { path: '/sitemap', label: '사이트맵', desc: '전체 페이지 구조' }
             ]
         }

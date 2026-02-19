@@ -21,6 +21,7 @@ import ROICalculator from './pages/ROICalculator';
 import CaseStudiesPage from './pages/CaseStudiesPage';
 import CompetitorComparison from './pages/CompetitorComparison';
 import SitemapPage from './pages/SitemapPage';
+import EUAIActPage from './pages/EUAIActPage';
 import './index.css';
 
 function App() {
@@ -55,6 +56,7 @@ function App() {
         <Route path="/case-studies" element={<CaseStudiesPage />} />
         <Route path="/compare" element={<CompetitorComparison />} />
         <Route path="/technology" element={<TechnologyPage />} />
+        <Route path="/eu-ai-act" element={<EUAIActPage />} />
         <Route path="/sitemap" element={<SitemapPage />} />
 
         {/* 시작하기 */}
