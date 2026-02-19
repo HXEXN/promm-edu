@@ -2,50 +2,121 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './BusinessModelPage.css';
 
-// ── Pricing Plans ──
-const PLANS = [
+// ── Track A: AI 리터러시 교육 요금제 ──
+const TRACK_A_PLANS = [
     {
-        id: 'starter',
-        icon: '🚀',
-        name: 'Starter',
-        desc: '소규모 팀의 AI 프롬프트 교육 시작에 적합',
-        monthlyPrice: 0,
-        annualPrice: 0,
-        priceLabel: '무료',
+        id: 'a-basic',
+        icon: '📖',
+        name: 'Basic',
+        desc: '팀 단위 AI 규제 기초 교육',
+        monthlyPrice: 290000,
+        annualPrice: 2900000,
         features: [
-            { text: '사용자 최대 5명', included: true },
-            { text: 'AI 분석 월 100회', included: true },
-            { text: '기본 교육 모듈 3개', included: true },
-            { text: '프롬프트 생성기', included: true },
-            { text: '기본 토큰 비용 분석', included: true },
-            { text: 'ROI 분석 리포트', included: false },
-            { text: 'EU AI Act 대비 도구', included: false },
-            { text: '고급 토큰 최적화 (STC)', included: false },
-            { text: 'API 접근', included: false },
-            { text: '전담 매니저', included: false }
+            { text: '교육 인원 최대 10명', included: true },
+            { text: 'EU AI Act 기초 과정', included: true },
+            { text: '국내 AI 기본법 기초 과정', included: true },
+            { text: '온라인 자기주도 학습', included: true },
+            { text: '분기별 규제 업데이트 브리핑', included: true },
+            { text: '개인 수료증 발급', included: true },
+            { text: 'AI 윤리 가이드라인 과정', included: false },
+            { text: '실무 워크숍 / 사례 실습', included: false },
+            { text: '전문가 1:1 Q&A', included: false },
+            { text: '기업 인증 / 감사 대응', included: false }
         ],
-        ctaText: '무료로 시작하기',
-        ctaStyle: 'outline',
-        featured: false
+        ctaText: '교육 시작하기',
+        ctaStyle: 'outline'
     },
     {
-        id: 'professional',
-        icon: '⚡',
+        id: 'a-pro',
+        icon: '🎓',
         name: 'Professional',
-        desc: '성장하는 기업을 위한 프리미엄 AI 교육',
-        monthlyPrice: 490000,
-        annualPrice: 4700000,
+        desc: '부서 단위 심화 교육 + 실습',
+        monthlyPrice: 790000,
+        annualPrice: 7900000,
         features: [
-            { text: '사용자 최대 50명', included: true },
-            { text: 'AI 분석 월 5,000회', included: true },
-            { text: '전체 교육 모듈 12개', included: true },
-            { text: '프롬프트 생성기', included: true },
-            { text: '고급 토큰 최적화 (STC 엔진)', included: true },
-            { text: 'ROI 분석 리포트', included: true },
-            { text: 'EU AI Act 컴플라이언스 도구', included: true },
-            { text: '비용 절감 상세 분석', included: true },
-            { text: 'API 접근', included: true },
-            { text: '전담 매니저', included: false }
+            { text: '교육 인원 최대 50명', included: true },
+            { text: 'EU AI Act 심화 + 실습 과정', included: true },
+            { text: '국내 AI 기본법 심화 + 실습', included: true },
+            { text: '라이브 강의 + 온라인 병행', included: true },
+            { text: '월간 규제 업데이트 브리핑', included: true },
+            { text: '부서별 수료증 발급', included: true },
+            { text: 'AI 윤리 가이드라인 과정', included: true },
+            { text: '실무 워크숍 / 사례 실습', included: true },
+            { text: '전문가 1:1 Q&A (월 2회)', included: true },
+            { text: '기업 인증 / 감사 대응', included: false }
+        ],
+        ctaText: '14일 무료 체험',
+        ctaStyle: 'primary',
+        featured: true,
+        badge: '추천'
+    },
+    {
+        id: 'a-enterprise',
+        icon: '🏛️',
+        name: 'Enterprise',
+        desc: '전사 맞춤형 규제 대응 교육',
+        monthlyPrice: -1,
+        annualPrice: -1,
+        priceLabel: '별도 견적',
+        features: [
+            { text: '교육 인원 무제한', included: true },
+            { text: 'EU AI Act 맞춤 컨설팅 + 교육', included: true },
+            { text: '국내 AI 기본법 맞춤 컨설팅', included: true },
+            { text: '현장 출강 + 온/오프라인 병행', included: true },
+            { text: '실시간 규제 변경 알림', included: true },
+            { text: '기업 공식 인증서 발급', included: true },
+            { text: 'AI 윤리 가이드라인 + 워크숍', included: true },
+            { text: '산업별 맞춤 사례 실습', included: true },
+            { text: '전문가 상시 자문 (전담)', included: true },
+            { text: '감사 대응 + 규정 준수 리포트', included: true }
+        ],
+        ctaText: '도입 상담 신청',
+        ctaStyle: 'enterprise'
+    }
+];
+
+// ── Track B: 검증 & 교정 요금제 ──
+const TRACK_B_PLANS = [
+    {
+        id: 'b-standard',
+        icon: '🔍',
+        name: 'Standard',
+        desc: 'AI 시스템 기본 진단 & 검증',
+        monthlyPrice: 490000,
+        annualPrice: 4900000,
+        features: [
+            { text: 'AI 시스템 진단 월 5건', included: true },
+            { text: '위험 등급 자동 분류', included: true },
+            { text: '기본 편향성 검증 리포트', included: true },
+            { text: '프롬프트 자동 교정', included: true },
+            { text: '기본 정확도 리포트', included: true },
+            { text: '월간 컴플라이언스 대시보드', included: true },
+            { text: '심층 편향성 분석', included: false },
+            { text: 'EU 규정 준수 인증서', included: false },
+            { text: '국내법 적합성 검증', included: false },
+            { text: '전문가 교정 + 감사 대응', included: false }
+        ],
+        ctaText: '진단 시작하기',
+        ctaStyle: 'outline'
+    },
+    {
+        id: 'b-advanced',
+        icon: '⚡',
+        name: 'Advanced',
+        desc: '심층 검증 + 인증 리포트',
+        monthlyPrice: 1290000,
+        annualPrice: 12900000,
+        features: [
+            { text: 'AI 시스템 진단 월 20건', included: true },
+            { text: '위험 등급 자동 분류 + 상세 분석', included: true },
+            { text: '심층 편향성 분석 (다차원)', included: true },
+            { text: '프롬프트 자동 교정 + 전문가 리뷰', included: true },
+            { text: '상세 정확도 & 신뢰도 리포트', included: true },
+            { text: '실시간 컴플라이언스 대시보드', included: true },
+            { text: 'EU AI Act 규정 준수 인증서', included: true },
+            { text: '국내 AI법 적합성 검증', included: true },
+            { text: '분기별 재검증 서비스', included: true },
+            { text: '전문가 교정 + 감사 대응', included: false }
         ],
         ctaText: '14일 무료 체험',
         ctaStyle: 'primary',
@@ -53,156 +124,145 @@ const PLANS = [
         badge: '인기'
     },
     {
-        id: 'enterprise',
-        icon: '🏢',
-        name: 'Enterprise',
-        desc: '대규모 조직을 위한 완전 맞춤형 솔루션',
+        id: 'b-premium',
+        icon: '🛡️',
+        name: 'Premium',
+        desc: '전사 AI 거버넌스 + 감사 대응',
         monthlyPrice: -1,
         annualPrice: -1,
         priceLabel: '별도 견적',
         features: [
-            { text: '사용자 무제한', included: true },
-            { text: 'AI 분석 무제한', included: true },
-            { text: 'AI 맞춤 커리큘럼 생성', included: true },
-            { text: '프롬프트 생성기', included: true },
-            { text: '엔터프라이즈급 토큰 최적화', included: true },
-            { text: 'ROI 분석 + 전사 리포트', included: true },
-            { text: 'EU AI Act 대비 + 컨설팅', included: true },
-            { text: '전사 비용 최적화 분석', included: true },
-            { text: 'API + 커스텀 인테그레이션', included: true },
-            { text: '전담 매니저 (SLA 99.9%)', included: true }
+            { text: 'AI 시스템 진단 무제한', included: true },
+            { text: '실시간 위험 모니터링', included: true },
+            { text: '실시간 편향성 모니터링', included: true },
+            { text: '전담팀 프롬프트 교정', included: true },
+            { text: '인증 리포트 (법적 효력)', included: true },
+            { text: '전사 AI 거버넌스 대시보드', included: true },
+            { text: 'EU 감사 대응 풀 패키지', included: true },
+            { text: '국내법 적합성 + 법률 자문', included: true },
+            { text: '상시 재검증 + 모니터링', included: true },
+            { text: '전담 컨설턴트 배정', included: true }
         ],
         ctaText: '도입 상담 신청',
-        ctaStyle: 'enterprise',
-        featured: false
+        ctaStyle: 'enterprise'
     }
 ];
 
-// ── Revenue Streams ──
-const REVENUE_STREAMS = [
-    { icon: '💳', title: 'SaaS 구독료', desc: '월/연 정기 구독 기반 안정적 매출', pct: '55%' },
-    { icon: '🔗', title: 'API 토큰 과금', desc: '사용량 기반 종량제 API 호출 수익', pct: '20%' },
-    { icon: '🎓', title: '컨설팅 서비스', desc: 'EU AI Act 대응 및 프롬프트 전략 자문', pct: '15%' },
-    { icon: '📋', title: '커스텀 개발', desc: '기업 맞춤형 모듈 및 API 통합 개발', pct: '10%' }
-];
-
-// ── FAQ Data ──
+// ── FAQ ──
 const FAQ_DATA = [
     {
-        q: '무료 플랜에서 유료 플랜으로 언제든 전환할 수 있나요?',
-        a: '네, 언제든지 Professional 또는 Enterprise 플랜으로 업그레이드할 수 있습니다. 기존 데이터와 학습 진도는 그대로 유지됩니다.'
+        q: 'EU AI Act와 국내 AI 기본법의 차이점은 무엇인가요?',
+        a: 'EU AI Act는 유럽연합의 포괄적 AI 규제법으로, 위험 등급별 의무사항과 최대 €35M의 과징금을 규정합니다. 국내 AI 기본법(인공지능 산업 육성 및 신뢰 기반 조성 등에 관한 법률)은 고위험 AI 영향평가 의무화, 이용자 보호, AI 윤리 원칙을 포함하며, 2026년 시행을 목표로 합니다. 두 법 모두 고위험 AI에 대한 투명성과 안전성을 요구합니다.'
     },
     {
-        q: '결제 방식은 어떻게 되나요?',
-        a: '신용카드, 법인카드, 계좌이체(세금계산서 발행)를 지원합니다. 연간 결제 시 2개월 무료 혜택이 적용됩니다.'
+        q: 'AI 리터러시 교육과 검증 프로그램을 함께 도입해야 하나요?',
+        a: '함께 도입하시면 최대 효과를 볼 수 있습니다. 교육은 조직의 AI 규제 인식 수준을 높이고, 검증은 실제 AI 시스템이 규정을 준수하는지 확인합니다. 번들 도입 시 20% 할인이 적용됩니다.'
     },
     {
-        q: '데이터 보안은 어떻게 관리되나요?',
-        a: 'AWS 기반 인프라에서 운영되며, 모든 데이터는 AES-256 암호화됩니다. SOC 2 Type II 인증을 보유하고 있으며, Enterprise 플랜은 전용 VPC 배포도 가능합니다.'
+        q: '검증 리포트는 법적 효력이 있나요?',
+        a: 'Premium 플랜의 인증 리포트는 국내외 AI 규제 감사 시 증빙 자료로 활용할 수 있습니다. EU AI Act의 적합성 평가(Conformity Assessment) 기준에 부합하는 형식으로 발급됩니다.'
     },
     {
-        q: 'AI 맞춤 커리큘럼은 어떻게 생성되나요?',
-        a: 'GPT-5.2 기반 AI가 귀사의 업종, AI 사용 현황, 직원 수준을 분석하여 최적화된 교육 과정을 자동으로 생성합니다. Enterprise 플랜에서 이용 가능합니다.'
+        q: '편향성 검증은 어떤 방식으로 진행되나요?',
+        a: '성별, 연령, 인종, 지역 등 다차원 공정성 지표를 기반으로 AI 출력의 편향을 분석합니다. Standard는 기본 통계 분석, Advanced는 SHAP/LIME 기반 설명 가능한 AI 분석, Premium은 실시간 모니터링을 제공합니다.'
     },
     {
-        q: 'API 토큰 과금은 어떻게 계산되나요?',
-        a: 'Professional 플랜의 월 5,000회 기본 제공량을 초과하면, 추가 분석 건당 ₩50의 종량제 요금이 적용됩니다. Enterprise는 별도 협의합니다.'
+        q: '교육 수료증은 어떤 가치가 있나요?',
+        a: 'PROMM EDU 수료증은 AI 리터러시 역량을 증명하는 자격으로, 기업의 AI 거버넌스 체계 수립 시 인력 역량 증빙으로 활용됩니다. Enterprise 플랜은 기업 공식 인증서로 발급되어 규제 감사에 대응할 수 있습니다.'
     },
     {
-        q: 'EU AI Act 컴플라이언스 기능은 무엇을 포함하나요?',
-        a: '위험 등급 자동 진단, 10항목 체크리스트, 시행 타임라인 추적을 포함합니다. Enterprise 플랜은 전문가 컨설팅과 맞춤 규정 준수 리포트가 추가됩니다.'
+        q: '국내 AI 기본법 시행 전에 준비해야 할 사항은?',
+        a: '2026년 시행 전까지 ① 자사 AI 시스템 고위험 여부 판단, ② AI 영향평가 수행 체계 구축, ③ 전 직원 AI 리터러시 교육, ④ AI 윤리 가이드라인 내재화를 권장합니다. PROMM EDU의 2-Track 프로그램으로 모두 대비할 수 있습니다.'
     },
     {
-        q: '해지는 어떻게 하나요?',
-        a: '언제든 해지 가능하며, 해지 시 남은 기간까지 서비스를 이용할 수 있습니다. 위약금은 없습니다. 데이터는 해지 후 30일간 보관됩니다.'
+        q: '프롬프트 교정은 어떻게 이루어지나요?',
+        a: 'AI 프롬프트의 편향성, 부정확성, 규정 위반 가능성을 자동 분석하고, 수정된 프롬프트를 제안합니다. Advanced 이상 플랜에서는 전문가가 직접 리뷰하여 교정합니다.'
     },
     {
-        q: '무료 체험 기간에 신용카드를 등록해야 하나요?',
-        a: '아니요, 14일 무료 체험은 카드 등록 없이 바로 시작할 수 있습니다. 체험 종료 후 유료 전환을 원하실 때만 결제 정보를 등록하시면 됩니다.'
+        q: '무료 체험 기간에 카드를 등록해야 하나요?',
+        a: '아니요, 14일 무료 체험은 카드 등록 없이 바로 시작할 수 있습니다. 체험 기간 중 교육 3개 모듈과 AI 진단 2건을 무료로 이용할 수 있습니다.'
     }
 ];
 
 function BusinessModelPage() {
     const navigate = useNavigate();
+    const [activeTrack, setActiveTrack] = useState('a');
     const [isAnnual, setIsAnnual] = useState(true);
     const [openFaqIdx, setOpenFaqIdx] = useState(null);
 
-    // Simulator state
-    const [simEmployees, setSimEmployees] = useState(30);
-    const [simUsage, setSimUsage] = useState(3000);
+    const currentPlans = activeTrack === 'a' ? TRACK_A_PLANS : TRACK_B_PLANS;
 
-    const formatKRW = (amount) => {
-        if (amount >= 10000) {
-            return `₩${(amount / 10000).toFixed(0)}만`;
-        }
-        return `₩${amount.toLocaleString()}`;
-    };
-
-    // Simulator calculations
-    const getRecommendedPlan = () => {
-        if (simEmployees <= 5 && simUsage <= 100) return 'starter';
-        if (simEmployees <= 50 && simUsage <= 5000) return 'professional';
-        return 'enterprise';
-    };
-
-    const getSimCost = () => {
-        const plan = getRecommendedPlan();
-        if (plan === 'starter') return 0;
-        if (plan === 'professional') {
-            const base = isAnnual ? Math.round(4700000 / 12) : 490000;
-            const extraCalls = Math.max(0, simUsage - 5000);
-            const extraCost = extraCalls * 50;
-            return base + extraCost;
-        }
-        // Enterprise estimate
-        return Math.round(simEmployees * 15000 + simUsage * 30);
-    };
-
-    const getSimSavings = () => {
-        // Average AI cost saving of 40% through prompt optimization
-        const avgTokenCostPerCall = 150; // ₩150 per API call average
-        const monthlyCostWithout = simUsage * avgTokenCostPerCall * simEmployees * 0.3;
-        const savingsRate = 0.4;
-        return Math.round(monthlyCostWithout * savingsRate);
-    };
-
-    const getSimROI = () => {
-        const cost = getSimCost();
-        if (cost === 0) return '∞';
-        const savings = getSimSavings();
-        return `${Math.round((savings / Math.max(cost, 1)) * 100)}%`;
+    const formatPrice = (plan) => {
+        if (plan.priceLabel) return plan.priceLabel;
+        const price = isAnnual ? Math.round(plan.annualPrice / 12) : plan.monthlyPrice;
+        return `₩${price.toLocaleString()}`;
     };
 
     return (
         <div className="business-model-page">
             {/* ═══ Hero ═══ */}
             <section className="biz-hero">
-                <h1>비즈니스 모델 & 요금제</h1>
+                <div className="hero-badge-row">
+                    <span className="hero-badge">EU AI Act</span>
+                    <span className="hero-badge domestic">국내 AI 기본법</span>
+                </div>
+                <h1>AI 규제 시대,<br />교육과 검증으로 대비하세요</h1>
                 <p className="hero-sub">
-                    AI 프롬프트 교육으로 비용 40% 절감, 생산성 3배 향상.<br />
-                    기업 규모에 맞는 플랜을 선택하세요.
+                    EU AI Act와 국내 AI 기본법, 두 가지 규제에 동시 대응.<br />
+                    리터러시 교육부터 시스템 검증·교정까지 원스톱 솔루션.
                 </p>
                 <div className="hero-stats">
                     <div className="hero-stat">
-                        <div className="stat-num">40%</div>
-                        <div className="stat-label">평균 비용 절감</div>
+                        <div className="stat-num">2026</div>
+                        <div className="stat-label">국내 AI법 시행 예정</div>
                     </div>
                     <div className="hero-stat">
-                        <div className="stat-num">3배</div>
-                        <div className="stat-label">생산성 향상</div>
+                        <div className="stat-num">€35M</div>
+                        <div className="stat-label">EU 최대 과징금</div>
                     </div>
                     <div className="hero-stat">
-                        <div className="stat-num">2.4개월</div>
-                        <div className="stat-label">평균 손익분기점</div>
+                        <div className="stat-num">2-Track</div>
+                        <div className="stat-label">교육 + 검증 프로그램</div>
                     </div>
+                </div>
+            </section>
+
+            {/* ═══ Track Selector ═══ */}
+            <section className="track-section">
+                <div className="track-tabs">
+                    <button
+                        className={`track-tab ${activeTrack === 'a' ? 'active track-a' : ''}`}
+                        onClick={() => setActiveTrack('a')}
+                    >
+                        <span className="track-icon">📚</span>
+                        <div className="track-info">
+                            <strong>Track A</strong>
+                            <span>AI 리터러시 교육</span>
+                        </div>
+                    </button>
+                    <button
+                        className={`track-tab ${activeTrack === 'b' ? 'active track-b' : ''}`}
+                        onClick={() => setActiveTrack('b')}
+                    >
+                        <span className="track-icon">🔍</span>
+                        <div className="track-info">
+                            <strong>Track B</strong>
+                            <span>검증 & 교정 프로그램</span>
+                        </div>
+                    </button>
+                </div>
+
+                <div className={`track-desc-bar ${activeTrack === 'b' ? 'track-b' : ''}`}>
+                    {activeTrack === 'a' ? (
+                        <p>EU AI Act · 국내 AI 기본법 · AI 윤리 가이드라인 교육을 통해 조직의 <strong>AI 리터러시 역량</strong>을 강화합니다</p>
+                    ) : (
+                        <p>AI 시스템의 위험 등급 진단 · 편향성 검증 · 프롬프트 교정으로 <strong>규정 준수를 입증</strong>합니다</p>
+                    )}
                 </div>
             </section>
 
             {/* ═══ Pricing Plans ═══ */}
             <section className="pricing-section">
-                <h2>💰 요금제</h2>
-                <p>성장 단계에 맞는 플랜을 선택하세요</p>
-
                 <div className="pricing-toggle">
                     <span>월간 결제</span>
                     <div
@@ -214,9 +274,9 @@ function BusinessModelPage() {
                 </div>
 
                 <div className="pricing-cards">
-                    {PLANS.map((plan) => (
-                        <div key={plan.id} className={`pricing-card ${plan.featured ? 'featured' : ''}`}>
-                            {plan.badge && <span className="card-badge">{plan.badge}</span>}
+                    {currentPlans.map((plan) => (
+                        <div key={plan.id} className={`pricing-card ${plan.featured ? 'featured' : ''} ${activeTrack === 'b' ? 'track-b-card' : ''}`}>
+                            {plan.badge && <span className={`card-badge ${activeTrack === 'b' ? 'badge-b' : ''}`}>{plan.badge}</span>}
 
                             <div className="card-header">
                                 <span className="card-icon">{plan.icon}</span>
@@ -265,8 +325,7 @@ function BusinessModelPage() {
                             <button
                                 className={`card-cta ${plan.ctaStyle}`}
                                 onClick={() => {
-                                    if (plan.id === 'enterprise') navigate('/enterprise/process');
-                                    else if (plan.id === 'starter') navigate('/free-trial');
+                                    if (plan.ctaStyle === 'enterprise') navigate('/enterprise/process');
                                     else navigate('/free-trial');
                                 }}
                             >
@@ -277,76 +336,80 @@ function BusinessModelPage() {
                 </div>
             </section>
 
-            {/* ═══ Revenue Simulator ═══ */}
-            <section className="simulator-section">
-                <h2>📊 도입 효과 시뮬레이터</h2>
-                <p>직원 수와 AI 사용량을 입력하면 최적 플랜과 절감 효과를 확인할 수 있습니다</p>
-
-                <div className="simulator-card">
-                    <div className="sim-inputs">
-                        <div className="sim-group">
-                            <label>👥 AI 활용 직원 수</label>
-                            <input
-                                type="range"
-                                className="sim-slider"
-                                min="1" max="500"
-                                value={simEmployees}
-                                onChange={e => setSimEmployees(Number(e.target.value))}
-                            />
-                            <div className="sim-value">{simEmployees}명</div>
-                        </div>
-                        <div className="sim-group">
-                            <label>🔄 월간 AI 분석 요청 수</label>
-                            <input
-                                type="range"
-                                className="sim-slider"
-                                min="50" max="50000" step="50"
-                                value={simUsage}
-                                onChange={e => setSimUsage(Number(e.target.value))}
-                            />
-                            <div className="sim-value">{simUsage.toLocaleString()}회/월</div>
-                        </div>
+            {/* ═══ Bundle Offer ═══ */}
+            <section className="bundle-section">
+                <div className="bundle-card">
+                    <div className="bundle-left">
+                        <span className="bundle-badge">🔥 BUNDLE</span>
+                        <h2>Track A + B 통합 도입</h2>
+                        <p>교육과 검증을 함께 도입하면 <strong>20% 할인</strong>이 적용됩니다.<br />
+                            규제 교육으로 인식을 높이고, 검증으로 실제 준수를 입증하세요.</p>
                     </div>
-
-                    <div className="sim-results">
-                        <div className="sim-result-card">
-                            <div className="result-label">추천 플랜</div>
-                            <div className="result-value plan">
-                                {getRecommendedPlan() === 'starter' ? 'Starter' :
-                                    getRecommendedPlan() === 'professional' ? 'Professional' : 'Enterprise'}
+                    <div className="bundle-right">
+                        <div className="bundle-items">
+                            <div className="bundle-item">
+                                <span>📚</span>
+                                <span>AI 리터러시 교육</span>
                             </div>
-                            <div className="result-sub">월 {formatKRW(getSimCost())}</div>
-                        </div>
-                        <div className="sim-result-card">
-                            <div className="result-label">예상 월 절감액</div>
-                            <div className="result-value savings">
-                                {formatKRW(getSimSavings())}
+                            <div className="bundle-plus">+</div>
+                            <div className="bundle-item">
+                                <span>🔍</span>
+                                <span>검증 & 교정</span>
                             </div>
-                            <div className="result-sub">토큰 최적화 기준</div>
+                            <div className="bundle-equals">=</div>
+                            <div className="bundle-discount">20% OFF</div>
                         </div>
-                        <div className="sim-result-card">
-                            <div className="result-label">예상 ROI</div>
-                            <div className="result-value roi">
-                                {getSimROI()}
-                            </div>
-                            <div className="result-sub">월 투자 대비 절감</div>
-                        </div>
+                        <button className="cta-btn primary" onClick={() => navigate('/enterprise/process')}>
+                            통합 상담 신청
+                        </button>
                     </div>
                 </div>
             </section>
 
-            {/* ═══ Revenue Streams ═══ */}
-            <section className="streams-section">
-                <h2>📈 수익 구조</h2>
-                <div className="streams-grid">
-                    {REVENUE_STREAMS.map((stream, i) => (
-                        <div key={i} className="stream-card">
-                            <span className="stream-icon">{stream.icon}</span>
-                            <div className="stream-title">{stream.title}</div>
-                            <div className="stream-desc">{stream.desc}</div>
-                            <span className="stream-pct">매출 비중 {stream.pct}</span>
+            {/* ═══ Regulation Timeline ═══ */}
+            <section className="reg-timeline-section">
+                <h2>📅 주요 규제 일정</h2>
+                <div className="reg-timeline">
+                    <div className="reg-event completed">
+                        <div className="reg-date">2024.08</div>
+                        <div className="reg-dot" />
+                        <div className="reg-content">
+                            <strong>EU AI Act 발효</strong>
+                            <p>유럽연합 AI법 공식 발효</p>
                         </div>
-                    ))}
+                    </div>
+                    <div className="reg-event completed">
+                        <div className="reg-date">2025.02</div>
+                        <div className="reg-dot" />
+                        <div className="reg-content">
+                            <strong>금지 AI 시행</strong>
+                            <p>수용 불가 AI 시스템 전면 금지</p>
+                        </div>
+                    </div>
+                    <div className="reg-event current">
+                        <div className="reg-date">2025.08</div>
+                        <div className="reg-dot" />
+                        <div className="reg-content">
+                            <strong>AI 리터러시 의무화</strong>
+                            <p>EU AI Act Article 4 — AI 사용 인력 교육 의무</p>
+                        </div>
+                    </div>
+                    <div className="reg-event upcoming">
+                        <div className="reg-date">2026.02</div>
+                        <div className="reg-dot" />
+                        <div className="reg-content">
+                            <strong>국내 AI 기본법 시행 (예정)</strong>
+                            <p>고위험 AI 영향평가 의무화</p>
+                        </div>
+                    </div>
+                    <div className="reg-event upcoming">
+                        <div className="reg-date">2026.08</div>
+                        <div className="reg-dot" />
+                        <div className="reg-content">
+                            <strong>고위험 AI 전면 시행</strong>
+                            <p>EU AI Act Annex III 전면 규제</p>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -371,10 +434,10 @@ function BusinessModelPage() {
 
             {/* ═══ CTA ═══ */}
             <section className="cta-section">
-                <h2>🚀 지금 시작하세요</h2>
+                <h2>🚀 규제 대비, 지금 시작하세요</h2>
                 <p>
-                    14일 무료 체험으로 PROMM EDU의 강력한 AI 프롬프트 교육을
-                    직접 경험해보세요. 카드 등록 불필요.
+                    14일 무료 체험으로 AI 리터러시 교육 3개 모듈과
+                    AI 시스템 진단 2건을 무료로 이용하세요.
                 </p>
                 <div className="cta-buttons">
                     <button className="cta-btn primary" onClick={() => navigate('/free-trial')}>
@@ -382,6 +445,9 @@ function BusinessModelPage() {
                     </button>
                     <button className="cta-btn secondary" onClick={() => navigate('/enterprise/process')}>
                         기업 도입 상담
+                    </button>
+                    <button className="cta-btn secondary" onClick={() => navigate('/eu-ai-act')}>
+                        EU AI Act 진단하기
                     </button>
                 </div>
             </section>
