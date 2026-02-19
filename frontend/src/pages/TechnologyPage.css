@@ -1,6 +1,6 @@
 .technology-page {
     min-height: 100vh;
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    background: var(--bg-primary);
 }
 
 /* Hero Section */
@@ -60,13 +60,13 @@
 
 .tech-tab {
     padding: 12px 24px;
-    background: white;
-    border: 2px solid #e2e8f0;
+    background: var(--bg-elevated);
+    border: 2px solid var(--border-color);
     border-radius: 8px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s;
-    color: #64748b;
+    color: var(--text-tertiary);
 }
 
 .tech-tab:hover {
@@ -84,7 +84,7 @@
 
 /* Tech Sections */
 .tech-section {
-    background: white;
+    background: var(--bg-elevated);
     border-radius: 16px;
     padding: var(--space-2xl);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
@@ -93,12 +93,12 @@
 .tech-section h2 {
     font-size: 2rem;
     margin-bottom: var(--space-md);
-    color: #1a1f35;
+    color: var(--text-primary);
 }
 
 .section-intro {
     font-size: 1.1rem;
-    color: #334155;
+    color: var(--text-secondary);
     line-height: 1.8;
     margin-bottom: var(--space-2xl);
 }
@@ -112,7 +112,7 @@
 }
 
 .arch-layer {
-    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    background: var(--bg-primary);
     border-radius: 12px;
     padding: var(--space-xl);
     border-left: 4px solid #cbd5e1;
@@ -150,7 +150,7 @@
 .layer-header h3 {
     font-size: 1.5rem;
     margin: 0;
-    color: #1a1f35;
+    color: var(--text-primary);
 }
 
 .tech-stack {
@@ -161,20 +161,20 @@
 
 .tech-stack li {
     padding: 8px 0;
-    color: #374151;
+    color: var(--text-secondary);
     font-size: 0.95rem;
 }
 
 .tech-stack strong {
-    color: #1a1f35;
+    color: var(--text-primary);
 }
 
 .layer-responsibility {
-    background: white;
+    background: var(--bg-elevated);
     padding: var(--space-md);
     border-radius: 8px;
     margin-top: var(--space-md);
-    color: #374151;
+    color: var(--text-secondary);
 }
 
 .connection-arrow {
@@ -205,7 +205,7 @@
     display: flex;
     align-items: start;
     gap: var(--space-md);
-    background: white;
+    background: var(--bg-elevated);
     padding: var(--space-md);
     border-radius: 8px;
 }
@@ -216,12 +216,12 @@
 
 .deploy-item strong {
     display: block;
-    color: #1a1f35;
+    color: var(--text-primary);
     margin-bottom: 4px;
 }
 
 .deploy-item p {
-    color: #64748b;
+    color: var(--text-tertiary);
     font-size: 0.9rem;
     margin: 0;
 }
@@ -230,12 +230,12 @@
 .algorithm-section {
     margin: var(--space-2xl) 0;
     padding: var(--space-xl);
-    background: #f8fafc;
+    background: var(--bg-secondary);
     border-radius: 12px;
 }
 
 .algorithm-section h3 {
-    color: #1a1f35;
+    color: var(--text-primary);
     margin-bottom: var(--space-md);
 }
 
@@ -249,13 +249,13 @@
 }
 
 .pipeline-step {
-    background: white;
+    background: var(--bg-elevated);
     padding: var(--space-lg);
     border-radius: 12px;
     text-align: center;
     flex: 1;
     min-width: 200px;
-    border: 2px solid #e2e8f0;
+    border: 2px solid var(--border-color);
     transition: all 0.3s;
 }
 
@@ -283,12 +283,12 @@
 
 .pipeline-step h4 {
     margin: var(--space-sm) 0;
-    color: #1a1f35;
+    color: var(--text-primary);
 }
 
 .pipeline-step p {
     font-size: 0.9rem;
-    color: #64748b;
+    color: var(--text-tertiary);
     margin-bottom: var(--space-sm);
 }
 
@@ -312,7 +312,7 @@
 
 .code-example h4 {
     margin-bottom: var(--space-md);
-    color: #1a1f35;
+    color: var(--text-primary);
 }
 
 .code-example pre {
@@ -343,7 +343,7 @@
 }
 
 .formula {
-    background: white;
+    background: var(--bg-elevated);
     padding: var(--space-md);
     border-radius: 8px;
     text-align: center;
@@ -373,17 +373,17 @@
 .pricing-table td {
     padding: var(--space-md);
     text-align: left;
-    border-bottom: 1px solid #e2e8f0;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .pricing-table th {
-    background: #f8fafc;
-    color: #1a1f35;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
     font-weight: 700;
 }
 
 .pricing-table tr:hover {
-    background: #f8fafc;
+    background: var(--bg-secondary);
 }
 
 .pricing-table tr.highlight {
@@ -399,10 +399,10 @@
 }
 
 .detection-pattern {
-    background: white;
+    background: var(--bg-elevated);
     padding: var(--space-lg);
     border-radius: 12px;
-    border: 2px solid #e2e8f0;
+    border: 2px solid var(--border-color);
 }
 
 .pattern-label {
@@ -437,7 +437,7 @@
 }
 
 .source-card {
-    background: white;
+    background: var(--bg-elevated);
     border-radius: 12px;
     padding: var(--space-xl);
     border-left: 4px solid #10b981;
@@ -457,16 +457,16 @@
 
 .source-header h3 {
     margin: 0;
-    color: #1a1f35;
+    color: var(--text-primary);
 }
 
 .source-details {
-    color: #475569;
+    color: var(--text-secondary);
     line-height: 1.8;
 }
 
 .source-details strong {
-    color: #1a1f35;
+    color: var(--text-primary);
 }
 
 .source-details ul {
@@ -523,19 +523,19 @@
 }
 
 .physics-card {
-    background: #f8fafc;
+    background: var(--bg-secondary);
     padding: var(--space-xl);
     border-radius: 12px;
     border-left: 4px solid #4facfe;
 }
 
 .physics-card h4 {
-    color: #1a1f35;
+    color: var(--text-primary);
     margin-bottom: var(--space-md);
 }
 
 .physics-card p {
-    color: #64748b;
+    color: var(--text-tertiary);
     margin-bottom: var(--space-md);
 }
 
@@ -569,7 +569,7 @@
 }
 
 .metric-item {
-    background: white;
+    background: var(--bg-elevated);
     padding: var(--space-lg);
     border-radius: 12px;
     text-align: center;
@@ -586,13 +586,13 @@
 
 .metric-label {
     font-weight: 700;
-    color: #1a1f35;
+    color: var(--text-primary);
     margin: var(--space-sm) 0;
 }
 
 .metric-item p {
     font-size: 0.9rem;
-    color: #64748b;
+    color: var(--text-tertiary);
     margin: 0;
 }
 
@@ -603,7 +603,7 @@
 
 .table-note {
     font-size: 0.85rem;
-    color: #64748b;
+    color: var(--text-tertiary);
     margin-top: var(--space-sm);
 }
 
@@ -626,10 +626,10 @@
 }
 
 .patent-card {
-    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    background: var(--bg-primary);
     border-radius: 16px;
     padding: var(--space-xl);
-    border: 2px solid #e2e8f0;
+    border: 2px solid var(--border-color);
     transition: all 0.3s;
 }
 
@@ -653,7 +653,7 @@
 .patent-header h3 {
     font-size: 1.5rem;
     margin: 0;
-    color: #1a1f35;
+    color: var(--text-primary);
     flex: 1;
 }
 
@@ -672,7 +672,7 @@
 }
 
 .patent-desc {
-    color: #374151;
+    color: var(--text-secondary);
     line-height: 1.8;
     margin-bottom: var(--space-lg);
 }
@@ -686,7 +686,7 @@
 
 .patent-metrics .metric {
     text-align: center;
-    background: white;
+    background: var(--bg-elevated);
     padding: var(--space-md);
     border-radius: 12px;
 }
@@ -703,7 +703,7 @@
 
 .patent-metrics .metric-label {
     font-size: 0.85rem;
-    color: #64748b;
+    color: var(--text-tertiary);
 }
 
 .quality-dimensions {
@@ -723,19 +723,19 @@
 }
 
 .patent-research {
-    background: white;
+    background: var(--bg-elevated);
     padding: var(--space-md);
     border-radius: 8px;
 }
 
 .patent-research strong {
-    color: #1a1f35;
+    color: var(--text-primary);
 }
 
 .patent-research ul {
     margin: var(--space-sm) 0 0 0;
     padding-left: 20px;
-    color: #64748b;
+    color: var(--text-tertiary);
     font-size: 0.9rem;
 }
 
@@ -785,10 +785,10 @@
 }
 
 .trend-card {
-    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    background: var(--bg-primary);
     border-radius: 16px;
     padding: var(--space-xl);
-    border: 2px solid #e2e8f0;
+    border: 2px solid var(--border-color);
     transition: all 0.3s;
 }
 
@@ -840,7 +840,7 @@
 }
 
 .trend-desc {
-    color: #374151;
+    color: var(--text-secondary);
     line-height: 1.8;
     margin-bottom: var(--space-lg);
 }
@@ -868,7 +868,7 @@
 
 .trend-source {
     font-size: 0.9rem;
-    color: #475569;
+    color: var(--text-secondary);
     font-weight: 500;
 }
 
@@ -880,7 +880,7 @@
 
 .trend-stat {
     text-align: center;
-    background: white;
+    background: var(--bg-elevated);
     padding: var(--space-md);
     border-radius: 12px;
 }
@@ -897,7 +897,7 @@
 
 .trend-stat .stat-label {
     font-size: 0.85rem;
-    color: #64748b;
+    color: var(--text-tertiary);
 }
 
 /* Research Papers */
@@ -920,7 +920,7 @@
 }
 
 .paper-item {
-    background: white;
+    background: var(--bg-elevated);
     padding: var(--space-md);
     border-radius: 12px;
     border-left: 3px solid #10b981;
@@ -928,13 +928,13 @@
 
 .paper-item strong {
     display: block;
-    color: #1a1f35;
+    color: var(--text-primary);
     margin-bottom: 4px;
 }
 
 .paper-item p {
     margin: 0 0 var(--space-sm) 0;
-    color: #64748b;
+    color: var(--text-tertiary);
     font-size: 0.9rem;
 }
 

@@ -56,7 +56,7 @@
 
 .header-subtitle {
     font-size: 1.2rem;
-    color: #94a3b8;
+    color: var(--text-tertiary);
     position: relative;
     z-index: 1;
 }
@@ -95,7 +95,7 @@
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s;
-    color: #94a3b8;
+    color: var(--text-tertiary);
 }
 
 .tab:hover {
@@ -227,11 +227,11 @@ strong {
 
 p,
 li {
-    color: #94a3b8;
+    color: var(--text-tertiary);
 }
 
 .why-reasons .reason p {
-    color: #94a3b8;
+    color: var(--text-tertiary);
 }
 
 .page-header {
@@ -834,7 +834,7 @@ li {
 }
 
 .course-card {
-    background: white;
+    background: var(--bg-elevated);
     padding: var(--space-lg);
     border-radius: var(--radius-lg);
     border-left: 4px solid #4facfe;
@@ -860,11 +860,11 @@ li {
 .course-name {
     font-size: 1.2rem;
     font-weight: 600;
-    color: #1a1f35;
+    color: var(--text-primary);
 }
 
 .course-desc {
-    color: #475569;
+    color: var(--text-secondary);
     line-height: 1.8;
     margin-bottom: var(--space-md);
 }
@@ -891,7 +891,7 @@ li {
 }
 
 .initiative {
-    background: white;
+    background: var(--bg-elevated);
     padding: var(--space-md);
     border-radius: var(--radius-md);
 }
@@ -904,12 +904,12 @@ li {
 
 .initiative p {
     margin: 0;
-    color: #475569;
+    color: var(--text-secondary);
     font-size: 0.9rem;
 }
 
 .stanford-study {
-    background: white;
+    background: var(--bg-elevated);
     padding: var(--space-lg);
     border-radius: var(--radius-md);
 }
@@ -920,7 +920,7 @@ li {
 }
 
 .stanford-study p {
-    color: #475569;
+    color: var(--text-secondary);
     margin-bottom: var(--space-sm);
 }
 

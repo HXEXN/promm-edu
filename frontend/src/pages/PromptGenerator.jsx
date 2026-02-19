@@ -173,7 +173,7 @@ function PromptGenerator() {
                                 )}
                             </button>
                             <span className="ai-badge">
-                                {aiLoading ? '⏳ GPT 분석 중...' : 'Powered by GPT-4o-mini'}
+                                {aiLoading ? '⏳ GPT 분석 중...' : 'Powered by GPT-5 Mini'}
                             </span>
                         </div>
 

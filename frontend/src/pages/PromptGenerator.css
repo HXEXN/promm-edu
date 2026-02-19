@@ -40,7 +40,7 @@
 
 .header-subtitle {
     font-size: clamp(1rem, 2.5vw, 1.2rem);
-    color: #94a3b8;
+    color: var(--text-tertiary);
     max-width: 700px;
     margin: 0 auto;
     position: relative;
@@ -80,7 +80,7 @@
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s;
-    color: #94a3b8;
+    color: var(--text-tertiary);
 }
 
 .mode-btn:hover {
@@ -110,7 +110,7 @@
 }
 
 .ai-hint, .custom-hint {
-    color: #94a3b8;
+    color: var(--text-tertiary);
     margin-bottom: var(--space-lg);
 }
 
@@ -280,14 +280,14 @@
 
 .mode-btn {
     padding: 14px 32px;
-    background: white;
-    border: 2px solid #e2e8f0;
+    background: var(--bg-elevated);
+    border: 2px solid var(--border-color);
     border-radius: 12px;
     font-size: 1.1rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s;
-    color: #64748b;
+    color: var(--text-tertiary);
 }
 
 .mode-btn:hover {
@@ -305,7 +305,7 @@
 
 /* Category Section */
 .category-section {
-    background: white;
+    background: var(--bg-elevated);
     border-radius: 16px;
     padding: var(--space-2xl);
     margin-bottom: var(--space-xl);
@@ -314,7 +314,7 @@
 
 .category-section h2 {
     margin-bottom: var(--space-lg);
-    color: #1a1f35;
+    color: var(--text-primary);
 }
 
 .category-grid {
@@ -329,8 +329,8 @@
     align-items: center;
     gap: var(--space-sm);
     padding: var(--space-lg);
-    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-    border: 2px solid #e2e8f0;
+    background: var(--bg-primary);
+    border: 2px solid var(--border-color);
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.3s;
@@ -354,12 +354,12 @@
 
 .category-name {
     font-weight: 600;
-    color: #1a1f35;
+    color: var(--text-primary);
 }
 
 /* Template Section */
 .template-section {
-    background: white;
+    background: var(--bg-elevated);
     border-radius: 16px;
     padding: var(--space-2xl);
     margin-bottom: var(--space-xl);
@@ -368,7 +368,7 @@
 
 .template-section h2 {
     margin-bottom: var(--space-lg);
-    color: #1a1f35;
+    color: var(--text-primary);
 }
 
 .template-list {
@@ -378,8 +378,8 @@
 
 .template-item {
     padding: var(--space-lg);
-    background: #f8fafc;
-    border: 2px solid #e2e8f0;
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-color);
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.3s;
@@ -397,19 +397,19 @@
 }
 
 .template-item h3 {
-    color: #1a1f35;
+    color: var(--text-primary);
     margin-bottom: var(--space-sm);
 }
 
 .template-item p {
-    color: #64748b;
+    color: var(--text-tertiary);
     font-size: 0.95rem;
     margin: 0;
 }
 
 /* Variables Section */
 .variables-section {
-    background: white;
+    background: var(--bg-elevated);
     border-radius: 16px;
     padding: var(--space-2xl);
     margin-bottom: var(--space-xl);
@@ -418,7 +418,7 @@
 
 .variables-section h2 {
     margin-bottom: var(--space-lg);
-    color: #1a1f35;
+    color: var(--text-primary);
 }
 
 .variables-grid {
@@ -436,13 +436,13 @@
 
 .variable-input label {
     font-weight: 600;
-    color: #1a1f35;
+    color: var(--text-primary);
     text-transform: capitalize;
 }
 
 .variable-input input {
     padding: 12px 16px;
-    border: 2px solid #e2e8f0;
+    border: 2px solid var(--border-color);
     border-radius: 8px;
     font-size: 1rem;
     transition: all 0.3s;
@@ -476,7 +476,7 @@
 
 /* Custom Mode */
 .custom-mode {
-    background: white;
+    background: var(--bg-elevated);
     border-radius: 16px;
     padding: var(--space-2xl);
     margin-bottom: var(--space-xl);
@@ -485,18 +485,18 @@
 
 .custom-mode h2 {
     margin-bottom: var(--space-md);
-    color: #1a1f35;
+    color: var(--text-primary);
 }
 
 .custom-hint {
-    color: #64748b;
+    color: var(--text-tertiary);
     margin-bottom: var(--space-lg);
 }
 
 .custom-input {
     width: 100%;
     padding: var(--space-md);
-    border: 2px solid #e2e8f0;
+    border: 2px solid var(--border-color);
     border-radius: 12px;
     font-size: 1rem;
     font-family: inherit;
@@ -513,7 +513,7 @@
 
 /* Generated Section */
 .generated-section {
-    background: white;
+    background: var(--bg-elevated);
     border-radius: 16px;
     padding: var(--space-2xl);
     margin-bottom: var(--space-xl);
@@ -532,7 +532,7 @@
 
 .generated-header h2 {
     margin: 0;
-    color: #1a1f35;
+    color: var(--text-primary);
 }
 
 .action-buttons {
@@ -551,8 +551,8 @@
 }
 
 .btn-copy {
-    background: #f1f5f9;
-    color: #475569;
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
 }
 
 .btn-copy:hover {
@@ -588,7 +588,7 @@
     display: flex;
     gap: var(--space-xl);
     padding: var(--space-md);
-    background: #f8fafc;
+    background: var(--bg-secondary);
     border-radius: 8px;
 }
 
@@ -598,12 +598,12 @@
 }
 
 .stat-label {
-    color: #64748b;
+    color: var(--text-tertiary);
     font-weight: 600;
 }
 
 .stat-value {
-    color: #1a1f35;
+    color: var(--text-primary);
     font-weight: 700;
 }
 
@@ -629,7 +629,7 @@
 }
 
 .tip-card {
-    background: white;
+    background: var(--bg-elevated);
     padding: var(--space-lg);
     border-radius: 12px;
     border-left: 4px solid #10b981;
@@ -694,7 +694,7 @@
    ================================ */
 
 .ai-mode {
-    background: white;
+    background: var(--bg-elevated);
     border-radius: 16px;
     padding: var(--space-2xl);
     margin-bottom: var(--space-xl);
@@ -703,11 +703,11 @@
 
 .ai-mode h2 {
     margin-bottom: var(--space-md);
-    color: #1a1f35;
+    color: var(--text-primary);
 }
 
 .ai-hint {
-    color: #64748b;
+    color: var(--text-tertiary);
     margin-bottom: var(--space-lg);
     line-height: 1.6;
 }
@@ -715,7 +715,7 @@
 .ai-input {
     width: 100%;
     padding: var(--space-md);
-    border: 2px solid #e2e8f0;
+    border: 2px solid var(--border-color);
     border-radius: 12px;
     font-size: 1rem;
     font-family: inherit;
@@ -767,7 +767,7 @@
 
 .ai-badge {
     font-size: 0.85rem;
-    color: #94a3b8;
+    color: var(--text-tertiary);
     font-style: italic;
 }
 
@@ -815,7 +815,7 @@
 .ai-results-header h3 {
     margin: 0;
     font-size: 1.4rem;
-    color: #1a1f35;
+    color: var(--text-primary);
 }
 
 .ai-mode-badge {
@@ -841,7 +841,7 @@
     align-items: center;
     gap: var(--space-2xl);
     padding: var(--space-xl);
-    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    background: var(--bg-primary);
     border-radius: 16px;
     margin-bottom: var(--space-xl);
 }
@@ -869,14 +869,14 @@
 .score-number {
     font-size: 2rem;
     font-weight: 800;
-    color: #1a1f35;
+    color: var(--text-primary);
     display: block;
     line-height: 1;
 }
 
 .score-label {
     font-size: 0.8rem;
-    color: #94a3b8;
+    color: var(--text-tertiary);
 }
 
 .score-grade {
@@ -900,7 +900,7 @@
 
 .grade-desc {
     font-size: 1.1rem;
-    color: #64748b;
+    color: var(--text-tertiary);
     font-weight: 500;
 }
 
@@ -911,7 +911,7 @@
 
 .structure-section h4 {
     margin-bottom: var(--space-md);
-    color: #1a1f35;
+    color: var(--text-primary);
     font-size: 1.1rem;
 }
 
@@ -1007,7 +1007,7 @@
 
 .improvements-section h4 {
     margin-bottom: var(--space-md);
-    color: #1a1f35;
+    color: var(--text-primary);
     font-size: 1.1rem;
 }
 
@@ -1042,7 +1042,7 @@
 }
 
 .imp-text {
-    color: #1e3a5f;
+    color: var(--text-primary);
     line-height: 1.5;
     font-size: 0.95rem;
 }
@@ -1061,20 +1061,20 @@
 
 .optimized-header h4 {
     margin: 0;
-    color: #1a1f35;
+    color: var(--text-primary);
     font-size: 1.1rem;
 }
 
 .btn-copy-small {
     padding: 8px 18px;
-    background: #f1f5f9;
-    border: 1px solid #e2e8f0;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
     border-radius: 8px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s;
     font-size: 0.9rem;
-    color: #475569;
+    color: var(--text-secondary);
 }
 
 .btn-copy-small:hover {
@@ -1103,23 +1103,23 @@
 
 .cost-section h4 {
     margin-bottom: var(--space-md);
-    color: #1a1f35;
+    color: var(--text-primary);
     font-size: 1.1rem;
 }
 
 .cost-table {
     border-radius: 12px;
     overflow: hidden;
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--border-color);
 }
 
 .cost-header-row {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
     padding: 12px 18px;
-    background: #f8fafc;
+    background: var(--bg-secondary);
     font-weight: 700;
-    color: #64748b;
+    color: var(--text-tertiary);
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -1131,12 +1131,12 @@
     padding: 14px 18px;
     border-top: 1px solid #f1f5f9;
     font-size: 0.95rem;
-    color: #475569;
+    color: var(--text-secondary);
     transition: background 0.2s;
 }
 
 .cost-row:hover {
-    background: #f8fafc;
+    background: var(--bg-secondary);
 }
 
 .cost-row.cheapest {
@@ -1146,19 +1146,19 @@
 
 .model-name {
     font-weight: 600;
-    color: #1a1f35;
+    color: var(--text-primary);
 }
 
 .cost-total {
     font-weight: 700;
-    color: #334155;
+    color: var(--text-secondary);
 }
 
 /* Usage Info */
 .usage-info {
     text-align: center;
     padding: var(--space-md);
-    color: #94a3b8;
+    color: var(--text-tertiary);
     font-size: 0.85rem;
     border-top: 1px solid #f1f5f9;
     margin-top: var(--space-md);

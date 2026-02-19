@@ -303,12 +303,14 @@ function analyzeModelOptions(text, qualityScore, priority, type = 'text') {
     const outputMultiplier = type === 'code' ? 5 : 2;
     const estimatedOutputTokens = inputTokens * outputMultiplier;
 
+    // 2026년 2월 최신 AI 모델 가격 (per 1M tokens)
     const models = [
-        { id: 'gpt-4o', name: 'GPT-4o', input: 5.00, output: 15.00, quality: 98, speed: 90 },
-        { id: 'gpt-4o-mini', name: 'GPT-4o Mini', input: 0.15, output: 0.60, quality: 82, speed: 98 },
-        { id: 'claude-3.5-sonnet', name: 'Claude 3.5 Sonnet', input: 3.00, output: 15.00, quality: 99, speed: 85 },
-        { id: 'claude-3-haiku', name: 'Claude 3 Haiku', input: 0.25, output: 1.25, quality: 78, speed: 99 },
-        { id: 'gemini-1.5-pro', name: 'Gemini 1.5 Pro', input: 3.50, output: 10.50, quality: 96, speed: 88 }
+        { id: 'gpt-5.2', name: 'GPT-5.2', input: 0.875, output: 7.00, quality: 99, speed: 92 },
+        { id: 'gpt-5-mini', name: 'GPT-5 Mini', input: 0.25, output: 2.00, quality: 85, speed: 98 },
+        { id: 'claude-sonnet-4.6', name: 'Claude Sonnet 4.6', input: 3.00, output: 15.00, quality: 98, speed: 88 },
+        { id: 'claude-haiku-4.5', name: 'Claude Haiku 4.5', input: 1.00, output: 5.00, quality: 82, speed: 99 },
+        { id: 'gemini-2.5-pro', name: 'Gemini 2.5 Pro', input: 1.25, output: 10.00, quality: 97, speed: 90 },
+        { id: 'gemini-2.5-flash', name: 'Gemini 2.5 Flash', input: 0.30, output: 2.50, quality: 83, speed: 99 }
     ];
 
     return models.map(model => {
@@ -350,9 +352,12 @@ function determineOptimalStrategy(modelAnalysis, budget, minQuality, priority, m
     recommended.recommended = true;
 
     const reasons = {
-        'gpt-4o-mini': '비용 효율성이 가장 높습니다. GPT-4o 대비 94% 비용 절감이 가능합니다.',
-        'gpt-4o': '최고 수준의 품질이 필요한 복잡한 작업에 적합합니다.',
-        'claude-3.5-sonnet': '창의적 글쓰기와 코드 생성에 탁월합니다.'
+        'gpt-5-mini': '비용 효율성이 가장 높습니다. GPT-5.2 대비 71% 비용 절감이 가능합니다.',
+        'gpt-5.2': '최고 수준의 품질이 필요한 복잡한 작업에 적합합니다.',
+        'claude-sonnet-4.6': '창의적 글쓰기와 코드 생성에 탁월합니다.',
+        'claude-haiku-4.5': '빠른 응답과 적당한 품질의 균형이 뛰어납니다.',
+        'gemini-2.5-pro': 'Google 생태계 통합과 긴 컨텍스트 처리에 탁월합니다.',
+        'gemini-2.5-flash': '초저비용으로 대량 작업 처리에 최적입니다.'
     };
 
     // Determine optimization settings based on priority
@@ -387,7 +392,7 @@ function determineOptimalStrategy(modelAnalysis, budget, minQuality, priority, m
         model: recommended.id,
         modelName: recommended.name,
         reason: reasons[recommended.id] || '균형 잡힌 성능을 제공합니다.',
-        compression: recommended.id !== 'gpt-4o-mini' ?
+        compression: recommended.id !== 'gpt-5-mini' && recommended.id !== 'gemini-2.5-flash' ?
             optimizationSettings :
             { ...optimizationSettings, reason: '이미 저비용 모델이지만 추가 최적화 가능' },
         estimatedMonthlyCost: recommended.estimatedCost.monthly1000,

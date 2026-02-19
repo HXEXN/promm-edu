@@ -376,7 +376,7 @@
 }
 
 .gen-modal {
-    background: white;
+    background: var(--bg-elevated);
     border-radius: 20px;
     padding: 48px;
     text-align: center;
@@ -394,7 +394,7 @@
 
 .gen-modal h2 {
     font-size: 1.4rem;
-    color: #1e293b;
+    color: var(--text-primary);
     margin-bottom: 28px;
 }
 
@@ -412,15 +412,15 @@
     gap: 12px;
     padding: 10px 16px;
     border-radius: 10px;
-    background: #f8fafc;
-    color: #94a3b8;
+    background: var(--bg-secondary);
+    color: var(--text-tertiary);
     font-size: 0.95rem;
     transition: all 0.4s;
 }
 
 .gen-step.active {
     background: #eff6ff;
-    color: #1e293b;
+    color: var(--text-primary);
     font-weight: 600;
 }
 

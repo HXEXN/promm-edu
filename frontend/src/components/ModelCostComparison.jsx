@@ -114,7 +114,7 @@ function ModelCostComparison({ costAnalysis }) {
                 <div className="rec-icon">💡</div>
                 <div className="rec-content">
                     <strong>추천:</strong> 일반적인 작업의 경우 <strong>{cheapest.modelName}</strong>을 사용하면
-                    비용 효율이 가장 좋습니다. 복잡한 작업은 GPT-4o를 고려하세요.
+                    비용 효율이 가장 좋습니다. 복잡한 작업은 GPT-5.2를 고려하세요.
                 </div>
             </div>
         </div>

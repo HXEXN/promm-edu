@@ -23,7 +23,7 @@ function CostEngineInfo() {
                         <div className="step-card">
                             <div className="step-number">2</div>
                             <h5>모델 비교</h5>
-                            <p>GPT-4, Claude, Gemini 등 주요 AI 모델의 실제 가격을 비교하여 최적의 모델을 추천합니다.</p>
+                            <p>GPT-5, Claude 4, Gemini 2.5 등 주요 AI 모델의 실제 가격을 비교하여 최적의 모델을 추천합니다.</p>
                         </div>
 
                         <div className="step-card">
@@ -41,7 +41,7 @@ function CostEngineInfo() {
                 </div>
 
                 <div className="pricing-info">
-                    <h4>💰 실제 가격 정보 (2026년 기준)</h4>
+                    <h4>💰 실제 가격 정보 (2026년 2월 기준)</h4>
                     <table className="pricing-table">
                         <thead>
                             <tr>
@@ -53,28 +53,40 @@ function CostEngineInfo() {
                         </thead>
                         <tbody>
                             <tr>
-                                <td><strong>GPT-4o</strong></td>
-                                <td>$5.00</td>
-                                <td>$15.00</td>
-                                <td>최고 성능, 복잡한 작업</td>
+                                <td><strong>GPT-5.2</strong></td>
+                                <td>$0.875</td>
+                                <td>$7.00</td>
+                                <td>최고 성능, 복잡한 추론 작업</td>
                             </tr>
                             <tr>
-                                <td><strong>GPT-4o-mini</strong></td>
-                                <td>$0.15</td>
-                                <td>$0.60</td>
+                                <td><strong>GPT-5 Mini</strong></td>
+                                <td>$0.25</td>
+                                <td>$2.00</td>
                                 <td>가성비 최고, 일반 작업</td>
                             </tr>
                             <tr>
-                                <td><strong>Claude 3.5 Sonnet</strong></td>
+                                <td><strong>Claude Sonnet 4.6</strong></td>
                                 <td>$3.00</td>
                                 <td>$15.00</td>
-                                <td>긴 문서 처리 우수</td>
+                                <td>창의적 글쓰기, 코드 생성</td>
                             </tr>
                             <tr>
-                                <td><strong>Gemini Pro</strong></td>
-                                <td>$1.25</td>
+                                <td><strong>Claude Haiku 4.5</strong></td>
+                                <td>$1.00</td>
                                 <td>$5.00</td>
-                                <td>Google 생태계 통합</td>
+                                <td>초고속 응답, 분류 작업</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Gemini 2.5 Pro</strong></td>
+                                <td>$1.25</td>
+                                <td>$10.00</td>
+                                <td>긴 컨텍스트, 멀티모달</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Gemini 2.5 Flash</strong></td>
+                                <td>$0.30</td>
+                                <td>$2.50</td>
+                                <td>초저비용, 대량 처리</td>
                             </tr>
                         </tbody>
                     </table>

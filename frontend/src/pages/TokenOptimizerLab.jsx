@@ -223,12 +223,12 @@ Could you please provide the results in a table format? Thank you very much. I w
                                 </span>
                             </div>
                             <div className="stat-item">
-                                <span className="stat-number">{result.compression.compressionRatio}%</span>
+                                <span className="stat-number">{Number(result.compression.compressionRatio).toFixed(1)}%</span>
                                 <span className="stat-label">압축률</span>
                             </div>
                             <div className="stat-item">
                                 <span className="stat-number speed">
-                                    {result.costSavings?.estimatedLatencyReduction || result.compression.compressionRatio}%
+                                    {Number(result.costSavings?.estimatedLatencyReduction || result.compression.compressionRatio).toFixed(1)}%
                                 </span>
                                 <span className="stat-label">연산 속도 향상</span>
                             </div>
@@ -522,7 +522,7 @@ Could you please provide the results in a table format? Thank you very much. I w
                                             <span className="detail-icon">📉</span>
                                             <div className="detail-text">
                                                 <strong>비용 시뮬레이션</strong>
-                                                <p>GPT-4o, Claude 3.5, Gemini Pro 등 6개 최신 모델의 실시간 토큰 단가를 반영합니다.</p>
+                                                <p>GPT-5.2, Claude Sonnet 4.6, Gemini 2.5 Pro 등 6개 최신 모델의 실시간 토큰 단가를 반영합니다.</p>
                                             </div>
                                         </div>
                                         <div className="detail-item">

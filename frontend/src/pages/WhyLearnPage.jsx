@@ -221,7 +221,7 @@ function WhyLearnPage() {
                                             <span className="cost-value bad">95 tokens</span>
                                         </div>
                                         <div className="money-cost">
-                                            약 $0.00104 (Claude 3.5 Sonnet 기준)
+                                            약 $0.00104 (Claude Sonnet 4.6 기준)
                                         </div>
                                     </div>
                                 </div>

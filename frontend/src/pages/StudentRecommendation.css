@@ -10,7 +10,7 @@
 }
 
 .result-header {
-    background: white;
+    background: var(--bg-elevated);
     border-radius: 24px;
     padding: var(--space-2xl);
     text-align: center;
@@ -26,18 +26,18 @@
 
 .result-header h1 {
     font-size: 2.2rem;
-    color: #1a1f35;
+    color: var(--text-primary);
     margin: 0 0 var(--space-sm) 0;
 }
 
 .result-header p {
-    color: #64748b;
+    color: var(--text-tertiary);
     font-size: 1.1rem;
 }
 
 /* Profile Summary */
 .profile-summary {
-    background: white;
+    background: var(--bg-elevated);
     border-radius: 16px;
     padding: var(--space-xl);
     margin-bottom: var(--space-xl);
@@ -46,7 +46,7 @@
 
 .profile-summary h2 {
     font-size: 1.5rem;
-    color: #1a1f35;
+    color: var(--text-primary);
     margin-bottom: var(--space-md);
 }
 
@@ -80,7 +80,7 @@
 
 /* Curriculum Section */
 .curriculum-section {
-    background: white;
+    background: var(--bg-elevated);
     border-radius: 16px;
     padding: var(--space-xl);
     margin-bottom: var(--space-xl);
@@ -89,7 +89,7 @@
 
 .curriculum-section h2 {
     font-size: 1.5rem;
-    color: #1a1f35;
+    color: var(--text-primary);
     margin-bottom: var(--space-lg);
 }
 
@@ -99,7 +99,7 @@
 }
 
 .curriculum-card {
-    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    background: var(--bg-primary);
     border-left: 4px solid #667eea;
     border-radius: 12px;
     padding: var(--space-lg);
@@ -126,7 +126,7 @@
 
 .curriculum-card h3 {
     font-size: 1.3rem;
-    color: #1a1f35;
+    color: var(--text-primary);
     margin: 0 0 var(--space-sm) 0;
 }
 
@@ -142,7 +142,7 @@
 }
 
 .duration {
-    color: #64748b;
+    color: var(--text-tertiary);
 }
 
 .topic-list {
@@ -152,14 +152,14 @@
 }
 
 .topic-list li {
-    color: #475569;
+    color: var(--text-secondary);
     padding: 4px 0;
     line-height: 1.6;
 }
 
 /* Tools Section */
 .tools-section {
-    background: white;
+    background: var(--bg-elevated);
     border-radius: 16px;
     padding: var(--space-xl);
     margin-bottom: var(--space-xl);
@@ -168,7 +168,7 @@
 
 .tools-section h2 {
     font-size: 1.5rem;
-    color: #1a1f35;
+    color: var(--text-primary);
     margin-bottom: var(--space-lg);
 }
 
@@ -204,7 +204,7 @@
 
 /* Learning Path */
 .path-section {
-    background: white;
+    background: var(--bg-elevated);
     border-radius: 16px;
     padding: var(--space-xl);
     margin-bottom: var(--space-xl);
@@ -213,7 +213,7 @@
 
 .path-section h2 {
     font-size: 1.5rem;
-    color: #1a1f35;
+    color: var(--text-primary);
     margin-bottom: var(--space-lg);
     text-align: center;
 }
@@ -228,7 +228,7 @@
     align-items: center;
     gap: var(--space-md);
     padding: var(--space-md);
-    background: #f8fafc;
+    background: var(--bg-secondary);
     border-radius: 12px;
     transition: all 0.3s;
 }
@@ -254,13 +254,13 @@
 
 .step-content h4 {
     margin: 0 0 4px 0;
-    color: #1a1f35;
+    color: var(--text-primary);
     font-size: 1.1rem;
 }
 
 .step-content p {
     margin: 0;
-    color: #64748b;
+    color: var(--text-tertiary);
     font-size: 0.95rem;
 }
 
@@ -302,13 +302,13 @@
 }
 
 .btn-retake {
-    background: white;
+    background: var(--bg-elevated);
     color: #667eea;
     border: 2px solid #667eea;
 }
 
 .btn-retake:hover {
-    background: #f8fafc;
+    background: var(--bg-secondary);
 }
 
 @keyframes bounce {

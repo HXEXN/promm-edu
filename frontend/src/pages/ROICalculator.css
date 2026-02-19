@@ -38,7 +38,7 @@
 
 /* Input Section */
 .input-section {
-    background: white;
+    background: var(--bg-elevated);
     border-radius: 20px;
     padding: var(--space-2xl);
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
@@ -47,7 +47,7 @@
 
 .input-section h2 {
     font-size: 2rem;
-    color: #1a1f35;
+    color: var(--text-primary);
     margin-bottom: var(--space-xl);
 }
 
@@ -60,7 +60,7 @@
     justify-content: space-between;
     align-items: center;
     font-weight: 600;
-    color: #1a1f35;
+    color: var(--text-primary);
     margin-bottom: var(--space-md);
     font-size: 1.05rem;
 }
@@ -88,7 +88,7 @@
     appearance: none;
     width: 24px;
     height: 24px;
-    background: white;
+    background: var(--bg-elevated);
     border: 3px solid #10b981;
     border-radius: 50%;
     cursor: pointer;
@@ -98,7 +98,7 @@
 .slider::-moz-range-thumb {
     width: 24px;
     height: 24px;
-    background: white;
+    background: var(--bg-elevated);
     border: 3px solid #10b981;
     border-radius: 50%;
     cursor: pointer;
@@ -109,14 +109,14 @@
     display: flex;
     justify-content: space-between;
     margin-top: var(--space-sm);
-    color: #64748b;
+    color: var(--text-tertiary);
     font-size: 0.85rem;
 }
 
 .number-input {
     width: 100%;
     padding: 14px 18px;
-    border: 2px solid #e2e8f0;
+    border: 2px solid var(--border-color);
     border-radius: 12px;
     font-size: 1rem;
     transition: all 0.3s;
@@ -130,19 +130,19 @@
 
 .input-hint {
     margin-top: var(--space-sm);
-    color: #64748b;
+    color: var(--text-tertiary);
     font-size: 0.9rem;
 }
 
 .model-select {
     width: 100%;
     padding: 14px 18px;
-    border: 2px solid #e2e8f0;
+    border: 2px solid var(--border-color);
     border-radius: 12px;
     font-size: 1rem;
     cursor: pointer;
     transition: all 0.3s;
-    background: white;
+    background: var(--bg-elevated);
 }
 
 .model-select:focus {
@@ -152,7 +152,7 @@
 
 /* Results Section */
 .results-section {
-    background: white;
+    background: var(--bg-elevated);
     border-radius: 20px;
     padding: var(--space-2xl);
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
@@ -161,7 +161,7 @@
 
 .results-section h2 {
     font-size: 2rem;
-    color: #1a1f35;
+    color: var(--text-primary);
     margin-bottom: var(--space-xl);
 }
 
@@ -173,11 +173,11 @@
 }
 
 .result-card {
-    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    background: var(--bg-primary);
     border-radius: 16px;
     padding: var(--space-xl);
     text-align: center;
-    border: 2px solid #e2e8f0;
+    border: 2px solid var(--border-color);
     transition: all 0.3s;
 }
 
@@ -207,7 +207,7 @@
 }
 
 .result-card h3 {
-    color: #64748b;
+    color: var(--text-tertiary);
     font-size: 0.95rem;
     font-weight: 600;
     text-transform: uppercase;
@@ -234,7 +234,7 @@
 }
 
 .card-detail {
-    color: #64748b;
+    color: var(--text-tertiary);
     font-size: 0.85rem;
     line-height: 1.6;
 }
@@ -272,7 +272,7 @@
 }
 
 .net-item {
-    background: white;
+    background: var(--bg-elevated);
     padding: var(--space-lg);
     border-radius: 12px;
     text-align: center;
@@ -280,7 +280,7 @@
 
 .net-item .label {
     display: block;
-    color: #64748b;
+    color: var(--text-tertiary);
     font-size: 0.9rem;
     font-weight: 600;
     margin-bottom: var(--space-sm);
@@ -301,7 +301,7 @@
 
 .platform-cost-note {
     text-align: center;
-    color: #64748b;
+    color: var(--text-tertiary);
     font-size: 0.85rem;
 }
 
@@ -311,7 +311,7 @@
 }
 
 .savings-chart h4 {
-    color: #1a1f35;
+    color: var(--text-primary);
     font-size: 1.3rem;
     margin-bottom: var(--space-lg);
     text-align: center;
@@ -324,7 +324,7 @@
     height: 200px;
     gap: var(--space-sm);
     padding: var(--space-lg);
-    background: #f8fafc;
+    background: var(--bg-secondary);
     border-radius: 12px;
     margin-bottom: var(--space-md);
 }
@@ -361,7 +361,7 @@
 
 .bar-label {
     margin-top: var(--space-sm);
-    color: #64748b;
+    color: var(--text-tertiary);
     font-size: 0.75rem;
 }
 
@@ -375,7 +375,7 @@
     display: flex;
     align-items: center;
     gap: var(--space-sm);
-    color: #64748b;
+    color: var(--text-tertiary);
     font-size: 0.9rem;
 }
 
@@ -453,20 +453,20 @@
 }
 
 .btn-secondary:hover {
-    background: white;
-    color: #1a1f35;
+    background: var(--bg-elevated);
+    color: var(--text-primary);
 }
 
 /* Assumptions Note */
 .assumptions-note {
-    background: #f8fafc;
+    background: var(--bg-secondary);
     border-left: 4px solid #4facfe;
     border-radius: 8px;
     padding: var(--space-xl);
 }
 
 .assumptions-note h4 {
-    color: #1a1f35;
+    color: var(--text-primary);
     font-size: 1.1rem;
     margin-bottom: var(--space-md);
 }
@@ -478,13 +478,13 @@
 }
 
 .assumptions-note li {
-    color: #475569;
+    color: var(--text-secondary);
     padding: 8px 0;
     line-height: 1.6;
 }
 
 .assumptions-note strong {
-    color: #1a1f35;
+    color: var(--text-primary);
 }
 
 /* Responsive */

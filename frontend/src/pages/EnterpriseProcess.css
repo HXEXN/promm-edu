@@ -51,7 +51,7 @@
 
 .hero-subtitle {
     font-size: 1.2rem;
-    color: #94a3b8;
+    color: var(--text-tertiary);
     margin-bottom: var(--space-2xl);
     line-height: 1.6;
 }
@@ -84,7 +84,7 @@
 
 .stat-label {
     font-size: 0.9rem;
-    color: #94a3b8;
+    color: var(--text-tertiary);
     margin-top: var(--space-sm);
 }
 
@@ -124,7 +124,7 @@
 .section-subtitle {
     text-align: center;
     font-size: 1.1rem;
-    color: #94a3b8;
+    color: var(--text-tertiary);
     margin-bottom: var(--space-2xl);
 }
 
@@ -183,7 +183,7 @@
 }
 
 .step-description {
-    color: #94a3b8;
+    color: var(--text-tertiary);
     margin-bottom: var(--space-md);
     line-height: 1.6;
 }
@@ -240,7 +240,7 @@
 }
 
 .benefit-card p {
-    color: #94a3b8;
+    color: var(--text-tertiary);
     line-height: 1.6;
 }
 
@@ -313,8 +313,8 @@
 }
 
 .btn-primary-large {
-    background: white;
-    color: #0f172a;
+    background: var(--bg-elevated);
+    color: var(--text-primary);
     padding: 16px 40px;
     border: none;
     border-radius: 12px;
@@ -402,7 +402,7 @@
 
 .stat-label {
     font-size: 0.9rem;
-    color: #94a3b8;
+    color: var(--text-tertiary);
     margin-top: var(--space-sm);
 }
 
@@ -427,20 +427,20 @@
 /* Process Section */
 .process-section {
     padding: 100px var(--space-xl);
-    background: #f8fafc;
+    background: var(--bg-secondary);
 }
 
 .section-title {
     font-size: 2.5rem;
     text-align: center;
     margin-bottom: var(--space-md);
-    color: #1a1f35;
+    color: var(--text-primary);
 }
 
 .section-subtitle {
     text-align: center;
     font-size: 1.2rem;
-    color: #64748b;
+    color: var(--text-tertiary);
     margin-bottom: var(--space-2xl);
 }
 
@@ -454,7 +454,7 @@
 }
 
 .process-step {
-    background: white;
+    background: var(--bg-elevated);
     border-radius: 16px;
     padding: var(--space-2xl);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
@@ -491,12 +491,12 @@
 
 .step-title {
     font-size: 1.5rem;
-    color: #1a1f35;
+    color: var(--text-primary);
     margin-bottom: var(--space-sm);
 }
 
 .step-description {
-    color: #64748b;
+    color: var(--text-tertiary);
     margin-bottom: var(--space-md);
     line-height: 1.6;
 }
@@ -508,7 +508,7 @@
 }
 
 .step-details li {
-    color: #475569;
+    color: var(--text-secondary);
     padding: 6px 0;
     font-size: 0.95rem;
 }
@@ -520,7 +520,7 @@
 /* Benefits Section */
 .benefits-section {
     padding: 100px var(--space-xl);
-    background: white;
+    background: var(--bg-elevated);
 }
 
 .benefits-grid {
@@ -551,19 +551,19 @@
 
 .benefit-card h3 {
     font-size: 1.3rem;
-    color: #1a1f35;
+    color: var(--text-primary);
     margin-bottom: var(--space-sm);
 }
 
 .benefit-card p {
-    color: #64748b;
+    color: var(--text-tertiary);
     line-height: 1.6;
 }
 
 /* Case Studies */
 .cases-section {
     padding: 100px var(--space-xl);
-    background: #f8fafc;
+    background: var(--bg-secondary);
 }
 
 .cases-grid {
@@ -575,7 +575,7 @@
 }
 
 .case-card {
-    background: white;
+    background: var(--bg-elevated);
     border-radius: 16px;
     padding: var(--space-2xl);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
@@ -591,7 +591,7 @@
 
 .case-header h3 {
     font-size: 1.5rem;
-    color: #1a1f35;
+    color: var(--text-primary);
     margin: 0;
 }
 
@@ -609,7 +609,7 @@
 .case-result {
     margin-bottom: var(--space-md);
     line-height: 1.6;
-    color: #475569;
+    color: var(--text-secondary);
 }
 
 .case-result {
@@ -663,7 +663,7 @@
 }
 
 .btn-primary-large {
-    background: white;
+    background: var(--bg-elevated);
     color: #4facfe;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }

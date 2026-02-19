@@ -99,7 +99,7 @@
 .email-form input {
     flex: 1;
     padding: 16px 20px;
-    border: 2px solid #e2e8f0;
+    border: 2px solid var(--border-color);
     border-radius: 12px;
     font-size: 1rem;
     transition: all 0.3s;
@@ -145,13 +145,13 @@
     gap: var(--space-lg);
     justify-content: center;
     flex-wrap: wrap;
-    color: #64748b;
+    color: var(--text-tertiary);
     font-size: 0.9rem;
 }
 
 /* Engine Selection */
 .engine-selection {
-    background: white;
+    background: var(--bg-elevated);
     border-radius: 20px;
     padding: var(--space-2xl);
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
@@ -175,12 +175,12 @@
 
 .engine-selection h2 {
     font-size: 2rem;
-    color: #1a1f35;
+    color: var(--text-primary);
     margin-bottom: var(--space-sm);
 }
 
 .engine-selection>p {
-    color: #64748b;
+    color: var(--text-tertiary);
     font-size: 1rem;
     margin-bottom: var(--space-xl);
 }
@@ -192,8 +192,8 @@
 }
 
 .engine-option {
-    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-    border: 2px solid #e2e8f0;
+    background: var(--bg-primary);
+    border: 2px solid var(--border-color);
     border-radius: 16px;
     padding: var(--space-xl);
     transition: all 0.3s;
@@ -218,12 +218,12 @@
 
 .engine-header h3 {
     margin: 0;
-    color: #1a1f35;
+    color: var(--text-primary);
     font-size: 1.3rem;
 }
 
 .engine-desc {
-    color: #475569;
+    color: var(--text-secondary);
     line-height: 1.6;
     margin-bottom: var(--space-md);
 }
@@ -236,7 +236,7 @@
 }
 
 .engine-features span {
-    color: #64748b;
+    color: var(--text-tertiary);
     font-size: 0.9rem;
 }
 
@@ -277,7 +277,7 @@
 
 /* Results */
 .trial-result {
-    background: white;
+    background: var(--bg-elevated);
     border-radius: 20px;
     padding: var(--space-2xl);
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
@@ -285,7 +285,7 @@
 
 .trial-result h2 {
     font-size: 2rem;
-    color: #1a1f35;
+    color: var(--text-primary);
     margin-bottom: var(--space-xl);
 }
 
@@ -320,7 +320,7 @@
 }
 
 .btn-try-again {
-    background: white;
+    background: var(--bg-elevated);
     color: #4facfe;
     border: 2px solid #4facfe;
     padding: 12px 32px;
@@ -364,7 +364,7 @@
 }
 
 .benefit {
-    background: white;
+    background: var(--bg-elevated);
     padding: var(--space-md);
     border-radius: 8px;
     color: #166534;
@@ -391,7 +391,7 @@
 
 /* No Credits */
 .no-credits {
-    background: white;
+    background: var(--bg-elevated);
     border-radius: 20px;
     padding: var(--space-2xl);
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
@@ -411,12 +411,12 @@
 
 .empty-state h3 {
     font-size: 1.8rem;
-    color: #1a1f35;
+    color: var(--text-primary);
     margin-bottom: var(--space-sm);
 }
 
 .empty-state p {
-    color: #64748b;
+    color: var(--text-tertiary);
     font-size: 1.1rem;
     margin-bottom: var(--space-xl);
 }
@@ -425,7 +425,7 @@
 .why-smartfarm {
     margin-top: var(--space-2xl);
     padding: var(--space-2xl);
-    background: white;
+    background: var(--bg-elevated);
     border-radius: 20px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
 }
@@ -433,7 +433,7 @@
 .why-smartfarm h2 {
     text-align: center;
     font-size: 2rem;
-    color: #1a1f35;
+    color: var(--text-primary);
     margin-bottom: var(--space-2xl);
 }
 
@@ -446,7 +446,7 @@
 .feature-card {
     text-align: center;
     padding: var(--space-xl);
-    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    background: var(--bg-primary);
     border-radius: 12px;
     transition: all 0.3s;
 }
@@ -463,13 +463,13 @@
 }
 
 .feature-card h4 {
-    color: #1a1f35;
+    color: var(--text-primary);
     font-size: 1.2rem;
     margin-bottom: var(--space-sm);
 }
 
 .feature-card p {
-    color: #64748b;
+    color: var(--text-tertiary);
     font-size: 0.95rem;
     line-height: 1.6;
 }

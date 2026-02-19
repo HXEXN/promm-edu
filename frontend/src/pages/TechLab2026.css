@@ -42,7 +42,7 @@
 }
 
 .tech-lab-subtitle {
-    color: #94a3b8;
+    color: var(--text-tertiary);
     font-size: 1.05rem;
     margin: 0 0 20px;
 }
@@ -88,7 +88,7 @@
     background: transparent;
     border: 2px solid transparent;
     border-radius: 12px;
-    color: #64748b;
+    color: var(--text-tertiary);
     font-size: 0.82rem;
     font-weight: 700;
     cursor: pointer;
@@ -106,7 +106,7 @@
 }
 
 .tech-tab:hover:not(.active) {
-    color: #94a3b8;
+    color: var(--text-tertiary);
     background: rgba(255, 255, 255, 0.02);
 }
 
@@ -146,7 +146,7 @@
     background: rgba(148, 163, 184, 0.12);
     border: 1px solid rgba(148, 163, 184, 0.2);
     border-radius: 10px;
-    color: #94a3b8;
+    color: var(--text-tertiary);
     font-size: 0.82rem;
     cursor: pointer;
     transition: all 0.2s;
@@ -161,7 +161,7 @@
 .tech-input-form label {
     display: block;
     font-size: 0.82rem;
-    color: #94a3b8;
+    color: var(--text-tertiary);
     font-weight: 600;
     margin: 14px 0 6px;
 }
@@ -319,7 +319,7 @@
 .metric-lbl {
     display: block;
     font-size: 0.72rem;
-    color: #94a3b8;
+    color: var(--text-tertiary);
     margin-top: 4px;
     font-weight: 600;
 }
@@ -410,7 +410,7 @@
     display: flex;
     justify-content: space-between;
     font-size: 0.75rem;
-    color: #64748b;
+    color: var(--text-tertiary);
 }
 
 /* Cache Sections */
@@ -457,7 +457,7 @@
     background: rgba(15, 23, 42, 0.4);
     border-radius: 10px;
     font-size: 0.85rem;
-    color: #94a3b8;
+    color: var(--text-tertiary);
 }
 
 .cache-stats code {
@@ -532,7 +532,7 @@
 
 .agent-role {
     font-size: 0.78rem;
-    color: #94a3b8;
+    color: var(--text-tertiary);
     margin-bottom: 6px;
 }
 
@@ -570,7 +570,7 @@
 
 .rule-desc {
     font-size: 0.82rem;
-    color: #94a3b8;
+    color: var(--text-tertiary);
 }
 
 .json-output {
@@ -695,7 +695,7 @@
 
 .tech-feature-card p {
     font-size: 0.82rem;
-    color: #94a3b8;
+    color: var(--text-tertiary);
     margin: 0;
     line-height: 1.4;
 }

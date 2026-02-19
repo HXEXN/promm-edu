@@ -542,7 +542,7 @@ function TechnologyPage() {
                                 </div>
                                 <p className="trend-desc">
                                     텍스트를 넘어 이미지, 오디오, 비디오를 통합한 멀티모달 프롬프팅.
-                                    GPT-4o, Gemini 2.0의 네이티브 멀티모달 지원으로 더욱 풍부한 AI 인터랙션이 가능합니다.
+                                    GPT-5.2, Gemini 2.5 Pro의 네이티브 멀티모달 지원으로 더욱 풍부한 AI 인터랙션이 가능합니다.
                                 </p>
                                 <div className="trend-features">
                                     <span>Image Understanding</span>

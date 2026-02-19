@@ -1,7 +1,7 @@
 .corp-edu-page {
     min-height: 100vh;
-    background: #f1f5f9;
-    color: #1a1f35;
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
     font-family: 'Inter', sans-serif;
 }
 
@@ -33,7 +33,7 @@
 
 .header-text p {
     font-size: 0.75rem;
-    color: #94a3b8;
+    color: var(--text-tertiary);
     margin: 0;
 }
 
@@ -68,7 +68,7 @@
 .btn-reset-curriculum {
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #94a3b8;
+    color: var(--text-tertiary);
     font-size: 0.7rem;
     padding: 2px 8px;
     border-radius: 8px;
@@ -120,7 +120,7 @@
 .edu-sidebar {
     width: 300px;
     min-width: 300px;
-    background: white;
+    background: var(--bg-elevated);
     border-radius: 16px;
     padding: var(--space-lg);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
@@ -152,13 +152,13 @@
 .progress-card {
     text-align: center;
     padding-bottom: var(--space-lg);
-    border-bottom: 1px solid #e2e8f0;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .progress-card h3 {
     font-size: 0.95rem;
     font-weight: 700;
-    color: #1e293b;
+    color: var(--text-primary);
     margin-bottom: var(--space-sm);
 }
 
@@ -176,7 +176,7 @@
 .inner-circle {
     width: 85px;
     height: 85px;
-    background: white;
+    background: var(--bg-elevated);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -194,7 +194,7 @@
 
 .completion-text {
     font-size: 0.85rem;
-    color: #64748b;
+    color: var(--text-tertiary);
     margin-top: var(--space-sm);
 }
 
@@ -237,7 +237,7 @@
 .module-nav h3 {
     font-size: 0.9rem;
     margin-bottom: var(--space-md);
-    color: #64748b;
+    color: var(--text-tertiary);
     display: flex;
     align-items: center;
     gap: 8px;
@@ -268,7 +268,7 @@
 }
 
 .nav-item:hover {
-    background: #f8fafc;
+    background: var(--bg-secondary);
 }
 
 .nav-item.active {
@@ -282,7 +282,7 @@
 
 .nav-num {
     font-weight: 700;
-    color: #94a3b8;
+    color: var(--text-tertiary);
     font-size: 0.85rem;
 }
 
@@ -292,9 +292,9 @@
 
 .nav-item.module {
     font-weight: 600;
-    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    background: var(--bg-primary);
     margin-bottom: 4px;
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--border-color);
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
 }
 
@@ -345,7 +345,7 @@
 .nav-title {
     font-size: 0.88rem;
     font-weight: 600;
-    color: #1e293b;
+    color: var(--text-primary);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -353,14 +353,14 @@
 
 .lesson-count {
     font-size: 0.72rem;
-    color: #64748b;
+    color: var(--text-tertiary);
     font-weight: 500;
 }
 
 .nav-item.lesson {
     padding: 10px 14px 10px 32px;
     font-size: 0.85rem;
-    background: white;
+    background: var(--bg-elevated);
     border-left: 2px solid #e2e8f0;
     margin-left: 16px;
     border-radius: 0 10px 10px 0;
@@ -375,8 +375,8 @@
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background: #f1f5f9;
-    color: #94a3b8;
+    background: var(--bg-tertiary);
+    color: var(--text-tertiary);
     flex-shrink: 0;
     transition: all 0.3s ease;
 }
@@ -416,7 +416,7 @@
 }
 
 .lesson-title {
-    color: #64748b;
+    color: var(--text-tertiary);
     transition: color 0.2s ease;
     white-space: nowrap;
     overflow: hidden;
@@ -439,7 +439,7 @@
 /* ===== Main Content ===== */
 .edu-content {
     flex: 1;
-    background: white;
+    background: var(--bg-elevated);
     border-radius: 16px;
     padding: var(--space-xl) var(--space-2xl);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
@@ -458,7 +458,7 @@
     align-items: center;
     gap: var(--space-sm);
     font-size: 0.85rem;
-    color: #64748b;
+    color: var(--text-tertiary);
     margin-bottom: var(--space-sm);
 }
 
@@ -481,7 +481,7 @@
 .content-header h2 {
     font-size: 1.8rem;
     margin: 0 0 4px 0;
-    color: #0f172a;
+    color: var(--text-primary);
 }
 
 /* ===== View Tabs ===== */
@@ -489,7 +489,7 @@
     display: flex;
     gap: 4px;
     margin-top: var(--space-md);
-    border-bottom: 2px solid #e2e8f0;
+    border-bottom: 2px solid var(--border-color);
 }
 
 .tab {
@@ -498,7 +498,7 @@
     border: none;
     border-bottom: 3px solid transparent;
     font-weight: 600;
-    color: #64748b;
+    color: var(--text-tertiary);
     cursor: pointer;
     transition: all 0.2s;
     position: relative;
@@ -543,7 +543,7 @@
 .markdown-content pre {
     font-family: 'Inter', sans-serif;
     line-height: 1.8;
-    color: #1a1f35;
+    color: var(--text-primary);
 }
 
 /* ===== Example Box ===== */
@@ -569,7 +569,7 @@
 
 .example-prompt pre,
 .example-output pre {
-    background: white;
+    background: var(--bg-elevated);
     padding: var(--space-md);
     border-radius: 8px;
     border: 1px solid #bae6fd;
@@ -602,7 +602,7 @@
 }
 
 .reference-card {
-    background: white;
+    background: var(--bg-elevated);
     padding: 12px 16px;
     border-radius: 8px;
     border: 1px solid #fde68a;
@@ -610,14 +610,14 @@
 
 .ref-title {
     font-weight: 600;
-    color: #1e293b;
+    color: var(--text-primary);
     font-size: 0.9rem;
     margin-bottom: 4px;
 }
 
 .ref-meta {
     font-size: 0.78rem;
-    color: #64748b;
+    color: var(--text-tertiary);
     margin-bottom: 6px;
 }
 
@@ -654,9 +654,9 @@
 
 .btn-secondary {
     padding: 12px 24px;
-    background: #f1f5f9;
-    color: #475569;
-    border: 1px solid #e2e8f0;
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
     border-radius: 10px;
     font-weight: 600;
     cursor: pointer;
@@ -701,14 +701,14 @@
     align-items: center;
     gap: 10px;
     padding: 12px 24px;
-    background: white;
-    border: 1px solid #e2e8f0;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-color);
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.3s;
     font-size: 0.9rem;
     font-weight: 600;
-    color: #475569;
+    color: var(--text-secondary);
 }
 
 .lesson-nav-btn:hover:not(:disabled) {
@@ -742,16 +742,16 @@
     padding: var(--space-lg);
     border-radius: 12px;
     margin-bottom: var(--space-lg);
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--border-color);
 }
 
 .practice-instruction h4 {
     margin-top: 0;
-    color: #1a1f35;
+    color: var(--text-primary);
 }
 
 .hints-box {
-    background: #fff7ed;
+    background: hsla(25, 80%, 50%, 0.15);
     border-left: 4px solid #f59e0b;
     padding: var(--space-md) var(--space-lg);
     border-radius: 0 10px 10px 0;
@@ -791,7 +791,7 @@
 }
 
 .certificate-paper {
-    background: #fff;
+    background: var(--bg-elevated);
     width: 90%;
     max-width: 750px;
     padding: 36px;
@@ -810,8 +810,8 @@
     width: 36px;
     height: 36px;
     border: none;
-    background: #f1f5f9;
-    color: #475569;
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
     font-size: 1.1rem;
     border-radius: 50%;
     cursor: pointer;
@@ -824,7 +824,7 @@
 
 .modal-close-btn:hover {
     background: #e2e8f0;
-    color: #1e293b;
+    color: var(--text-primary);
     transform: scale(1.1);
 }
 
@@ -841,13 +841,13 @@
 .cert-border h1 {
     font-family: 'Playfair Display', serif;
     font-size: 2.2rem;
-    color: #1a1f35;
+    color: var(--text-primary);
     margin-bottom: 16px;
 }
 
 .cert-text {
     font-size: 1rem;
-    color: #64748b;
+    color: var(--text-tertiary);
     margin-bottom: 32px;
 }
 
@@ -1095,7 +1095,7 @@
     }
 
     .modal-overlay {
-        background: white;
+        background: var(--bg-elevated);
     }
 
     .certificate-paper {

@@ -17,25 +17,25 @@
   --warning-yellow: hsl(45, 100%, 55%);
   --danger-red: hsl(0, 90%, 60%);
 
-  /* Backgrounds with Depth */
-  --bg-primary: hsl(220, 25%, 98%);
-  --bg-secondary: hsl(220, 20%, 96%);
-  --bg-tertiary: hsl(220, 15%, 94%);
-  --bg-elevated: hsl(0, 0%, 100%);
+  /* Backgrounds with Depth - Dark Theme (Site Default) */
+  --bg-primary: hsl(220, 30%, 8%);
+  --bg-secondary: hsl(220, 25%, 12%);
+  --bg-tertiary: hsl(220, 20%, 16%);
+  --bg-elevated: hsl(220, 25%, 14%);
 
-  /* Glassmorphism */
-  --glass-bg: hsla(0, 0%, 100%, 0.65);
-  --glass-border: hsla(0, 0%, 100%, 0.3);
-  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  /* Glassmorphism - Dark Theme */
+  --glass-bg: hsla(220, 25%, 14%, 0.7);
+  --glass-border: hsla(220, 25%, 40%, 0.3);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
 
-  /* Modern Text */
-  --text-primary: hsl(220, 30%, 10%);
-  --text-secondary: hsl(220, 20%, 35%);
-  --text-tertiary: hsl(220, 15%, 55%);
+  /* Modern Text - Light on Dark */
+  --text-primary: hsl(220, 30%, 98%);
+  --text-secondary: hsl(220, 20%, 80%);
+  --text-tertiary: hsl(220, 15%, 60%);
 
-  /* Enhanced Borders & Shadows */
-  --border-color: hsl(220, 20%, 88%);
-  --border-accent: hsla(220, 90%, 56%, 0.2);
+  /* Enhanced Borders & Shadows - Dark */
+  --border-color: hsl(220, 20%, 25%);
+  --border-accent: hsla(220, 90%, 70%, 0.3);
 
   --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-sm: 0 2px 8px 0 rgba(0, 0, 0, 0.08);
@@ -56,6 +56,7 @@
   --space-lg: 2rem;
   --space-xl: 3rem;
   --space-2xl: 4rem;
+  --space-3xl: 6rem;
 
   /* Border Radius - More Pronounced */
   --radius-sm: 0.5rem;
@@ -78,27 +79,6 @@
   --gradient-mesh: linear-gradient(135deg, var(--primary-blue-light) 0%, var(--accent-purple) 50%, var(--accent-pink) 100%);
 }
 
-/* Dark Mode - Enhanced */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-primary: hsl(220, 30%, 8%);
-    --bg-secondary: hsl(220, 25%, 12%);
-    --bg-tertiary: hsl(220, 20%, 16%);
-    --bg-elevated: hsl(220, 25%, 14%);
-
-    --glass-bg: hsla(220, 25%, 14%, 0.7);
-    --glass-border: hsla(220, 25%, 40%, 0.3);
-    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
-
-    --text-primary: hsl(220, 30%, 98%);
-    --text-secondary: hsl(220, 20%, 80%);
-    --text-tertiary: hsl(220, 15%, 60%);
-
-    --border-color: hsl(220, 20%, 25%);
-    --border-accent: hsla(220, 90%, 70%, 0.3);
-  }
-}
-
 /* === Reset & Base === */
 * {
   margin: 0;
@@ -110,8 +90,8 @@ body {
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: var(--neutral-900);
-  background: var(--neutral-50);
+  color: var(--text-primary);
+  background: hsl(220, 30%, 8%);
   line-height: 1.6;
   overflow-x: hidden;
   padding-top: 70px;

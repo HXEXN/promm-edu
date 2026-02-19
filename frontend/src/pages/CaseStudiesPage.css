@@ -1,6 +1,6 @@
 .case-studies-page {
     min-height: 100vh;
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    background: var(--bg-primary);
 }
 
 /* Hero Section */
@@ -58,9 +58,9 @@
 }
 
 .filter-btn {
-    background: white;
-    border: 2px solid #e2e8f0;
-    color: #64748b;
+    background: var(--bg-elevated);
+    border: 2px solid var(--border-color);
+    color: var(--text-tertiary);
     padding: 12px 24px;
     border-radius: 12px;
     font-weight: 600;
@@ -90,7 +90,7 @@
 }
 
 .case-card {
-    background: white;
+    background: var(--bg-elevated);
     border-radius: 20px;
     padding: var(--space-2xl);
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
@@ -115,7 +115,7 @@
 .company-logo {
     width: 80px;
     height: 80px;
-    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    background: var(--bg-primary);
     border-radius: 16px;
     display: flex;
     align-items: center;
@@ -129,12 +129,12 @@
 
 .company-info h3 {
     font-size: 1.5rem;
-    color: #1a1f35;
+    color: var(--text-primary);
     margin-bottom: var(--space-sm);
 }
 
 .industry {
-    color: #64748b;
+    color: var(--text-tertiary);
     font-size: 0.95rem;
 }
 
@@ -149,13 +149,13 @@
 .metric {
     text-align: center;
     padding: var(--space-md);
-    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    background: var(--bg-primary);
     border-radius: 12px;
 }
 
 .metric-label {
     display: block;
-    color: #64748b;
+    color: var(--text-tertiary);
     font-size: 0.8rem;
     font-weight: 600;
     margin-bottom: var(--space-sm);
@@ -207,7 +207,7 @@
 }
 
 .summary-section p {
-    color: #475569;
+    color: var(--text-secondary);
     line-height: 1.6;
 }
 
@@ -218,7 +218,7 @@
 }
 
 .summary-section li {
-    color: #475569;
+    color: var(--text-secondary);
     padding: 6px 0;
     line-height: 1.6;
 }
@@ -227,7 +227,7 @@
 .empty-state {
     text-align: center;
     padding: var(--space-2xl);
-    color: #64748b;
+    color: var(--text-tertiary);
     font-size: 1.1rem;
 }
 
@@ -291,8 +291,8 @@
 }
 
 .btn-secondary:hover {
-    background: white;
-    color: #1a1f35;
+    background: var(--bg-elevated);
+    color: var(--text-primary);
 }
 
 /* Responsive */
