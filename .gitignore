@@ -43,3 +43,5 @@ coverage/
 .cache/
 temp/
 tmp/
+edu/
+edu_back/
