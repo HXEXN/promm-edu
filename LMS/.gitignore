@@ -1,0 +1,44 @@
+# 파이썬(Python) 관련
+lms_backend/__pycache__/
+lms_backend/*.py[cod]
+lms_backend/*$py.class
+lms_backend/lmsb/
+lms_backend/.pytest_cache/
+lms_backend/.venv/
+lms_backend/venv/
+
+# 로컬(Local) 환경 설정 관련
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Node.js (프론트엔드) 관련
+lms_frontend/node_modules/
+lms_frontend/dist/
+lms_frontend/.pnp
+lms_frontend/.pnp.js
+
+# 데이터베이스(Database) 관련
+lms_backend/data.db
+lms_backend/data.db-journal
+
+# 로그(Logs) 관련
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs/
+*.log
+
+# 운영체제(OS) & IDE 관련
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Util
+Chan_lms.txt

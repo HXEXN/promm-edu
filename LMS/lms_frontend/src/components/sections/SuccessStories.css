@@ -1,0 +1,110 @@
+.success-stories-section {
+    padding: var(--space-3xl) 0;
+    background: rgba(15, 23, 42, 0.5);
+    position: relative;
+}
+
+.success-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: var(--space-2xl);
+}
+
+@media (min-width: 768px) {
+    .success-header {
+        flex-direction: row;
+        align-items: flex-end;
+    }
+}
+
+.stories-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+}
+
+@media (min-width: 768px) {
+    .stories-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.story-card {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.story-card:hover {
+    background: rgba(30, 41, 59, 0.8);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-5px);
+}
+
+.story-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--space-lg);
+}
+
+.story-logo {
+    font-size: 2rem;
+    padding: var(--space-sm);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-md);
+}
+
+.story-metric {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.metric-value {
+    color: #4ade80;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.metric-label {
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+}
+
+.story-card h3 {
+    font-size: 1.25rem;
+    color: white;
+    margin-bottom: var(--space-xs);
+}
+
+.story-desc {
+    color: var(--text-tertiary);
+    font-size: 0.9rem;
+    margin-bottom: var(--space-lg);
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.story-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: auto;
+}
+
+.story-tag {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: rgba(51, 65, 85, 0.5);
+    color: #cbd5e1;
+}

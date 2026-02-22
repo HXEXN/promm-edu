@@ -1,0 +1,352 @@
+/* Dashboard Modern Dark Theme 2026 */
+
+.dashboard-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+.app-container {
+    flex: 1;
+    overflow: visible;
+    padding-bottom: var(--space-lg);
+    height: auto !important;
+}
+
+.dashboard-header {
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding: var(--space-md) var(--space-lg);
+    margin-bottom: var(--space-md);
+    position: relative;
+    overflow: hidden;
+}
+
+.dashboard-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(96, 165, 250, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    justify-content: space-between;
+    width: 100%;
+}
+
+.header-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+}
+
+.header-text h1 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin: 0;
+    background: linear-gradient(135deg, #FFFFFF 0%, #94a3b8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.header-actions {
+    display: flex;
+    gap: var(--space-sm);
+    align-items: center;
+}
+
+.glass-button {
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: #e2e8f0;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.glass-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+}
+
+.btn-mode-switch {
+    padding: 8px 16px;
+    background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.btn-mode-switch:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+}
+
+.mode-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.mode-badge.student {
+    background: rgba(59, 130, 246, 0.15);
+    color: #60A5FA;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.mode-badge.enterprise {
+    background: rgba(249, 115, 22, 0.15);
+    color: #F97316;
+    border: 1px solid rgba(249, 115, 22, 0.2);
+}
+
+@media (max-width: 768px) {
+    .dashboard-header {
+        padding: var(--space-md);
+    }
+
+    .logo-section {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-md);
+    }
+
+    .header-actions {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 4px;
+    }
+}
+
+.app-container {
+    flex: 1;
+    overflow: visible;
+    /* Let content expand */
+    padding-bottom: var(--space-lg);
+    height: auto !important;
+}
+
+.dashboard-header {
+    background: var(--gradient-mesh);
+    background-size: 200% 200%;
+    animation: gradientShift 15s ease infinite;
+    padding: var(--space-sm) var(--space-lg);
+    /* Reduced padding */
+    box-shadow: var(--shadow-md);
+    /* Reduced shadow */
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    /* Reduced radius */
+    margin-bottom: var(--space-sm);
+    /* Reduced margin */
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+    /* Prevent shrinking below content */
+}
+
+.dashboard-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    animation: rotate 20s linear infinite;
+}
+
+.header-content {
+    position: relative;
+    z-index: 1;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    justify-content: center;
+    width: 100%;
+}
+
+.company-logo {
+    width: 50px;
+    /* Reduced from 80px */
+    height: auto;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.2));
+    animation: float 3s ease-in-out infinite;
+}
+
+.header-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-xs);
+    flex: 1;
+}
+
+.header-actions {
+    display: flex;
+    gap: var(--space-sm);
+    align-items: center;
+}
+
+.btn-mode-switch {
+    padding: var(--space-sm) var(--space-lg);
+    background: linear-gradient(135deg, var(--primary-blue), var(--primary-blue-dark));
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--radius-lg);
+    color: white;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+}
+
+.btn-mode-switch:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    filter: brightness(1.1);
+}
+
+.btn-info-toggle {
+    padding: var(--space-sm) var(--space-lg);
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: var(--radius-lg);
+    color: white;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    white-space: nowrap;
+}
+
+.btn-info-toggle:hover {
+    background: rgba(255, 255, 255, 0.35);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn-action {
+    padding: var(--space-xs) var(--space-md);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-md);
+    color: white;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    white-space: nowrap;
+}
+
+.btn-action:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-1px);
+}
+
+.mode-badge.student {
+    background: linear-gradient(135deg, rgba(79, 172, 254, 0.3), rgba(0, 242, 254, 0.3));
+    border-color: rgba(79, 172, 254, 0.5);
+}
+
+.mode-badge.enterprise {
+    background: linear-gradient(135deg, rgba(255, 107, 107, 0.3), rgba(255, 142, 83, 0.3));
+    border-color: rgba(255, 142, 83, 0.5);
+}
+
+
+@keyframes gradientShift {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.dashboard-header h1 {
+    position: relative;
+    z-index: 1;
+    font-size: 1.5rem;
+    /* Reduced from 2.5rem */
+    font-weight: 800;
+    color: white;
+    margin: 0;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+    animation: float 3s ease-in-out infinite;
+}
+
+.mode-badge {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    margin-top: var(--space-sm);
+    padding: var(--space-xs) var(--space-md);
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--radius-full);
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 768px) {
+    .dashboard-header {
+        flex-direction: column;
+        gap: var(--space-sm);
+        text-align: center;
+    }
+
+    .dashboard-header h1 {
+        font-size: 1.2rem;
+    }
+}
