@@ -1,0 +1,612 @@
+{
+  "timestamp": "2026-03-04T18:36:07.076966",
+  "model": "gpt-4o-mini",
+  "total_samples": 30,
+  "overall_stats": {
+    "total_samples": 30,
+    "avg_reduction_rate": 0.2972,
+    "median_reduction_rate": 0.271,
+    "std_reduction_rate": 0.1045,
+    "min_reduction_rate": 0.1404,
+    "max_reduction_rate": 0.4815,
+    "avg_original_tokens": 54.7,
+    "avg_refined_tokens": 38.6,
+    "avg_saved_tokens": 16.1,
+    "total_tokens_saved": 482,
+    "total_cost_saved": 7.23e-05,
+    "pattern_frequency": {
+      "과잉 공손 표현": 30,
+      "반복 강조 표현": 19,
+      "불필요 접속사/수식어": 16,
+      "불필요 지시 문구": 9
+    }
+  },
+  "category_stats": [
+    {
+      "category": "질문응답",
+      "sample_count": 8,
+      "avg_original_tokens": 52.5,
+      "avg_refined_tokens": 33.2,
+      "avg_saved_tokens": 19.2,
+      "avg_reduction_rate": 0.3621,
+      "median_reduction_rate": 0.3649,
+      "std_reduction_rate": 0.0776,
+      "min_reduction_rate": 0.26,
+      "max_reduction_rate": 0.4528,
+      "total_patterns_found": 19,
+      "avg_patterns_per_prompt": 2.38,
+      "avg_cost_saved": 2.8875e-06
+    },
+    {
+      "category": "코드생성",
+      "sample_count": 8,
+      "avg_original_tokens": 48.4,
+      "avg_refined_tokens": 33,
+      "avg_saved_tokens": 15.4,
+      "avg_reduction_rate": 0.3128,
+      "median_reduction_rate": 0.2824,
+      "std_reduction_rate": 0.1015,
+      "min_reduction_rate": 0.2041,
+      "max_reduction_rate": 0.4717,
+      "total_patterns_found": 19,
+      "avg_patterns_per_prompt": 2.38,
+      "avg_cost_saved": 2.3063e-06
+    },
+    {
+      "category": "요약",
+      "sample_count": 8,
+      "avg_original_tokens": 66.8,
+      "avg_refined_tokens": 53.1,
+      "avg_saved_tokens": 13.6,
+      "avg_reduction_rate": 0.2027,
+      "median_reduction_rate": 0.191,
+      "std_reduction_rate": 0.0558,
+      "min_reduction_rate": 0.1404,
+      "max_reduction_rate": 0.2821,
+      "total_patterns_found": 22,
+      "avg_patterns_per_prompt": 2.75,
+      "avg_cost_saved": 2.0438e-06
+    },
+    {
+      "category": "번역",
+      "sample_count": 6,
+      "avg_original_tokens": 49.8,
+      "avg_refined_tokens": 33.8,
+      "avg_saved_tokens": 16,
+      "avg_reduction_rate": 0.3158,
+      "median_reduction_rate": 0.264,
+      "std_reduction_rate": 0.1195,
+      "min_reduction_rate": 0.2,
+      "max_reduction_rate": 0.4815,
+      "total_patterns_found": 14,
+      "avg_patterns_per_prompt": 2.33,
+      "avg_cost_saved": 2.4e-06
+    }
+  ],
+  "results": [
+    {
+      "category": "질문응답",
+      "prompt_id": 1,
+      "original_tokens": 63,
+      "refined_tokens": 35,
+      "saved_tokens": 28,
+      "reduction_rate": 0.4444,
+      "patterns_found": [
+        "과잉 공손 표현",
+        "불필요 지시 문구"
+      ],
+      "pattern_count": 2,
+      "rules_applied": 8,
+      "cost_original": 9.45e-06,
+      "cost_optimized": 5.25e-06,
+      "cost_saved": 4.2e-06
+    },
+    {
+      "category": "질문응답",
+      "prompt_id": 2,
+      "original_tokens": 50,
+      "refined_tokens": 37,
+      "saved_tokens": 13,
+      "reduction_rate": 0.26,
+      "patterns_found": [
+        "과잉 공손 표현",
+        "반복 강조 표현"
+      ],
+      "pattern_count": 2,
+      "rules_applied": 6,
+      "cost_original": 7.5e-06,
+      "cost_optimized": 5.55e-06,
+      "cost_saved": 1.95e-06
+    },
+    {
+      "category": "질문응답",
+      "prompt_id": 3,
+      "original_tokens": 56,
+      "refined_tokens": 32,
+      "saved_tokens": 24,
+      "reduction_rate": 0.4286,
+      "patterns_found": [
+        "과잉 공손 표현",
+        "불필요 접속사/수식어"
+      ],
+      "pattern_count": 2,
+      "rules_applied": 8,
+      "cost_original": 8.4e-06,
+      "cost_optimized": 4.8e-06,
+      "cost_saved": 3.6e-06
+    },
+    {
+      "category": "질문응답",
+      "prompt_id": 4,
+      "original_tokens": 45,
+      "refined_tokens": 28,
+      "saved_tokens": 17,
+      "reduction_rate": 0.3778,
+      "patterns_found": [
+        "과잉 공손 표현",
+        "반복 강조 표현"
+      ],
+      "pattern_count": 2,
+      "rules_applied": 6,
+      "cost_original": 6.75e-06,
+      "cost_optimized": 4.2e-06,
+      "cost_saved": 2.55e-06
+    },
+    {
+      "category": "질문응답",
+      "prompt_id": 5,
+      "original_tokens": 53,
+      "refined_tokens": 36,
+      "saved_tokens": 17,
+      "reduction_rate": 0.3208,
+      "patterns_found": [
+        "과잉 공손 표현",
+        "반복 강조 표현"
+      ],
+      "pattern_count": 2,
+      "rules_applied": 6,
+      "cost_original": 7.95e-06,
+      "cost_optimized": 5.4e-06,
+      "cost_saved": 2.55e-06
+    },
+    {
+      "category": "질문응답",
+      "prompt_id": 6,
+      "original_tokens": 46,
+      "refined_tokens": 34,
+      "saved_tokens": 12,
+      "reduction_rate": 0.2609,
+      "patterns_found": [
+        "과잉 공손 표현",
+        "불필요 접속사/수식어",
+        "불필요 지시 문구"
+      ],
+      "pattern_count": 3,
+      "rules_applied": 6,
+      "cost_original": 6.9e-06,
+      "cost_optimized": 5.1e-06,
+      "cost_saved": 1.8e-06
+    },
+    {
+      "category": "질문응답",
+      "prompt_id": 7,
+      "original_tokens": 54,
+      "refined_tokens": 35,
+      "saved_tokens": 19,
+      "reduction_rate": 0.3519,
+      "patterns_found": [
+        "과잉 공손 표현",
+        "불필요 접속사/수식어",
+        "반복 강조 표현"
+      ],
+      "pattern_count": 3,
+      "rules_applied": 6,
+      "cost_original": 8.1e-06,
+      "cost_optimized": 5.25e-06,
+      "cost_saved": 2.85e-06
+    },
+    {
+      "category": "질문응답",
+      "prompt_id": 8,
+      "original_tokens": 53,
+      "refined_tokens": 29,
+      "saved_tokens": 24,
+      "reduction_rate": 0.4528,
+      "patterns_found": [
+        "과잉 공손 표현",
+        "불필요 접속사/수식어",
+        "불필요 지시 문구"
+      ],
+      "pattern_count": 3,
+      "rules_applied": 7,
+      "cost_original": 7.95e-06,
+      "cost_optimized": 4.35e-06,
+      "cost_saved": 3.6e-06
+    },
+    {
+      "category": "코드생성",
+      "prompt_id": 1,
+      "original_tokens": 54,
+      "refined_tokens": 29,
+      "saved_tokens": 25,
+      "reduction_rate": 0.463,
+      "patterns_found": [
+        "과잉 공손 표현",
+        "반복 강조 표현"
+      ],
+      "pattern_count": 2,
+      "rules_applied": 7,
+      "cost_original": 8.1e-06,
+      "cost_optimized": 4.35e-06,
+      "cost_saved": 3.75e-06
+    },
+    {
+      "category": "코드생성",
+      "prompt_id": 2,
+      "original_tokens": 45,
+      "refined_tokens": 33,
+      "saved_tokens": 12,
+      "reduction_rate": 0.2667,
+      "patterns_found": [
+        "과잉 공손 표현",
+        "불필요 접속사/수식어",
+        "불필요 지시 문구"
+      ],
+      "pattern_count": 3,
+      "rules_applied": 6,
+      "cost_original": 6.75e-06,
+      "cost_optimized": 4.95e-06,
+      "cost_saved": 1.8e-06
+    },
+    {
+      "category": "코드생성",
+      "prompt_id": 3,
+      "original_tokens": 48,
+      "refined_tokens": 35,
+      "saved_tokens": 13,
+      "reduction_rate": 0.2708,
+      "patterns_found": [
+        "과잉 공손 표현",
+        "반복 강조 표현"
+      ],
+      "pattern_count": 2,
+      "rules_applied": 5,
+      "cost_original": 7.2e-06,
+      "cost_optimized": 5.25e-06,
+      "cost_saved": 1.95e-06
+    },
+    {
+      "category": "코드생성",
+      "prompt_id": 4,
+      "original_tokens": 53,
+      "refined_tokens": 28,
+      "saved_tokens": 25,
+      "reduction_rate": 0.4717,
+      "patterns_found": [
+        "과잉 공손 표현",
+        "불필요 접속사/수식어"
+      ],
+      "pattern_count": 2,
+      "rules_applied": 7,
+      "cost_original": 7.95e-06,
+      "cost_optimized": 4.2e-06,
+      "cost_saved": 3.75e-06
+    },
+    {
+      "category": "코드생성",
+      "prompt_id": 5,
+      "original_tokens": 49,
+      "refined_tokens": 39,
+      "saved_tokens": 10,
+      "reduction_rate": 0.2041,
+      "patterns_found": [
+        "과잉 공손 표현",
+        "불필요 접속사/수식어"
+      ],
+      "pattern_count": 2,
+      "rules_applied": 5,
+      "cost_original": 7.35e-06,
+      "cost_optimized": 5.85e-06,
+      "cost_saved": 1.5e-06
+    },
+    {
+      "category": "코드생성",
+      "prompt_id": 6,
+      "original_tokens": 51,
+      "refined_tokens": 36,
+      "saved_tokens": 15,
+      "reduction_rate": 0.2941,
+      "patterns_found": [
+        "과잉 공손 표현",
+        "반복 강조 표현"
+      ],
+      "pattern_count": 2,
+      "rules_applied": 5,
+      "cost_original": 7.65e-06,
+      "cost_optimized": 5.4e-06,
+      "cost_saved": 2.25e-06
+    },
+    {
+      "category": "코드생성",
+      "prompt_id": 7,
+      "original_tokens": 42,
+      "refined_tokens": 29,
+      "saved_tokens": 13,
+      "reduction_rate": 0.3095,
+      "patterns_found": [
+        "과잉 공손 표현",
+        "불필요 접속사/수식어",
+        "불필요 지시 문구"
+      ],
+      "pattern_count": 3,
+      "rules_applied": 4,
+      "cost_original": 6.3e-06,
+      "cost_optimized": 4.35e-06,
+      "cost_saved": 1.95e-06
+    },
+    {
+      "category": "코드생성",
+      "prompt_id": 8,
+      "original_tokens": 45,
+      "refined_tokens": 35,
+      "saved_tokens": 10,
+      "reduction_rate": 0.2222,
+      "patterns_found": [
+        "과잉 공손 표현",
+        "불필요 접속사/수식어",
+        "반복 강조 표현"
+      ],
+      "pattern_count": 3,
+      "rules_applied": 6,
+      "cost_original": 6.75e-06,
+      "cost_optimized": 5.25e-06,
+      "cost_saved": 1.5e-06
+    },
+    {
+      "category": "요약",
+      "prompt_id": 1,
+      "original_tokens": 78,
+      "refined_tokens": 56,
+      "saved_tokens": 22,
+      "reduction_rate": 0.2821,
+      "patterns_found": [
+        "과잉 공손 표현",
+        "반복 강조 표현",
+        "불필요 지시 문구"
+      ],
+      "pattern_count": 3,
+      "rules_applied": 6,
+      "cost_original": 1.17e-05,
+      "cost_optimized": 8.4e-06,
+      "cost_saved": 3.3e-06
+    },
+    {
+      "category": "요약",
+      "prompt_id": 2,
+      "original_tokens": 70,
+      "refined_tokens": 60,
+      "saved_tokens": 10,
+      "reduction_rate": 0.1429,
+      "patterns_found": [
+        "과잉 공손 표현",
+        "불필요 접속사/수식어",
+        "반복 강조 표현"
+      ],
+      "pattern_count": 3,
+      "rules_applied": 5,
+      "cost_original": 1.05e-05,
+      "cost_optimized": 9e-06,
+      "cost_saved": 1.5e-06
+    },
+    {
+      "category": "요약",
+      "prompt_id": 3,
+      "original_tokens": 59,
+      "refined_tokens": 43,
+      "saved_tokens": 16,
+      "reduction_rate": 0.2712,
+      "patterns_found": [
+        "과잉 공손 표현",
+        "불필요 접속사/수식어",
+        "반복 강조 표현"
+      ],
+      "pattern_count": 3,
+      "rules_applied": 6,
+      "cost_original": 8.85e-06,
+      "cost_optimized": 6.45e-06,
+      "cost_saved": 2.4e-06
+    },
+    {
+      "category": "요약",
+      "prompt_id": 4,
+      "original_tokens": 57,
+      "refined_tokens": 49,
+      "saved_tokens": 8,
+      "reduction_rate": 0.1404,
+      "patterns_found": [
+        "과잉 공손 표현",
+        "반복 강조 표현"
+      ],
+      "pattern_count": 2,
+      "rules_applied": 4,
+      "cost_original": 8.55e-06,
+      "cost_optimized": 7.35e-06,
+      "cost_saved": 1.2e-06
+    },
+    {
+      "category": "요약",
+      "prompt_id": 5,
+      "original_tokens": 67,
+      "refined_tokens": 55,
+      "saved_tokens": 12,
+      "reduction_rate": 0.1791,
+      "patterns_found": [
+        "과잉 공손 표현",
+        "불필요 접속사/수식어",
+        "반복 강조 표현"
+      ],
+      "pattern_count": 3,
+      "rules_applied": 4,
+      "cost_original": 1.005e-05,
+      "cost_optimized": 8.25e-06,
+      "cost_saved": 1.8e-06
+    },
+    {
+      "category": "요약",
+      "prompt_id": 6,
+      "original_tokens": 69,
+      "refined_tokens": 55,
+      "saved_tokens": 14,
+      "reduction_rate": 0.2029,
+      "patterns_found": [
+        "과잉 공손 표현",
+        "불필요 접속사/수식어",
+        "불필요 지시 문구"
+      ],
+      "pattern_count": 3,
+      "rules_applied": 5,
+      "cost_original": 1.035e-05,
+      "cost_optimized": 8.25e-06,
+      "cost_saved": 2.1e-06
+    },
+    {
+      "category": "요약",
+      "prompt_id": 7,
+      "original_tokens": 67,
+      "refined_tokens": 56,
+      "saved_tokens": 11,
+      "reduction_rate": 0.1642,
+      "patterns_found": [
+        "과잉 공손 표현",
+        "불필요 접속사/수식어",
+        "반복 강조 표현"
+      ],
+      "pattern_count": 3,
+      "rules_applied": 5,
+      "cost_original": 1.005e-05,
+      "cost_optimized": 8.4e-06,
+      "cost_saved": 1.65e-06
+    },
+    {
+      "category": "요약",
+      "prompt_id": 8,
+      "original_tokens": 67,
+      "refined_tokens": 51,
+      "saved_tokens": 16,
+      "reduction_rate": 0.2388,
+      "patterns_found": [
+        "과잉 공손 표현",
+        "반복 강조 표현"
+      ],
+      "pattern_count": 2,
+      "rules_applied": 6,
+      "cost_original": 1.005e-05,
+      "cost_optimized": 7.65e-06,
+      "cost_saved": 2.4e-06
+    },
+    {
+      "category": "번역",
+      "prompt_id": 1,
+      "original_tokens": 54,
+      "refined_tokens": 28,
+      "saved_tokens": 26,
+      "reduction_rate": 0.4815,
+      "patterns_found": [
+        "과잉 공손 표현",
+        "반복 강조 표현"
+      ],
+      "pattern_count": 2,
+      "rules_applied": 7,
+      "cost_original": 8.1e-06,
+      "cost_optimized": 4.2e-06,
+      "cost_saved": 3.9e-06
+    },
+    {
+      "category": "번역",
+      "prompt_id": 2,
+      "original_tokens": 47,
+      "refined_tokens": 36,
+      "saved_tokens": 11,
+      "reduction_rate": 0.234,
+      "patterns_found": [
+        "과잉 공손 표현",
+        "불필요 접속사/수식어",
+        "반복 강조 표현"
+      ],
+      "pattern_count": 3,
+      "rules_applied": 6,
+      "cost_original": 7.05e-06,
+      "cost_optimized": 5.4e-06,
+      "cost_saved": 1.65e-06
+    },
+    {
+      "category": "번역",
+      "prompt_id": 3,
+      "original_tokens": 47,
+      "refined_tokens": 35,
+      "saved_tokens": 12,
+      "reduction_rate": 0.2553,
+      "patterns_found": [
+        "과잉 공손 표현",
+        "불필요 지시 문구"
+      ],
+      "pattern_count": 2,
+      "rules_applied": 5,
+      "cost_original": 7.05e-06,
+      "cost_optimized": 5.25e-06,
+      "cost_saved": 1.8e-06
+    },
+    {
+      "category": "번역",
+      "prompt_id": 4,
+      "original_tokens": 55,
+      "refined_tokens": 40,
+      "saved_tokens": 15,
+      "reduction_rate": 0.2727,
+      "patterns_found": [
+        "과잉 공손 표현",
+        "반복 강조 표현",
+        "불필요 지시 문구"
+      ],
+      "pattern_count": 3,
+      "rules_applied": 4,
+      "cost_original": 8.25e-06,
+      "cost_optimized": 6e-06,
+      "cost_saved": 2.25e-06
+    },
+    {
+      "category": "번역",
+      "prompt_id": 5,
+      "original_tokens": 51,
+      "refined_tokens": 28,
+      "saved_tokens": 23,
+      "reduction_rate": 0.451,
+      "patterns_found": [
+        "과잉 공손 표현",
+        "불필요 접속사/수식어"
+      ],
+      "pattern_count": 2,
+      "rules_applied": 6,
+      "cost_original": 7.65e-06,
+      "cost_optimized": 4.2e-06,
+      "cost_saved": 3.45e-06
+    },
+    {
+      "category": "번역",
+      "prompt_id": 6,
+      "original_tokens": 45,
+      "refined_tokens": 36,
+      "saved_tokens": 9,
+      "reduction_rate": 0.2,
+      "patterns_found": [
+        "과잉 공손 표현",
+        "반복 강조 표현"
+      ],
+      "pattern_count": 2,
+      "rules_applied": 5,
+      "cost_original": 6.75e-06,
+      "cost_optimized": 5.4e-06,
+      "cost_saved": 1.35e-06
+    }
+  ]
+}
